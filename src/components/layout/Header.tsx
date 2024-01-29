@@ -1,7 +1,11 @@
+'use client'
+
 import Link from 'next/link'
+
 import CustomImage from '../common/CustomImage'
-import NavItems from './NavItems'
 import Title from '../common/Title'
+import NavItems from './NavItems'
+import ThemeSwitch from './ThemeSwitch'
 
 const Header = () => {
   return (
@@ -20,9 +24,10 @@ const Header = () => {
             <Title className="mb-0">jellysoo97.playground</Title>
           </Link>
 
-          <div className="hidden lg:flex items-center">
+          <div className="hidden md:flex items-center space-x-4">
             <NavItems />
             {/* view icons */}
+            <ThemeSwitch />
           </div>
         </div>
       </div>

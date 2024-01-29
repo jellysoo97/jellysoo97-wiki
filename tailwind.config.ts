@@ -2,11 +2,12 @@ import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
+  darkMode: 'class',
   theme: {
     colors: {
       white: '#FFFFFF',
       black: '#000000',
-      primary: {
+      blue: {
         default: '#4B93FF',
         dark: '#4B7EFF',
       },
@@ -15,21 +16,43 @@ const config: Config = {
         default: '#654BFF',
         dark: '#4B35D2',
       },
-      gray: {
-        100: '#E3E3E3',
-        200: '#C1C5D1',
-        300: '#bdbdbd',
-        400: '#9e9e9e',
-        500: '#777777',
+      yellow: '#FFDC49',
+      orange: '#D9730D',
+      red: '#D44C47',
+      pale: {
+        gray: '#F1F1EF',
+        brown: '#F4EEEE',
+        orange: '#FAEBDD',
+        yellow: '#FBF3DB',
+        green: '#EDF3EC',
+        blue: '#E7F3F8',
+        purple: '#F6F3F9',
+        pink: '#FAF1F5',
+        red: '#FDEBEC',
       },
-      orange: {
-        light: '#FFB74B',
-        default: '#FF8C4B',
-        dark: '#FF6C4B',
+      deep: {
+        gray: '#454B4E',
+        brown: '#434040',
+        orange: '#594A3A',
+        yellow: '#59563B',
+        green: '#354C4B',
+        blue: '#364954',
+        purple: '#443F57',
+        pink: '#533B4C',
+        red: '#594141',
       },
-      red: '#FF4B8C',
     },
-    extend: {},
+    extend: {
+      backgroundColor: {
+        primary: 'var(--color-bg-primary)',
+        secondary: 'var(--color-bg-secondary)',
+      },
+      textColor: {
+        primary: 'var(--color-text-primary)',
+        secondary: 'var(--color-text-secondary)',
+        red: 'var(--color-text-red)',
+      },
+    },
   },
   plugins: [],
 }

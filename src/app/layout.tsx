@@ -1,7 +1,10 @@
+import '@/styles/globals.css'
+
+import React from 'react'
+
 import Footer from '@/components/layout/Footer'
 import Header from '@/components/layout/Header'
-import '@/styles/globals.css'
-import React from 'react'
+import CustomThemeProvider from '@/components/provider/ThemeProvider'
 
 export default function RootLayout({
   children,
@@ -10,12 +13,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="relative overflow-hidden">
-        <Header />
+      <body className="relative flex flex-col h-dvh overflow-hidden">
+        <CustomThemeProvider>
+          <Header />
 
-        <main>{children}</main>
+          <main>{children}</main>
 
-        <Footer />
+          <Footer />
+        </CustomThemeProvider>
       </body>
     </html>
   )

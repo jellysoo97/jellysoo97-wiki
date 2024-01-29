@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-primary text-primary;
+  }
+}
+
+.light {
+  --color-bg-primary: #f7f6f3;
+  --color-bg-secondary: #fbf3db;
+  --color-text-primary: #454b4e;
+  --color-text-secondary: #434040;
+  --color-text-red: #d44c47;
+}
+
+.dark {
+  --color-bg-primary: #2f3438;
+  --color-bg-secondary: #373c3f;
+  --color-text-primary: #d4d4d4;
+  --color-text-secondary: #e5e5e5;
+  --color-text-red: #fca5a5;
+}
