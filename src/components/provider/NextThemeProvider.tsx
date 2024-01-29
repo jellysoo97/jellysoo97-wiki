@@ -7,8 +7,8 @@ type Props = {
   children: React.ReactNode
 }
 
-const CustomThemeProvider = ({ children }: Props) => {
+const NextThemeProvider = ({ children }: Props) => {
   return <ThemeProvider attribute="class">{children}</ThemeProvider>
 }
 
-export default CustomThemeProvider
+export default NextThemeProvider

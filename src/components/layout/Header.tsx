@@ -3,31 +3,32 @@
 import Link from 'next/link'
 
 import CustomImage from '../common/CustomImage'
+import IconButton from '../common/IconButton'
 import Title from '../common/Title'
-import NavItems from './NavItems'
+import GithubIcon from '../icons/GithubIcon'
 import ThemeSwitch from './ThemeSwitch'
+import ViewSwitch from './ViewSwitch'
 
 const Header = () => {
   return (
     <header>
-      <div className="sticky top-0 z-40 w-full border-b border-gray-200">
+      <div className="sticky top-0 z-40 w-full border-b border-gray-200 dark:border-deep-gray">
         <div className="flex justify-between items-center px-8 py-4">
-          <Link
-            href={'/'}
-            className="flex items-center space-x-4 flex-shrink-0"
-          >
+          <Link href={'/'} className="flex items-center space-x-4">
             <CustomImage
               src={'/images/logo.jpeg'}
               alt="logo"
-              className="w-12 h-12 rounded-full"
+              className="w-10 h-10 rounded-full md:w-12 md:h-12"
             />
             <Title className="mb-0">jellysoo97.playground</Title>
           </Link>
 
-          <div className="hidden md:flex items-center space-x-4">
-            <NavItems />
-            {/* view icons */}
+          <div className="flex items-center space-x-4">
+            <ViewSwitch />
             <ThemeSwitch />
+            <IconButton>
+              <GithubIcon className="w-7 h-7" />
+            </IconButton>
           </div>
         </div>
       </div>
