@@ -2,9 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
+@font-face {
+  font-family: 'NanumMyeongjo';
+  font-weight: normal;
+  font-style: normal;
+  src: url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
+}
+
 @layer base {
   body {
-    @apply bg-primary text-primary;
+    @apply bg-primary text-primary font-serif;
   }
 }
 

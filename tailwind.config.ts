@@ -1,9 +1,15 @@
 import type { Config } from 'tailwindcss'
+import { fontFamily } from 'tailwindcss/defaultTheme'
 
 const config: Config = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   darkMode: 'class',
   theme: {
+    fontFamily: {
+      sans: ['var(--font-sans)', ...fontFamily.sans],
+      serif: ['NanumMyeonjo', ...fontFamily.serif],
+      mono: ['var(--font-mono)', ...fontFamily.mono],
+    },
     colors: {
       white: '#FFFFFF',
       black: '#000000',
