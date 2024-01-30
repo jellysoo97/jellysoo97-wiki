@@ -5,7 +5,7 @@ import IconButton from '../common/IconButton'
 import GridViewIcon from '../icons/GridViewIcon'
 import ListViewIcon from '../icons/ListViewIcon'
 
-const ViewSwitch = () => {
+const ViewSwitchGroup = () => {
   const { isGridView, toggleView } = useView()
 
   return (
@@ -13,27 +13,27 @@ const ViewSwitch = () => {
       <IconButton
         className={cn(
           'hidden md:flex',
-          'backdrop-blur-lg rounded-full',
-          isGridView && 'bg-deep-yellow '
+          'rounded-full',
+          isGridView && 'bg-primary drop-shadow-base'
         )}
-        onClick={toggleView}
+        onClick={() => toggleView('grid')}
       >
         <GridViewIcon
-          className={cn('w-6 h-6', isGridView && 'fill-pale-yellow')}
+          className={cn('w-6 h-6', isGridView && 'fill-yellow-500')}
         />
       </IconButton>
       <IconButton
         className={cn(
           'hidden md:flex',
-          'backdrop-blur-lg rounded-full',
-          !isGridView && 'bg-deep-yellow '
+          'rounded-full',
+          !isGridView && 'bg-primary drop-shadow-base'
         )}
-        onClick={toggleView}
+        onClick={() => toggleView('list')}
       >
-        <ListViewIcon className={cn(isGridView && 'fill-pale-yellow')} />
+        <ListViewIcon />
       </IconButton>
     </>
   )
 }
 
-export default ViewSwitch
+export default ViewSwitchGroup

@@ -2,32 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
-@font-face {
-  font-family: 'NanumMyeongjo';
-  font-weight: normal;
-  font-style: normal;
-  src: url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
+@layer base {
+  :root {
+    --bg-highlight-gray: #f1f1ef;
+    --bg-highlight-yellow: #faf3dd;
+    --bg-highlight-red: #faecec;
+  }
 }
 
 @layer base {
   body {
-    @apply bg-primary text-primary font-serif;
+    @apply m-0 min-h-dvh overflow-hidden relative;
+    @apply font-serif text-neutral-600 bg-neutral-300 dark:text-neutral-350 dark:bg-neutral-800;
   }
 }
 
-.light {
-  --color-bg-primary: #f7f6f3;
-  --color-bg-secondary: #fbf3db;
-  --color-text-primary: #454b4e;
-  --color-text-secondary: #434040;
-  --color-text-red: #d44c47;
-}
+@layer components {
+  .text-primary {
+    @apply text-neutral-600 dark:text-neutral-350;
+  }
 
-.dark {
-  --color-bg-primary: #2f3438;
-  --color-bg-secondary: #373c3f;
-  --color-text-primary: #d4d4d4;
-  --color-text-secondary: #e5e5e5;
-  --color-text-red: #fca5a5;
+  .text-secondary {
+    @apply text-neutral-700 dark:text-neutral-400;
+  }
+
+  .bg-primary {
+    @apply bg-neutral-300 dark:bg-neutral-800;
+  }
+
+  .bg-secondary {
+    @apply bg-neutral-200 dark:bg-neutral-600;
+  }
 }

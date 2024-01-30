@@ -2,7 +2,7 @@
 
 import React, { createContext, Dispatch, SetStateAction, useState } from 'react'
 
-type ViewType = 'grid' | 'list'
+export type ViewType = 'grid' | 'list'
 
 type Props = {
   children: React.ReactNode

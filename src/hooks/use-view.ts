@@ -1,13 +1,17 @@
 import { useContext } from 'react'
 
-import { ViewContext } from '@/components/provider/ViewProvider'
+import { ViewContext, ViewType } from '@/components/provider/ViewProvider'
 
 const useView = () => {
   const viewContext = useContext(ViewContext)
 
   const isGridView = viewContext?.currentView === 'grid'
 
-  const toggleView = () => {
+  const toggleView = (clickedView: ViewType) => {
+    if (clickedView === viewContext?.currentView) {
+      return
+    }
+
     if (isGridView) {
       viewContext?.setCurrentView('list')
     } else {
