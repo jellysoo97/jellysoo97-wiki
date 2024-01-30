@@ -2,8 +2,9 @@
 
 import Link from 'next/link'
 
+import { siteConfig } from '@/constants/config'
+
 import CustomImage from '../common/CustomImage'
-import IconButton from '../common/IconButton'
 import Title from '../common/Title'
 import GithubIcon from '../icons/GithubIcon'
 import ThemeSwitch from './ThemeSwitch'
@@ -16,7 +17,7 @@ const Header = () => {
         <div className="flex justify-between items-center px-8 py-4">
           <Link href={'/'} className="flex items-center space-x-4">
             <CustomImage
-              src={'/images/logo.jpeg'}
+              src={siteConfig.author.avatar}
               alt="logo"
               className="w-10 h-10 rounded-full md:w-12 md:h-12"
             />
@@ -26,9 +27,9 @@ const Header = () => {
           <div className="flex items-center space-x-4">
             <ViewSwitchGroup />
             <ThemeSwitch />
-            <IconButton>
+            <Link href={siteConfig.url.github} target="_blank">
               <GithubIcon className="w-7 h-7" />
-            </IconButton>
+            </Link>
           </div>
         </div>
       </div>
