@@ -2,17 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Nanum Myeongjo';
+  src: url('../fonts/NanumMyeongjo-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Cutive Mono';
+  src: url('../fonts/CutiveMono-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 @layer base {
   :root {
     --bg-highlight-gray: #f1f1ef;
     --bg-highlight-yellow: #faf3dd;
     --bg-highlight-red: #faecec;
+
+    --font-serif: 'Nanum Myeongjo';
+    --font-mono: 'Cutive Mono';
   }
 }
 
 @layer base {
   body {
-    @apply m-0 min-h-dvh overflow-hidden relative;
+    @apply m-0 min-h-dvh relative;
     @apply font-serif text-neutral-600 bg-neutral-300 dark:text-neutral-350 dark:bg-neutral-800;
   }
 }
@@ -32,5 +48,9 @@
 
   .bg-secondary {
     @apply bg-neutral-200 dark:bg-neutral-600;
+  }
+
+  .wrapper {
+    @apply mx-auto max-w-3xl px-6 lg:max-w-6xl lg:px-8;
   }
 }

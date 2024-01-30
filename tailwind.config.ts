@@ -7,8 +7,8 @@ const config: Config = {
   theme: {
     fontFamily: {
       sans: ['var(--font-sans)', ...fontFamily.sans],
-      serif: ['Nanum Myeongjo', ...fontFamily.serif],
-      mono: ['Cutive Mono', ...fontFamily.mono],
+      serif: ['var(--font-serif)', ...fontFamily.serif],
+      mono: ['var(--font-mono)', ...fontFamily.mono],
     },
     extend: {
       colors: {
