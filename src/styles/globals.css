@@ -17,10 +17,27 @@
 
 @layer base {
   :root {
+    /* colors */
+    --neutral-50: #fafafa;
+    --neutral-100: #f5f5f5;
+    --neutral-150: #ededed;
+    --neutral-200: #e5e5e5;
+    --neutral-250: #dedede;
+    --neutral-300: #d4d4d4;
+    --neutral-350: #b5b5b5;
+    --neutral-400: #a3a3a3;
+    --neutral-450: #8a8a8a;
+    --neutral-500: #737373;
+    --neutral-600: #525252;
+    --neutral-700: #404040;
+    --neutral-750: #363636;
+    --neutral-800: #262626;
+    --neutral-900: #171717;
     --bg-highlight-gray: #f1f1ef;
     --bg-highlight-yellow: #faf3dd;
     --bg-highlight-red: #faecec;
 
+    /* fonts */
     --font-serif: 'Nanum Myeongjo';
     --font-mono: 'Cutive Mono';
   }
@@ -28,29 +45,11 @@
 
 @layer base {
   body {
-    @apply m-0 min-h-dvh relative;
+    @apply m-0 p-0 min-h-dvh relative;
     @apply font-serif text-neutral-600 bg-neutral-300 dark:text-neutral-350 dark:bg-neutral-800;
   }
-}
 
-@layer components {
-  .text-primary {
-    @apply text-neutral-600 dark:text-neutral-350;
-  }
-
-  .text-secondary {
-    @apply text-neutral-700 dark:text-neutral-400;
-  }
-
-  .bg-primary {
-    @apply bg-neutral-300 dark:bg-neutral-800;
-  }
-
-  .bg-secondary {
-    @apply bg-neutral-200 dark:bg-neutral-600;
-  }
-
-  .wrapper {
-    @apply mx-auto max-w-3xl px-6 lg:max-w-6xl lg:px-8;
+  main {
+    @apply layout-container;
   }
 }

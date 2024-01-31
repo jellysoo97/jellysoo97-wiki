@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss'
 import { fontFamily } from 'tailwindcss/defaultTheme'
+import plugin from 'tailwindcss/plugin'
 
 const config: Config = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
@@ -13,7 +14,21 @@ const config: Config = {
     extend: {
       colors: {
         neutral: {
-          350: '#b5b5b5',
+          50: 'var(--neutral-50)',
+          100: 'var(--neutral-100)',
+          150: 'var(--neutral-150)',
+          200: 'var(--neutral-200)',
+          250: 'var(--neutral-250)',
+          300: 'var(--neutral-300)',
+          350: 'var(--neutral-350)',
+          400: 'var(--neutral-400)',
+          450: 'var(--neutral-450)',
+          500: 'var(--neutral-500)',
+          600: 'var(--neutral-600)',
+          700: 'var(--neutral-700)',
+          750: 'var(--neutral-750)',
+          800: 'var(--neutral-800)',
+          900: 'var(--neutral-900)',
         },
         highlight: {
           gray: 'var(--bg-highlight-gray)',
@@ -21,11 +36,16 @@ const config: Config = {
           red: 'var(--bg-highlight-red)',
         },
       },
-      dropShadow: {
-        base: '0px 0px 10px rgba(234, 179, 8, 0.8)',
-      },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(({ addUtilities }) => {
+      addUtilities({
+        '.layout-container': {
+          '@apply mx-auto max-w-3xl px-6 lg:max-w-6xl lg:px-8': {},
+        },
+      })
+    }),
+  ],
 }
 export default config
