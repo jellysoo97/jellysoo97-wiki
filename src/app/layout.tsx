@@ -2,10 +2,10 @@ import '@/styles/globals.css'
 
 import React from 'react'
 
+import Divider from '@/components/common/Divider'
 import Footer from '@/components/layout/Footer'
 import Header from '@/components/layout/Header'
 import NextThemeProvider from '@/components/provider/NextThemeProvider'
-import ViewProvider from '@/components/provider/ViewProvider'
 
 export default function RootLayout({
   children,
@@ -16,11 +16,11 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <NextThemeProvider>
-          <ViewProvider>
-            <Header />
-            <main className="wrapper h-screen">{children}</main>
-            <Footer />
-          </ViewProvider>
+          <Header />
+          <Divider />
+          <main>{children}</main>
+          <Divider />
+          <Footer />
         </NextThemeProvider>
       </body>
     </html>
