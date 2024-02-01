@@ -40,6 +40,10 @@
     /* fonts */
     --font-serif: 'Nanum Myeongjo';
     --font-mono: 'Cutive Mono';
+
+    /* layout */
+    --header-height: 80px;
+    --main-height: calc(100dvh - var(--header-height));
   }
 }
 

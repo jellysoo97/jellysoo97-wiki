@@ -4,18 +4,20 @@ import { cn } from '@/utils/cn'
 
 type Props = {
   direction?: 'horizontal' | 'vertical'
-} & React.ComponentProps<'hr'>
+} & React.ComponentProps<'div'>
 
 const Divider = ({ direction = 'horizontal', className, ...props }: Props) => {
   return (
-    <hr
-      {...props}
-      className={cn(
-        'border-1 w-full border-neutral-300 dark:border-neutral-700',
-        direction === 'vertical' && 'rotate-90',
-        className
-      )}
-    />
+    <>
+      <div
+        {...props}
+        className={cn(
+          'bg-neutral-300 dark:bg-neutral-700',
+          direction === 'horizontal' ? 'w-full h-[1px]' : 'w-[1px] h-full',
+          className
+        )}
+      />
+    </>
   )
 }
 
