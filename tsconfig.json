@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "target": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -13,6 +14,7 @@
     "allowSyntheticDefaultImports": true,
     "jsx": "preserve",
     "incremental": true,
+    "baseUrl": ".",
     "plugins": [
       {
         "name": "next",
@@ -25,8 +27,15 @@
       "@/utils/*": ["./src/utils/*"],
       "@/hooks/*": ["./src/hooks/*"],
       "@/constants/*": ["./src/constants/*"],
+      "contentlayer/generated": ["./.contentlayer/generated"],
     },
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".contentlayer/generated",
+  ],
   "exclude": ["node_modules"],
 }

@@ -44,6 +44,9 @@ const config: Config = {
         '.layout-container': {
           '@apply mx-auto max-w-3xl px-6 lg:max-w-6xl lg:px-8': {},
         },
+        '.flex-centered': {
+          '@apply flex justify-center items-center': {},
+        },
       })
     }),
   ],

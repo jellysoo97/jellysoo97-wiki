@@ -51,6 +51,7 @@ export const menus: MenuItemType[] = [
                 depth: 4,
                 category: CategoryEnum.NextJs,
                 icon: <FileIcon />,
+                url: '/blog/nextjs/test',
               },
               {
                 title: '02. 의존성 설치',
