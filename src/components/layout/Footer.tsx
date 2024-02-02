@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="w-full py-4">
         <div className="layout-container flex justify-center items-center text-sm">
           Copyright © {formatDate(today, DateFormatTypeEnum.YearOnly)}{' '}
-          {siteConfig.author.name} All rights reserved
+          {siteConfig.author.name}
         </div>
       </div>
     </footer>
