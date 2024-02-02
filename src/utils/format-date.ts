@@ -1,11 +1,11 @@
 import dayjs from 'dayjs'
 
 export enum DateFormatTypeEnum {
-  DateAndTime = 'yyyy-MM-dd HH:mm:ss',
-  DateOnly = 'yyyy-MM-dd',
+  DateAndTime = 'YYYY-MM-DD HH:mm:ss',
+  DateOnly = 'YYYY-MM-DD',
   TimeOnly = 'HH:mm:ss',
-  YearOnly = 'yyyy',
-  MonthAndDay = 'MM-dd',
+  YearOnly = 'YYYY',
+  MonthAndDay = 'MM-DD',
 }
 
 export const today = dayjs().format()
@@ -18,14 +18,16 @@ export const formatDate = (
 
   switch (type) {
     case DateFormatTypeEnum.DateAndTime:
-      return date.format('yyyy-MM-dd HH:mm:ss')
+      return date.format(DateFormatTypeEnum.DateAndTime)
     case DateFormatTypeEnum.DateOnly:
-      return date.format('yyyy-MM-dd')
+      return date.format(DateFormatTypeEnum.DateOnly)
     case DateFormatTypeEnum.TimeOnly:
-      return date.format('HH:mm:ss')
+      return date.format(DateFormatTypeEnum.TimeOnly)
     case DateFormatTypeEnum.YearOnly:
       return date.get('y')
     case DateFormatTypeEnum.MonthAndDay:
-      return date.format('MM-dd')
+      return date.format(DateFormatTypeEnum.MonthAndDay)
+    default:
+      return date.format(DateFormatTypeEnum.DateOnly)
   }
 }
