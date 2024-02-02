@@ -1,6 +1,6 @@
 import { menus } from '@/constants/menus'
 
-import MenuItem from './MenuItem'
+import MenuItem from '../MenuItem'
 
 const Sidebar = () => {
   return (

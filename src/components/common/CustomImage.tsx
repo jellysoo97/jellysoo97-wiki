@@ -1,6 +1,7 @@
-import { cn } from '@/utils/cn'
 import Image from 'next/image'
 import React from 'react'
+
+import { cn } from '@/utils/cn'
 
 type Props = React.ComponentProps<'img'> & {
   src: string

@@ -6,10 +6,10 @@ import { useState } from 'react'
 import { MenuItemType } from '@/constants/menus'
 import { cn } from '@/utils/cn'
 
-import Divider from '../common/Divider'
-import AngleDownIcon from '../icons/AngleDownIcon'
-import FileIcon from '../icons/FileIcon'
-import FolderIcon from '../icons/FolderIcon'
+import Divider from './common/Divider'
+import AngleDownIcon from './icons/AngleDownIcon'
+import FileIcon from './icons/FileIcon'
+import FolderIcon from './icons/FolderIcon'
 
 type Props = {
   menu: MenuItemType

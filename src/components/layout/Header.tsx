@@ -7,7 +7,7 @@ import { siteConfig } from '@/constants/config'
 import CustomImage from '../common/CustomImage'
 import Title from '../common/Title'
 import GithubIcon from '../icons/GithubIcon'
-import ThemeSwitch from './ThemeSwitch'
+import ThemeSwitch from '../ThemeSwitch'
 
 const Header = () => {
   return (

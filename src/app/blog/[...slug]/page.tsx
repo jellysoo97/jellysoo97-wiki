@@ -1,22 +1,36 @@
 import { useMDXComponent } from 'next-contentlayer/hooks'
 
+import BlogHeader from '@/components/layout/blog/BlogHeader'
 import { allBlogPosts } from '@/constants/posts'
 
 type Props = {
   params: { slug: string[] }
 }
 
-const BlogPostPage = ({ params }: Props) => {
-  console.log(params)
-  const { slug } = params
-  const [_, category, series, title] = slug
+export default function BlogPostPage({ params }: Props) {
   const post = allBlogPosts.find(
-    (post) => post._raw.flattenedPath === `blog/${slug.join('/')}`
+    (post) => post._raw.flattenedPath === `blog/${params.slug.join('/')}`
   )
 
   const MDXContent = useMDXComponent(post?.body.code || '')
 
-  return <div>{MDXContent && <MDXContent />}</div>
+  if (!post) {
+    return <div>skeleton</div>
+  }
+
+  return (
+    <div className="flex flex-col">
+      <BlogHeader post={post} />
+
+      {/* progress bar */}
+
+      <section>
+        <MDXContent />
+      </section>
+
+      <div>footer</div>
+    </div>
+  )
 }
 
 export const generateStaticParams = async () => {
@@ -24,5 +38,3 @@ export const generateStaticParams = async () => {
     slug: post._raw.flattenedPath.split('/'),
   }))
 }
-
-export default BlogPostPage
