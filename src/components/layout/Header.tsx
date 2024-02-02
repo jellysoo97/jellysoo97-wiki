@@ -20,7 +20,7 @@ const Header = () => {
               alt="logo"
               className="w-10 h-10 rounded-full md:w-12 md:h-12"
             />
-            <Title className="mb-0">{siteConfig.title}</Title>
+            <Title className="mb-0 text-primary">{siteConfig.title}</Title>
           </Link>
 
           <div className="flex gap-x-4">

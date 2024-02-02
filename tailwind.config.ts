@@ -47,6 +47,12 @@ const config: Config = {
         '.flex-centered': {
           '@apply flex justify-center items-center': {},
         },
+        '.text-primary': {
+          '@apply text-neutral-600 dark:text-neutral-350': {},
+        },
+        '.text-secondary': {
+          '@apply text-neutral-600 dark:text-neutral-400': {},
+        },
       })
     }),
   ],
