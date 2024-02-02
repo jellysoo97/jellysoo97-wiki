@@ -1,3 +1,4 @@
+import { allPosts } from 'contentlayer/generated'
 import React from 'react'
 
 import FileIcon from '@/components/icons/FileIcon'
@@ -6,115 +7,82 @@ import JavascriptIcon from '@/components/icons/JavascriptIcon'
 import LightBulbIcon from '@/components/icons/LightBulbIcon'
 import NextjsIcon from '@/components/icons/NextjsIcon'
 import ReactIcon from '@/components/icons/ReactIcon'
+import SeriesIcon from '@/components/icons/SeriesIcon'
 
 import { siteConfig } from './config'
-
-export enum CategoryEnum {
-  Root = 'Root',
-  JavaScript = 'JavaScript',
-  NextJs = 'Next.js',
-  React = 'React',
-}
+import { allAreas, allCategories, allSeries } from './posts'
 
 export type MenuItemType = {
   title: string
   depth: number
-  category: CategoryEnum
   icon?: React.ReactNode
   url?: string
   children?: MenuItemType[]
 }
 
-export const categories: CategoryEnum[] = Object.values(CategoryEnum)
+const categoryIcon: Record<string, React.ReactNode> = {
+  javascript: <JavascriptIcon />,
+  nextjs: <NextjsIcon />,
+  react: <ReactIcon />,
+}
 
 export const menus: MenuItemType[] = [
   {
     title: `${siteConfig.title}`,
     depth: 1,
-    category: CategoryEnum.Root,
-    icon: <LightBulbIcon className="fill-yellow-300" />,
+    icon: <LightBulbIcon className="fill-yellow-500" />,
     children: [
-      {
-        title: CategoryEnum.NextJs,
+      ...allAreas.map((area) => ({
+        title: area.replace(/^[a-z]/, (char) => char.toUpperCase()),
         depth: 2,
-        category: CategoryEnum.NextJs,
         icon: <FolderIcon />,
-        children: [
-          {
-            title: '블로그 만들기',
-            depth: 3,
-            category: CategoryEnum.NextJs,
-            icon: <FolderIcon />,
-            children: [
-              {
-                title: '01. 프로젝트 생성',
-                depth: 4,
-                category: CategoryEnum.NextJs,
-                icon: <FileIcon />,
-                url: '/blog/nextjs/test',
-              },
-              {
-                title: '02. 의존성 설치',
-                depth: 4,
-                category: CategoryEnum.NextJs,
-                icon: <FileIcon />,
-              },
-            ],
-          },
-          {
-            title: '넥스트1',
-            depth: 3,
-            category: CategoryEnum.NextJs,
-            icon: <NextjsIcon />,
-          },
-          {
-            title: '넥스트2',
-            depth: 3,
-            category: CategoryEnum.NextJs,
-            icon: <NextjsIcon />,
-          },
-          {
-            title: '넥스트3',
-            depth: 3,
-            category: CategoryEnum.NextJs,
-            icon: <NextjsIcon />,
-          },
-        ],
-      },
-      {
-        title: CategoryEnum.React,
-        depth: 2,
-        category: CategoryEnum.React,
-        icon: <FolderIcon />,
-        children: [
-          {
-            title: '리액트1',
-            depth: 3,
-            category: CategoryEnum.React,
-            icon: <ReactIcon />,
-          },
-          {
-            title: '리액트2',
-            depth: 3,
-            category: CategoryEnum.React,
-            icon: <ReactIcon />,
-          },
-        ],
-      },
-      {
-        title: CategoryEnum.JavaScript,
-        depth: 2,
-        category: CategoryEnum.JavaScript,
-        icon: <FolderIcon />,
-        children: [
-          {
-            title: '자바스크립트',
-            depth: 3,
-            category: CategoryEnum.JavaScript,
-            icon: <JavascriptIcon />,
-          },
-        ],
-      },
+        children:
+          area === 'blog'
+            ? [
+                ...allCategories.map((category) => ({
+                  title: category.replace(/^[a-z]/, (char) =>
+                    char.toUpperCase()
+                  ),
+                  depth: 3,
+                  icon: <FolderIcon />,
+                  children: [
+                    ...allPosts
+                      .filter((post) => post.category === category)
+                      .map((post) => ({
+                        title: post.title,
+                        depth: 4,
+                        icon: categoryIcon[post.category || ''],
+                        url: post.url,
+                      })),
+                  ],
+                })),
+                ...allSeries.map((series) => ({
+                  title: series,
+                  depth: 3,
+                  icon: <SeriesIcon />,
+                  children: [
+                    ...allPosts
+                      .filter((post) => post.series === series)
+                      .map((post) => ({
+                        title: post.title,
+                        depth: 4,
+                        icon: <FileIcon />,
+                        url: post.url,
+                      })),
+                  ],
+                })),
+              ]
+            : [
+                ...allPosts
+                  .filter((post) => post.area === area)
+                  .map((post) => ({
+                    title: post.title,
+                    depth: 3,
+                    icon: post.category ? <FolderIcon /> : <FileIcon />,
+                    url: post.url,
+                  })),
+              ],
+      })),
     ],
   },
 ]
