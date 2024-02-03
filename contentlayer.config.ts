@@ -1,6 +1,7 @@
 import { defineDocumentType, makeSource } from 'contentlayer/source-files'
 import rehypePrettyCode from 'rehype-pretty-code'
 import remarkGfm from 'remark-gfm'
+import { Pluggable } from 'unified'
 
 export const Post = defineDocumentType(() => ({
   name: 'Post',
@@ -40,6 +41,8 @@ export default makeSource({
   documentTypes: [Post],
   mdx: {
     remarkPlugins: [remarkGfm],
-    rehypePlugins: [[rehypePrettyCode, { theme: 'one-dark-pro' }]],
+    rehypePlugins: [
+      [rehypePrettyCode, { themes: 'one-dark-pro' }] as Pluggable,
+    ],
   },
 })
