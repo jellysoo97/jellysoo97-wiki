@@ -1,6 +1,5 @@
 import type { Config } from 'tailwindcss'
 import { fontFamily } from 'tailwindcss/defaultTheme'
-import plugin from 'tailwindcss/plugin'
 
 const config: Config = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
@@ -38,8 +37,12 @@ const config: Config = {
       },
     },
   },
+  variants: {
+    typography: ['dark'],
+  },
   plugins: [
-    plugin(({ addUtilities }) => {
+    require('@tailwindcss/typography'),
+    ({ addUtilities }: Partial<Config>) => {
       addUtilities({
         '.layout-container': {
           '@apply mx-auto max-w-3xl px-6 lg:max-w-6xl lg:px-8': {},
@@ -53,8 +56,14 @@ const config: Config = {
         '.text-secondary': {
           '@apply text-neutral-600 dark:text-neutral-400': {},
         },
+        '.bg-primary': {
+          '@apply bg-neutral-300 dark:bg-neutral-800': {},
+        },
+        '.bg-secondary': {
+          '@apply bg-neutral-200 dark:bg-neutral-700': {},
+        },
       })
-    }),
+    },
   ],
 }
 export default config
