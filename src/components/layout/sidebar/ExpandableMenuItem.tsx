@@ -19,7 +19,7 @@ const ExpandableMenuItem = ({ menu }: Props) => {
 
   const hasChildren = menu.children && menu.children.length > 0
 
-  const handleToggle = () => {
+  const toggleMenu = () => {
     setIsToggled((prev) => !prev)
   }
 
@@ -30,7 +30,7 @@ const ExpandableMenuItem = ({ menu }: Props) => {
           'flex items-center p-1 gap-x-2',
           hasChildren && 'cursor-pointer'
         )}
-        onClick={handleToggle}
+        onClick={toggleMenu}
       >
         {new Array(menu.depth - 1).fill('').map((_, index) => (
           <div key={index} className="w-8 h-8 flex-centered">

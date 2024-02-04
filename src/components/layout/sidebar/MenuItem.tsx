@@ -22,7 +22,7 @@ const MenuItem = ({ menu }: Props) => {
   const isPost = menu.depth > 2 && !hasChildren
   const isCurrentPage = pathname === menu.url
 
-  const handleToggle = () => {
+  const toggleMenu = () => {
     setIsToggled((prev) => !prev)
   }
 
@@ -37,9 +37,9 @@ const MenuItem = ({ menu }: Props) => {
           isSeries && 'flex justify-between items-center',
           isPost && menu.depth > 3 && 'pl-8',
           isCurrentPage &&
-            'border-yellow-500 dark:border-yellow-500 hover:border-yellow-500'
+            'border-yellow-500 dark:border-yellow-500 hover:border-yellow-500 dark:hover:border-yellow-500'
         )}
-        onClick={handleToggle}
+        onClick={toggleMenu}
       >
         {hasChildren ? (
           <>
