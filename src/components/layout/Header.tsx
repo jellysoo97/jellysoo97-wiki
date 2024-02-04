@@ -1,23 +1,15 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 
 import { siteConfig } from '@/constants/config'
-import { cn } from '@/utils/cn'
 
 import CustomImage from '../common/CustomImage'
-import IconButton from '../common/IconButton'
 import Title from '../common/Title'
 import GithubIcon from '../icons/GithubIcon'
-import MenuIcon from '../icons/MenuIcon'
 import ThemeSwitch from '../ThemeSwitch'
 
 const Header = () => {
-  const pathname = usePathname()
-
-  const isRootPage = pathname === '/'
-
   return (
     <>
       <header>
@@ -41,18 +33,6 @@ const Header = () => {
           </div>
         </div>
       </header>
-
-      <div
-        className={cn(
-          'flex items-center p-4 lg:hidden',
-          isRootPage && 'hidden'
-        )}
-      >
-        <IconButton>
-          <MenuIcon />
-        </IconButton>
-        {/* breadcrumb */}
-      </div>
     </>
   )
 }

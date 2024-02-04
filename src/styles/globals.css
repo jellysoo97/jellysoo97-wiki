@@ -52,9 +52,6 @@
   body {
     @apply m-0 p-0 min-h-dvh relative;
     @apply font-serif text-neutral-600 bg-neutral-300 dark:text-neutral-350 dark:bg-neutral-800;
-  }
-
-  main {
-    @apply h-[var(--main-height)];
+    @apply overflow-hidden;
   }
 }

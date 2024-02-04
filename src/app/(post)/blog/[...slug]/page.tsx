@@ -19,7 +19,7 @@ export default function BlogPostPage({ params }: Props) {
   }
 
   return (
-    <>
+    <div className="layout-container flex flex-col">
       <BlogHeader post={post} />
 
       {/* progress bar */}
@@ -29,7 +29,7 @@ export default function BlogPostPage({ params }: Props) {
       </section>
 
       <BlogFooter />
-    </>
+    </div>
   )
 }
 
