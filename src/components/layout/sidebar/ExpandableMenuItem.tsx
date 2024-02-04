@@ -3,19 +3,18 @@
 import Link from 'next/link'
 import { useState } from 'react'
 
+import Divider from '@/components/common/Divider'
+import AngleDownIcon from '@/components/icons/AngleDownIcon'
+import FileIcon from '@/components/icons/FileIcon'
+import FolderIcon from '@/components/icons/FolderIcon'
 import { MenuItemType } from '@/constants/menus'
 import { cn } from '@/utils/cn'
-
-import Divider from './common/Divider'
-import AngleDownIcon from './icons/AngleDownIcon'
-import FileIcon from './icons/FileIcon'
-import FolderIcon from './icons/FolderIcon'
 
 type Props = {
   menu: MenuItemType
 }
 
-const MenuItem = ({ menu }: Props) => {
+const ExpandableMenuItem = ({ menu }: Props) => {
   const [isToggled, setIsToggled] = useState<boolean>(false)
 
   const hasChildren = menu.children && menu.children.length > 0
@@ -25,7 +24,7 @@ const MenuItem = ({ menu }: Props) => {
   }
 
   return (
-    <div className="w-full flex flex-col gap-y-1">
+    <div className="flex flex-col gap-y-1">
       <div
         className={cn(
           'flex items-center p-1 gap-x-2',
@@ -53,7 +52,8 @@ const MenuItem = ({ menu }: Props) => {
               className={cn(
                 'text-base',
                 hasChildren && 'text-xl',
-                menu.depth === 1 && 'font-extrabold text-2xl'
+                menu.depth === 1 && 'font-extrabold text-2xl',
+                menu.depth > 2 && 'text-base'
               )}
             >
               {menu.title}
@@ -74,7 +74,7 @@ const MenuItem = ({ menu }: Props) => {
       {isToggled && hasChildren && (
         <>
           {menu.children?.map((child) => (
-            <MenuItem key={`${child.title}`} menu={child} />
+            <ExpandableMenuItem key={`${child.title}`} menu={child} />
           ))}
         </>
       )}
@@ -82,4 +82,4 @@ const MenuItem = ({ menu }: Props) => {
   )
 }
 
-export default MenuItem
+export default ExpandableMenuItem

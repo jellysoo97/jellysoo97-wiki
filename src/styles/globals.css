@@ -43,6 +43,7 @@
 
     /* layout */
     --header-height: 80px;
+    --footer-height: 52px;
     --main-height: calc(100dvh - var(--header-height));
   }
 }
@@ -54,6 +55,6 @@
   }
 
   main {
-    @apply layout-container;
+    @apply h-[var(--main-height)];
   }
 }

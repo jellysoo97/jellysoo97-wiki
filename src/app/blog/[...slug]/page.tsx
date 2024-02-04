@@ -1,6 +1,8 @@
-import { useMDXComponent } from 'next-contentlayer/hooks'
+import { notFound } from 'next/navigation'
 
+import BlogFooter from '@/components/layout/blog/BlogFooter'
 import BlogHeader from '@/components/layout/blog/BlogHeader'
+import MDXContent from '@/components/MDXContent'
 import { allBlogPosts } from '@/constants/posts'
 
 type Props = {
@@ -12,24 +14,22 @@ export default function BlogPostPage({ params }: Props) {
     (post) => post._raw.flattenedPath === `blog/${params.slug.join('/')}`
   )
 
-  const MDXContent = useMDXComponent(post?.body.code || '')
-
   if (!post) {
-    return <div>skeleton</div>
+    notFound()
   }
 
   return (
-    <div className="flex flex-col">
+    <>
       <BlogHeader post={post} />
 
       {/* progress bar */}
 
-      <section>
-        <MDXContent />
+      <section className="prose dark:prose-dark">
+        <MDXContent code={post.body.code} />
       </section>
 
-      <div>footer</div>
-    </div>
+      <BlogFooter />
+    </>
   )
 }
 
