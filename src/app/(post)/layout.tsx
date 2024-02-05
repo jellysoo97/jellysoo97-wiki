@@ -21,11 +21,12 @@ export default function PostPageLayout({ children }: Props) {
           {/* breadcrumb */}
         </div>
         <Divider />
+        {/* dialog */}
       </div>
 
       <Sidebar />
 
-      <div className="overflow-y-auto lg:pl-80">
+      <div className="lg:ml-80">
         {children}
         <Divider />
         <Footer />

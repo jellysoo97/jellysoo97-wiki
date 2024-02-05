@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 
+import Divider from '@/components/common/Divider'
 import BlogFooter from '@/components/layout/blog/BlogFooter'
 import BlogHeader from '@/components/layout/blog/BlogHeader'
 import MDXContent from '@/components/MDXContent'
@@ -19,14 +20,16 @@ export default function BlogPostPage({ params }: Props) {
   }
 
   return (
-    <div className="layout-container flex flex-col">
+    <div className="layout-container h-full flex flex-col overflow-y-auto">
       <BlogHeader post={post} />
+
+      <Divider className="mb-6" />
 
       {/* progress bar */}
 
-      <section className="prose dark:prose-dark">
-        <MDXContent code={post.body.code} />
-      </section>
+      <MDXContent code={post.body.code} />
+
+      <Divider className="mb-6" />
 
       <BlogFooter />
     </div>

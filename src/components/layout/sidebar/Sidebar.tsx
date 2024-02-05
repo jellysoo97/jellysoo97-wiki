@@ -8,6 +8,7 @@ const Sidebar = () => {
     <nav
       className={cn(
         'hidden',
+        'overflow-y-auto',
         'lg:flex flex-col h-full fixed top-[var(--header-height)] left-0 w-80 px-4 py-6 overflow-y-auto border-r border-neutral-400 dark:border-neutral-700'
       )}
     >
@@ -16,7 +17,7 @@ const Sidebar = () => {
           key={menu.title}
           className={'w-full flex flex-col space-y-2 mt-4 first:mt-0'}
         >
-          <MenuItem menu={menu} />
+          <MenuItem menu={menu} isInitialToggled />
         </ul>
       ))}
     </nav>
