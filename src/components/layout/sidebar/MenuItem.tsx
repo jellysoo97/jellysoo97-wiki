@@ -10,10 +10,11 @@ import { cn } from '@/utils/cn'
 
 type Props = {
   menu: MenuItemType
+  isInitialToggled?: boolean
 }
 
-const MenuItem = ({ menu }: Props) => {
-  const [isToggled, setIsToggled] = useState<boolean>(false)
+const MenuItem = ({ menu, isInitialToggled = false }: Props) => {
+  const [isToggled, setIsToggled] = useState<boolean>(isInitialToggled)
   const pathname = usePathname()
 
   const hasChildren = menu.children && menu.children.length > 0
@@ -60,7 +61,11 @@ const MenuItem = ({ menu }: Props) => {
 
       {((isSeries && isToggled) || (!isSeries && hasChildren)) &&
         menu.children?.map((child) => (
-          <MenuItem key={child.title} menu={child} />
+          <MenuItem
+            key={child.title}
+            menu={child}
+            isInitialToggled={isInitialToggled}
+          />
         ))}
     </>
   )
