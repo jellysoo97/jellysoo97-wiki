@@ -1,5 +1,5 @@
 import { defineDocumentType, makeSource } from 'contentlayer/source-files'
-import rehypePrettyCode from 'rehype-pretty-code'
+import rehypePrettyCode, { Options } from 'rehype-pretty-code'
 import remarkGfm from 'remark-gfm'
 
 export const Post = defineDocumentType(() => ({
@@ -40,6 +40,13 @@ export default makeSource({
   documentTypes: [Post],
   mdx: {
     remarkPlugins: [remarkGfm],
-    rehypePlugins: [[rehypePrettyCode, { theme: 'one-dark-pro' }]],
+    rehypePlugins: [
+      [
+        rehypePrettyCode,
+        {
+          theme: 'one-dark-pro',
+        } as Partial<Options>,
+      ],
+    ],
   },
 })

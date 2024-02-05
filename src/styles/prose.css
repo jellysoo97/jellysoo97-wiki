@@ -1,0 +1,79 @@
+.prose {
+  @apply text-primary text-base;
+}
+
+.prose p {
+  @apply mb-0;
+}
+
+.prose h2 {
+  @apply text-xl text-title mb-1;
+}
+
+.prose h3 {
+  @apply text-lg text-title mb-1;
+}
+
+.prose ul {
+  list-style-type: '◻️';
+  padding-inline-start: 1ch;
+  @apply pl-8;
+
+  :has(input[type='checkbox']:checked) {
+    list-style-type: '✅';
+    padding-inline-start: 1ch;
+  }
+}
+
+.prose li {
+  @apply my-2;
+
+  &::marker {
+    @apply text-primary;
+  }
+}
+
+.prose li:has(input[type='checkbox']) input {
+  @apply hidden;
+}
+
+.prose code {
+  @apply font-mono text-base;
+}
+
+.prose code:not([data-language]) {
+  @apply text-red-500 dark:text-red-400;
+  @apply p-1 rounded-md bg-secondary;
+
+  &::before,
+  &::after {
+    @apply content-none;
+  }
+}
+
+.prose code[data-line-numbers] {
+  counter-reset: lineNumber;
+}
+
+.prose pre code span[data-line]::before {
+  counter-increment: lineNumber;
+  content: counter(lineNumber);
+  @apply inline-block text-right mr-3 w-4 text-primary;
+}
+
+.prose pre code span[data-highlighted-line] {
+  @apply border-l-2 border-yellow-500 bg-[var(--bg-code-block-title)];
+}
+
+.prose div[data-rehype-pretty-code-fragment] {
+  @apply w-full overflow-hidden bg-[var(--bg-code-block)] rounded-lg mb-5;
+
+  pre {
+    @apply overflow-x-auto m-0 p-2;
+    @apply bg-[var(--bg-code-block)];
+  }
+}
+
+.prose div[data-rehype-pretty-code-title] {
+  @apply font-mono font-semibold text-neutral-350 px-2 py-1 bg-[var(--bg-code-block-title)];
+}

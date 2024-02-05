@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import 'prose.css';
+
 @font-face {
   font-family: 'Nanum Myeongjo';
   src: url('../fonts/NanumMyeongjo-Regular.woff') format('woff');
@@ -36,13 +38,15 @@
     --bg-highlight-gray: #f1f1ef;
     --bg-highlight-yellow: #faf3dd;
     --bg-highlight-red: #faecec;
+    --bg-code-block: #1c1917e6;
+    --bg-code-block-title: #fff8d21a;
 
     /* fonts */
     --font-serif: 'Nanum Myeongjo';
     --font-mono: 'Cutive Mono';
 
     /* layout */
-    --header-height: 80px;
+    --header-height: 82px;
     --footer-height: 52px;
     --main-height: calc(100dvh - var(--header-height));
   }
@@ -52,6 +56,5 @@
   body {
     @apply m-0 p-0 min-h-dvh relative;
     @apply font-serif text-neutral-600 bg-neutral-300 dark:text-neutral-350 dark:bg-neutral-800;
-    @apply overflow-hidden;
   }
 }
