@@ -3,15 +3,15 @@
 }
 
 .prose p {
-  @apply mb-0;
+  @apply my-2;
 }
 
 .prose h2 {
-  @apply text-xl text-title mb-1;
+  @apply text-xl text-title mb-4;
 }
 
 .prose h3 {
-  @apply text-lg text-title mb-1;
+  @apply text-lg text-title mb-2;
 }
 
 .prose ul {
@@ -23,6 +23,11 @@
     list-style-type: '✅';
     padding-inline-start: 1ch;
   }
+}
+
+.prose li:has(ul) ul {
+  list-style-type: '▪';
+  padding-inline-start: 1ch;
 }
 
 .prose li {
