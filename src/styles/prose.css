@@ -14,6 +14,14 @@
   @apply text-lg text-title mb-2;
 }
 
+.prose a {
+  @apply text-blue-500 decoration-blue-500 underline-offset-2;
+}
+
+.prose strong {
+  @apply p-1 bg-[var(--bg-highlight-yellow)] rounded-md font-black;
+}
+
 .prose ul {
   list-style-type: '◻️';
   padding-inline-start: 1ch;
@@ -81,4 +89,15 @@
 
 .prose div[data-rehype-pretty-code-title] {
   @apply font-mono font-semibold text-neutral-350 px-2 py-1 bg-[var(--bg-code-block-title)];
+}
+
+.prose blockquote {
+  @apply border-l-4 border-yellow-500 not-italic bg-neutral-250 dark:bg-neutral-700 text-primary rounded-md py-2;
+}
+
+.prose blockquote p {
+  &::before,
+  &::after {
+    @apply content-none;
+  }
 }
