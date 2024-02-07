@@ -1,27 +1,36 @@
 ---
 title: '01. Introduction'
-description: '어떤 블로그를 만들까'
+description: '어떤 블로그를 어떻게 만들까'
 series: 'Next.js 블로그 만들기'
 date: 2024-02-02 21:56:23
 ---
 
 ## 1. 브레인스토밍
 
-- 심플한 디자인 / 반응형 레이아웃 / 다크모드
-- `Next.js 14` 튜토리얼 중 필요한 부분 반영
-- `contentlayer`로 `mdx` 형식의 글 작성
-- SEO, OG
-- `github action` / `vercel`
-- frameworkless ui playground 만들기 / 테스트 도입
-- 블로그 부가 기능 : 댓글, 뷰수, TOC
+- 컨텐츠: 글 포스팅, playground 만들기
+- 컨텐츠 외 고려사항: 간편한 포스팅 시스템, SEO, 스타일링, 배포, 블로그 부가기능
 
-## 2. 블로그 구현 To-do list
+## 2. 기술스택
 
-- [x] Next.js 14 app router, dynamic routing
-- [x] `contentlayer`로 mdx post 작성
-- [x] 반응형
+- `React`, `TypeScript`
+- ## `Next.js`
+- `Tailwindcss`
+  > It's fast, flexible, and reliable - with zero-runtime.  
+  > [공식문서](https://tailwindcss.com/docs/installation)
+  - **fast?** 테일윈드는 클래스를 사용하는 모든 HTML 파일과 JS 컴포넌트들을 스캔해서 클래스에 해당하는 정적인 css 파일을 생성한다. 런타임에 js를 읽어서 동적으로 스타일을 적용하는 css-in-js와 비교했을 때 브라우저가 더 빠르게 해석한다.
+  - **flexible?**
+  - +규격화된 디자인 시스템을 도입하기 좋다. 커스터마이징한 스타일 값들을 정의해놓고 재사용하면 보다 정돈된 블로그를 만들 수 있다.
+- ## `Contentlayer`
+
+## 3. 투두리스트
+
+- [x] 프로젝트 초기세팅
+- [x] 반응형 레이아웃
 - [x] 다크모드
-- [ ] 메타데이터
-- [ ] 부가 기능1: 댓글
-- [ ] 부가 기능2: TOC
-- [ ] 부가 기능3: view count
+- [x] `contentlayer` 세팅
+- [x] mdx 스타일링
+- 메타데이터
+- `vercel` 배포
+- 부가기능1: 댓글
+- 부가기능2: 뷰수
+- 부가기능3: TOC
