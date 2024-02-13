@@ -25,7 +25,7 @@ export default function BlogPostPage({ params }: Props) {
 
       <Divider className="mb-6" />
 
-      {/* progress bar */}
+      {/* TODO: progress bar */}
 
       <MDXContent code={post.body.code} />
 
