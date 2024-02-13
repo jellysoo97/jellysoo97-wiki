@@ -65,6 +65,13 @@ const config: Config = {
         '.bg-secondary': {
           '@apply bg-neutral-350 dark:bg-neutral-700': {},
         },
+        '.example': {
+          '@apply w-full text-primary px-2 py-4 bg-neutral-250 dark:bg-neutral-600':
+            {},
+        },
+        '.reset': {
+          all: 'unset',
+        },
       })
     },
   ],
