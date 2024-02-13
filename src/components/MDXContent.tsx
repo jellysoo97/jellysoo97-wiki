@@ -1,38 +1,12 @@
-import Image from 'next/image'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 import React from 'react'
-
-import { cn } from '@/utils/cn'
 
 type Props = {
   code: string
 }
 
-const img = ({
-  src,
-  alt,
-  title,
-  className,
-  ...props
-}: React.ComponentProps<'img'>) => {
-  return (
-    <figure
-      {...props}
-      className={cn(
-        'flex flex-col items-center justify-center gap-y-1',
-        'relative w-full',
-        className
-      )}
-    >
-      <Image
-        src={src || ''}
-        alt={alt || 'image'}
-        fill
-        className="object-cover"
-      />
-      {title && <figcaption className="text-secondary">{title}</figcaption>}
-    </figure>
-  )
+const img = ({ src, alt, ...props }: React.ComponentProps<'img'>) => {
+  return <img src={src || ''} alt={alt || 'image'} {...props} />
 }
 
 const pre = ({ title, children }: React.ComponentProps<'pre'>) => {
