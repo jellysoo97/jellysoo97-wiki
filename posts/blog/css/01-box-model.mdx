@@ -22,7 +22,7 @@ import Example from '../../../src/components/example/CssBoxModel'
 
 <Example.Example1 />
 
-- 첫번째 박스: `width: 50px`로 고정되어 있다. 문제는 제한된 박스 크기보다 긴 콘텐츠가 있다는 점이다. 해당 콘텐츠는 부모의 `border box` 밖으로 `overflow`된다.
+- 첫번째 박스: `width: 50px`로 고정되어 있다. 문제는 제한된 박스 크기보다 긴 콘텐츠가 있다는 점이다. 해당 콘텐츠는 부모의 border box 밖으로 overflow된다.
 - 두번째 박스: 첫번째 박스처럼 부모 밖으로 넘어가는 것을 방지하기 위해서는 두번째 예시처럼 `width`를 설정하지 않거나
 - 세번째 박스: 세번째 박스처럼 `width: min-content`로 설정하는 방법이 있다. `min-content`는 콘텐츠의 최소 내부 너비(단어 "intrinsic")만큼 넓어지도록 한다.
 
@@ -42,23 +42,7 @@ import Example from '../../../src/components/example/CssBoxModel'
 
 <Example.Example2 />
 
-```css showLineNumbers
-.box-sizing-content {
-  box-sizing: content-box;
-  width: 200px;
-  border: 10px solid;
-  padding: 20px;
-}
-
-.box-sizing-border {
-  box-sizing: border-box;
-  width: 200px;
-  border: 10px solid;
-  padding: 20px;
-}
-```
-
-- 둘다 `width: 100px;`인데 사이즈가 다르다.
+- 둘다 `width: 200px;`이고 동일한 `padding`, `border` 값을 주었는데 사이즈가 다르다.
 - `box-sizing: content-box;`: content box의 `width`가 200px이다. box-sizing의 기준이 content box이다.
 
 ```text showLineNumbers
@@ -71,4 +55,14 @@ import Example from '../../../src/components/example/CssBoxModel'
 ```text showLineNumbers
 // 전체 박스 크기 200px 고정, content box 크기
 200px - 20px*2(padding) - 10px*2(border) = 140px
+```
+
+- 요소에 `box-sizing: border-box;`를 적용하면 박스 모델 사이즈가 더 예측 가능하기 때문에 모든 요소에 기본값을 global하게 바꾸는 경우도 있다.
+
+```css showLineNumbers
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 ```
