@@ -4,15 +4,16 @@ import Divider from '@/components/common/Divider'
 import BlogFooter from '@/components/layout/blog/BlogFooter'
 import BlogHeader from '@/components/layout/blog/BlogHeader'
 import MDXContent from '@/components/MDXContent'
-import { allBlogPosts } from '@/constants/posts'
+import { allSeriesPosts } from '@/constants/posts'
 
 type Props = {
-  params: { slug: string }
+  params: { slug: string; postId: string }
 }
 
-const BlogPostPage = ({ params }: Props) => {
-  const post = allBlogPosts.find(
-    (post) => post._raw.flattenedPath === params.slug
+const SeriesPostPage = ({ params }: Props) => {
+  const post = allSeriesPosts.find(
+    (post) =>
+      post._raw.flattenedPath === `series/${params.slug}/${params.postId}`
   )
 
   if (!post) {
@@ -35,9 +36,11 @@ const BlogPostPage = ({ params }: Props) => {
 }
 
 export const generateStaticParams = async () => {
-  return allBlogPosts.map((post) => ({
-    slug: post._raw.flattenedPath,
-  }))
+  return allSeriesPosts.map((post) => {
+    const [_, slug, postId] = post._raw.flattenedPath.split('/')
+
+    return { slug, postId }
+  })
 }
 
-export default BlogPostPage
+export default SeriesPostPage

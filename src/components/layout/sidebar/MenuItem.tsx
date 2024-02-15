@@ -47,8 +47,8 @@ const MenuItem = ({ menu, isInitialToggled = false }: Props) => {
       )}
 
       {!hasChildren && (
-        <li className="flex justify-between items-center px-4 py-1">
-          <Link href={menu.url || '/'} className="flex gap-x-2">
+        <li className="flex items-center px-4 py-1">
+          <Link href={menu.url || '/'} className="flex flex-1 gap-x-2">
             {new Array(menu.depth - 1).fill('').map((_, index) => (
               <Fragment key={index}>
                 {isCurrentPage ? (
