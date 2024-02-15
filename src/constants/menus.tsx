@@ -1,16 +1,18 @@
-import { allPosts } from 'contentlayer/generated'
+import { Post } from 'contentlayer/generated'
 import React from 'react'
 
+import BlogIcon from '@/components/icons/BlogIcon'
 import FileIcon from '@/components/icons/FileIcon'
 import FolderIcon from '@/components/icons/FolderIcon'
-import JavascriptIcon from '@/components/icons/JavascriptIcon'
-import LightBulbIcon from '@/components/icons/LightBulbIcon'
-import NextjsIcon from '@/components/icons/NextjsIcon'
-import ReactIcon from '@/components/icons/ReactIcon'
+import PlaygroundIcon from '@/components/icons/PlaygroundIcon'
 import SeriesIcon from '@/components/icons/SeriesIcon'
 
-import { siteConfig } from './config'
-import { allAreas, allCategories, allSeries } from './posts'
+import {
+  allAreas,
+  allBlogPosts,
+  allPlaygroundPosts,
+  allSeriesPosts,
+} from './posts'
 
 export type MenuItemType = {
   title: string
@@ -20,69 +22,40 @@ export type MenuItemType = {
   children?: MenuItemType[]
 }
 
-const categoryIcon: Record<string, React.ReactNode> = {
-  javascript: <JavascriptIcon />,
-  nextjs: <NextjsIcon />,
-  react: <ReactIcon />,
+const menuPosts: Record<string, Post[]> = {
+  blog: allBlogPosts,
+  playground: allPlaygroundPosts,
+  series: allSeriesPosts,
+}
+const menuIcon: Record<string, React.ReactNode> = {
+  blog: <BlogIcon />,
+  playground: <PlaygroundIcon />,
+  series: <SeriesIcon />,
 }
 
-export const menus: MenuItemType[] = [
-  {
-    title: `${siteConfig.title}`,
-    depth: 1,
-    icon: <LightBulbIcon className="fill-yellow-500" />,
-    children: [
-      ...allAreas.map((area) => ({
-        title: area.replace(/^[a-z]/, (char) => char.toUpperCase()),
-        depth: 2,
-        icon: <FolderIcon />,
-        children:
-          area === 'blog'
-            ? [
-                ...allCategories.map((category) => ({
-                  title: category.replace(/^[a-z]/, (char) =>
-                    char.toUpperCase()
-                  ),
-                  depth: 3,
-                  icon: <FolderIcon />,
-                  children: [
-                    ...allPosts
-                      .filter((post) => post.category === category)
-                      .map((post) => ({
-                        title: post.title,
-                        depth: 4,
-                        icon: categoryIcon[post.category || ''],
-                        url: post.url,
-                      })),
-                  ],
-                })),
-                ...allSeries.map((series) => ({
-                  title: series,
-                  depth: 3,
-                  icon: <SeriesIcon />,
-                  children: [
-                    ...allPosts
-                      .filter((post) => post.series === series)
-                      .map((post) => ({
-                        title: post.title,
-                        depth: 4,
-                        icon: <FileIcon />,
-                        url: post.url,
-                      })),
-                  ],
-                })),
-              ]
-            : [
-                ...allPosts
-                  .filter((post) => post.area === area)
-                  .map((post) => ({
-                    title: post.title,
-                    depth: 3,
-                    icon: post.category ? <FolderIcon /> : <FileIcon />,
-                    url: post.url,
-                  })),
-              ],
-      })),
-    ],
-  },
-]
+export const menus: MenuItemType[] = allAreas.map((area) => ({
+  title: area.replace(/^[a-z]/, (char) => char.toUpperCase()),
+  depth: 1,
+  icon: menuIcon[area],
+  children: menuPosts[area].map((menu) => ({
+    title:
+      area === 'playground' ? menu.title : menu.category || menu.series || '',
+    depth: 2,
+    icon: area === 'playground' ? <FileIcon /> : <FolderIcon />,
+    url:
+      area === 'playground'
+        ? menu.url
+        : menu.url.split('/').slice(0, 3).concat('list').join('/'),
+    children:
+      ((menu.category || menu.series) &&
+        menuPosts[area]
+          .filter((post) => post.category === menu.category)
+          .map((post) => ({
+            title: post.title,
+            depth: 3,
+            icon: <FileIcon />,
+            url: post.url,
+          }))) ||
+      [],
+  })),
+}))

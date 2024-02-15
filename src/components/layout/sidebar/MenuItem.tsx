@@ -2,9 +2,11 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 
+import Divider from '@/components/common/Divider'
 import AngleDownIcon from '@/components/icons/AngleDownIcon'
+import AngleRightIcon from '@/components/icons/AngleRightIcon'
 import { MenuItemType } from '@/constants/menus'
 import { cn } from '@/utils/cn'
 
@@ -17,10 +19,7 @@ const MenuItem = ({ menu, isInitialToggled = false }: Props) => {
   const [isToggled, setIsToggled] = useState<boolean>(isInitialToggled)
   const pathname = usePathname()
 
-  const hasChildren = menu.children && menu.children.length > 0
-  const isArea = menu.depth === 2
-  const isSeries = menu.depth === 3 && hasChildren
-  const isPost = menu.depth > 2 && !hasChildren
+  const hasChildren = menu.children && menu.children?.length > 0
   const isCurrentPage = pathname === menu.url
 
   const toggleMenu = () => {
@@ -29,43 +28,48 @@ const MenuItem = ({ menu, isInitialToggled = false }: Props) => {
 
   return (
     <>
-      <li
-        className={cn(
-          isArea &&
-            'mb-1 text-neutral-800 dark:text-neutral-200 text-xl font-black',
-          (isSeries || isPost) &&
-            'pl-4 border-l-2 border-neutral-350 hover:border-neutral-400 dark:border-neutral-600 dark:hover:border-neutral-500 cursor-pointer',
-          isSeries && 'flex justify-between items-center',
-          isPost && menu.depth > 3 && 'pl-8',
-          isCurrentPage &&
-            'border-yellow-500 dark:border-yellow-500 hover:border-yellow-500 dark:hover:border-yellow-500'
-        )}
-        onClick={toggleMenu}
-      >
-        {hasChildren ? (
-          <>
-            <span>{menu.title}</span>
-            {isSeries && (
-              <AngleDownIcon
-                className={cn(
-                  'w-8 h-8 fill-neutral-600 dark:fill-neutral-350',
-                  isToggled && 'rotate-180'
-                )}
-              />
-            )}
-          </>
-        ) : (
-          <Link href={menu.url || ''}>{menu.title}</Link>
-        )}
-      </li>
-
-      {((isSeries && isToggled) || (!isSeries && hasChildren)) &&
-        menu.children?.map((child) => (
-          <MenuItem
-            key={child.title}
-            menu={child}
-            isInitialToggled={isInitialToggled}
+      {hasChildren && (
+        <ul className="flex justify-between items-center px-4 py-2 cursor-pointer">
+          <Link href={menu.url || ''} className="flex flex-1 gap-x-2">
+            {new Array(menu.depth - 1).fill('').map((_, index) => (
+              <div key={index} className="w-6 h-6 flex-centered">
+                <Divider direction="vertical" />
+              </div>
+            ))}
+            {menu.icon}
+            {menu.title}
+          </Link>
+          <AngleDownIcon
+            className={cn('w-8 h-8', isToggled && 'rotate-180')}
+            onClick={toggleMenu}
           />
+        </ul>
+      )}
+
+      {!hasChildren && (
+        <li className="flex justify-between items-center px-4 py-1">
+          <Link href={menu.url || '/'} className="flex gap-x-2">
+            {new Array(menu.depth - 1).fill('').map((_, index) => (
+              <Fragment key={index}>
+                {isCurrentPage ? (
+                  <AngleRightIcon className="text-yellow-500" />
+                ) : (
+                  <div className="w-6 h-6 flex-centered">
+                    <Divider direction="vertical" />
+                  </div>
+                )}
+              </Fragment>
+            ))}
+            {menu.icon}
+            {menu.title}
+          </Link>
+        </li>
+      )}
+
+      {hasChildren &&
+        isToggled &&
+        menu.children?.map((child) => (
+          <MenuItem key={child.title} menu={child} />
         ))}
     </>
   )
