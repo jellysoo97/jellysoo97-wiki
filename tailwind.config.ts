@@ -60,7 +60,7 @@ const config: Config = {
           '@apply text-neutral-800 dark:text-neutral-200': {},
         },
         '.bg-primary': {
-          '@apply bg-neutral-300 dark:bg-neutral-800': {},
+          '@apply bg-neutral-200 dark:bg-neutral-800': {},
         },
         '.bg-secondary': {
           '@apply bg-neutral-350 dark:bg-neutral-700': {},
