@@ -9,6 +9,7 @@ const Sidebar = () => {
       className={cn(
         'hidden',
         'overflow-y-auto',
+        'first:mt-4',
         'lg:flex flex-col h-full fixed top-[var(--header-height)] left-0 w-80 overflow-y-auto border-r border-neutral-400 dark:border-neutral-700'
       )}
     >

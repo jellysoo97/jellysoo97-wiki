@@ -12,17 +12,11 @@ const PlaygroundPage = ({ params }: Props) => {
     (post) => post._raw.flattenedPath === `playground/${params.slug}`
   )
 
-  console.log(params.slug, allPlaygroundPosts)
-
   if (!post) {
     notFound()
   }
 
-  return (
-    <div className="layout-container overflow-y-auto lg:ml-80">
-      <MDXContent code={post.body.code} />
-    </div>
-  )
+  return <MDXContent code={post.body.code} />
 }
 
 export const generateStaticParams = async () => {
