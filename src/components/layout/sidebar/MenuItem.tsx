@@ -66,7 +66,6 @@ const MenuItem = ({ menu, isInitialToggled = false }: Props) => {
                 <Divider direction="vertical" />
               </div>
             ))}
-            {menu.icon}
             <span
               className={cn(
                 'text-sm',
