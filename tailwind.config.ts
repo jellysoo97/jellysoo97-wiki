@@ -6,8 +6,9 @@ const config: Config = {
   darkMode: 'class',
   theme: {
     fontFamily: {
-      sans: ['var(--font-sans)', ...fontFamily.sans],
+      sans: [...fontFamily.sans],
       serif: ['var(--font-serif)', ...fontFamily.serif],
+      serifBold: ['var(--font-serif-bold)', ...fontFamily.serif],
       mono: ['var(--font-mono)', ...fontFamily.mono],
     },
     extend: {
@@ -29,11 +30,6 @@ const config: Config = {
           800: 'var(--neutral-800)',
           900: 'var(--neutral-900)',
         },
-        highlight: {
-          gray: 'var(--bg-highlight-gray)',
-          yellow: 'var(--bg-highlight-yellow)',
-          red: 'var(--bg-highlight-red)',
-        },
       },
     },
   },
@@ -44,33 +40,18 @@ const config: Config = {
     require('@tailwindcss/typography'),
     ({ addUtilities }: Partial<Config>) => {
       addUtilities({
-        '.layout-container': {
-          '@apply mx-auto max-w-3xl px-6 lg:max-w-6xl lg:px-8': {},
-        },
-        '.flex-centered': {
-          '@apply flex justify-center items-center': {},
-        },
+        // colors
+        '.bg-primary': { '@apply bg-neutral-200 dark:bg-neutral-800': '' },
+        '.bg-secondary': { '@apply bg-neutral-300 dark:bg-neutral-700': '' },
         '.text-primary': {
-          '@apply text-neutral-600 dark:text-neutral-350': {},
+          '@apply text-neutral-600 dark:text-neutral-350': '',
         },
         '.text-secondary': {
-          '@apply text-neutral-600 dark:text-neutral-400': {},
+          '@apply text-neutral-500 dark:text-neutral-400': '',
         },
-        '.text-title': {
-          '@apply text-neutral-800 dark:text-neutral-200': {},
-        },
-        '.bg-primary': {
-          '@apply bg-neutral-200 dark:bg-neutral-800': {},
-        },
-        '.bg-secondary': {
-          '@apply bg-neutral-350 dark:bg-neutral-700': {},
-        },
-        '.example': {
-          '@apply w-full text-primary px-2 py-4 bg-neutral-250 dark:bg-neutral-600':
-            {},
-        },
-        '.reset': {
-          all: 'unset',
+        // layout
+        '.layout-container': {
+          '@apply mx-auto max-w-3xl px-6 lg:max-w-6xl lg:px-8': '',
         },
       })
     },

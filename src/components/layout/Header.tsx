@@ -4,8 +4,6 @@ import Link from 'next/link'
 
 import { siteConfig } from '@/constants/config'
 
-import CustomImage from '../common/CustomImage'
-import Divider from '../common/Divider'
 import IconButton from '../common/IconButton'
 import Title from '../common/Title'
 import GithubIcon from '../icons/GithubIcon'
@@ -15,38 +13,27 @@ import ThemeSwitch from '../ThemeSwitch'
 const Header = () => {
   return (
     <>
-      <header className="sticky top-0 z-40 w-full bg-primary">
-        <div className="flex justify-between items-center p-4">
-          <Link href={'/'} className="flex items-center space-x-4">
-            <CustomImage
-              src={siteConfig.author.avatar}
-              alt="logo"
-              className="w-10 h-10 rounded-full md:w-12 md:h-12"
-            />
-            <Title className="mb-0 text-primary">{siteConfig.title}</Title>
+      <header className="sticky top-0 z-40 w-full h-[var(--height-header)] layout-container">
+        <div className="flex h-full justify-between items-center">
+          <Link href={'/'}>
+            <Title className="mb-0">🚀 {siteConfig.title}</Title>
           </Link>
 
-          <div className="flex gap-x-4">
+          <div className="flex items-center gap-x-2">
             <ThemeSwitch />
-            <Link href={siteConfig.url.github} target="_blank">
-              <GithubIcon className="w-7 h-7" />
+            <Link
+              href={siteConfig.url.github}
+              target="_blank"
+              className="w-8 h-8 flex justify-center items-center transition ease-in-out duration-300 hover:scale-110 md:transform-none"
+            >
+              <GithubIcon className="w-6 h-6 text-secondary" />
             </Link>
+            <IconButton>
+              <MenuIcon className="w-6 h-6 text-secondary" />
+            </IconButton>
           </div>
         </div>
-
-        <Divider />
       </header>
-
-      <div className="block lg:hidden">
-        <div className="layout-container flex items-center p-2">
-          <IconButton>
-            <MenuIcon />
-          </IconButton>
-          {/* breadcrumb */}
-        </div>
-        <Divider />
-        {/* dialog */}
-      </div>
     </>
   )
 }

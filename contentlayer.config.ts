@@ -10,24 +10,10 @@ export const Post = defineDocumentType(() => ({
     title: { type: 'string', required: true },
     description: { type: 'string', required: true },
     date: { type: 'date', required: true },
-    category: { type: 'string' },
+    tags: { type: 'list', of: { type: 'string' }, required: true },
     series: { type: 'string' },
-    thumbnail: { type: 'string' },
   },
   computedFields: {
-    area: {
-      type: 'string',
-      resolve: (post) => post._raw.flattenedPath.split('/')[0],
-    },
-    category: {
-      type: 'string',
-      resolve: (post) => {
-        const slug = post._raw.flattenedPath.split('/')
-        const [area, category] = slug
-
-        return area === 'blog' && !post.series ? category : ''
-      },
-    },
     url: {
       type: 'string',
       resolve: (post) => `/${post._raw.flattenedPath}`,

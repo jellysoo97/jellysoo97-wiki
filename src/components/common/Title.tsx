@@ -7,8 +7,8 @@ const Title = ({ className, ...props }: React.ComponentProps<'h1'>) => {
     <h1
       {...props}
       className={cn(
-        'text-neutral-800 dark:text-neutral-200',
-        'text-xl font-extrabold mb-4 md:text-2xl',
+        'font-serifBold text-primary text-lg lg:text-xl',
+        'mb-4',
         className
       )}
     />

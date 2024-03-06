@@ -5,17 +5,18 @@ const DarkThemeIcon = ({
   return (
     <svg
       className={className}
-      aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
-      fill="currentColor"
+      width="24"
+      height="24"
       viewBox="0 0 24 24"
+      fill="currentColor"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       {...props}
     >
-      <path
-        fillRule="evenodd"
-        d="M11.7 2a10 10 0 1 0 9.8 13.3 1 1 0 0 0-1-1.3H20a8 8 0 0 1-7.6-10.6l.1-.4a1 1 0 0 0-.8-1Z"
-        clipRule="evenodd"
-      />
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
     </svg>
   )
 }

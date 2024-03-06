@@ -5,8 +5,14 @@
 @import 'prose.css';
 
 @font-face {
-  font-family: 'Nanum Myeongjo';
+  font-family: 'Nanum Myeongjo Regular';
   src: url('../fonts/NanumMyeongjo-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Nanum Myeongjo ExtraBold';
+  src: url('../fonts/NanumMyeongjo-ExtraBold.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -35,20 +41,14 @@
     --neutral-750: #363636;
     --neutral-800: #262626;
     --neutral-900: #171717;
-    --bg-highlight-gray: #f1f1ef;
-    --bg-highlight-yellow: #f8ebc4;
-    --bg-highlight-red: #faecec;
-    --bg-code-block: #1c1917e6;
-    --bg-code-block-title: #fff8d21a;
 
     /* fonts */
-    --font-serif: 'Nanum Myeongjo';
+    --font-serif: 'Nanum Myeongjo Regular';
+    --font-serif-bold: 'Nanum Myeongjo ExtraBold';
     --font-mono: 'Cutive Mono';
 
     /* layout */
-    --header-height: 82px;
-    --footer-height: 52px;
-    --main-height: calc(100dvh - var(--header-height));
+    --height-header: 52px;
   }
 }
 
