@@ -1,14 +1,18 @@
 import { siteConfig } from '@/constants/config'
 import { DateFormatTypeEnum, formatDate, today } from '@/utils/format-date'
 
+import Divider from '../common/Divider'
+
 const Footer = () => {
   return (
-    <footer>
-      <div className="w-full py-4">
-        <div className="layout-container flex justify-center items-center text-sm">
+    <footer className="layout-container">
+      <Divider className="mt-8" />
+
+      <div className="flex justify-center items-center py-4">
+        <span>
           Copyright © {formatDate(today, DateFormatTypeEnum.YearOnly)}{' '}
           {siteConfig.author.name}
-        </div>
+        </span>
       </div>
     </footer>
   )
