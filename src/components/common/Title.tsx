@@ -7,7 +7,7 @@ const Title = ({ className, ...props }: React.ComponentProps<'h1'>) => {
     <h1
       {...props}
       className={cn(
-        'font-serifBold text-primary text-lg lg:text-xl',
+        'font-serifBold text-primary text-lg md:text-xl',
         'mb-4',
         className
       )}

@@ -4,6 +4,7 @@ import Link from 'next/link'
 
 import { siteConfig } from '@/constants/config'
 
+import Divider from '../common/Divider'
 import IconButton from '../common/IconButton'
 import Title from '../common/Title'
 import GithubIcon from '../icons/GithubIcon'
@@ -33,6 +34,8 @@ const Header = () => {
             </IconButton>
           </div>
         </div>
+
+        <Divider />
       </header>
     </>
   )

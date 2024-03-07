@@ -9,7 +9,7 @@ type Props = {
 
 const PostPageLayout = ({ children }: Props) => {
   return (
-    <div className="layout-container overflow-y-auto lg:ml-80">
+    <div className="layout-container overflow-y-auto md:ml-80">
       {children}
       <Divider />
       <Footer />
