@@ -1,3 +1,3 @@
-export const generateTag = (tags: string[]): string[] => {
-  return tags.map((tag) => `#${tag}`)
+export const generateTag = (tag: string): string => {
+  return `#${tag.replace(/[a-zA-Z]/, (char) => char.toUpperCase())}`
 }
