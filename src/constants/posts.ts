@@ -1,5 +1,7 @@
 import { allPosts, Post } from 'contentlayer/generated'
 
+export const ALL_POSTS_TAG = 'all'
+
 export const allSortedPosts: Post[] = allPosts.sort(
   (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
 )
@@ -20,6 +22,7 @@ export const allSeries: { series: string; url: string; thumbnail?: string }[] =
   ]
 
 export const allTags: string[] = [
+  ALL_POSTS_TAG,
   ...new Set(...allPosts.map((post) => post.tags)),
 ]
 
