@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import Badge from '@/components/common/Badge'
 import Card from '@/components/common/Card'
@@ -18,7 +18,7 @@ const AllPostsPage = () => {
     () =>
       currentTag === ALL_POSTS_TAG
         ? allSortedPosts
-        : allSortedPosts.filter((post) => post.tags[0] === currentTag),
+        : allSortedPosts.filter((post) => post.tags.includes(currentTag)),
     [currentTag]
   )
   const selectTag = (tag: string) => {

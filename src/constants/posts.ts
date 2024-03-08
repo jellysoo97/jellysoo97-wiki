@@ -22,8 +22,7 @@ export const allSeries: { series: string; url: string; thumbnail?: string }[] =
   ]
 
 export const allTags: string[] = [
-  ALL_POSTS_TAG,
-  ...new Set(...allPosts.map((post) => post.tags)),
+  ...new Set([ALL_POSTS_TAG].concat(...allPosts.map((post) => post.tags))),
 ]
 
 export const getPostsFilteredByTag = (tag: string): Post[] =>
