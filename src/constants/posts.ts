@@ -6,6 +6,19 @@ export const allSortedPosts: Post[] = allPosts.sort(
 
 export const recentPosts: Post[] = allSortedPosts.slice(0, 5)
 
+export const allSeries: { series: string; url: string; thumbnail?: string }[] =
+  [
+    ...new Set(
+      allPosts
+        .filter((post) => !!post.series)
+        .map((post) => ({
+          series: post.series || '',
+          url: post.url,
+          thumbnail: post.thumbnail,
+        }))
+    ),
+  ]
+
 export const allTags: string[] = [
   ...new Set(...allPosts.map((post) => post.tags)),
 ]
