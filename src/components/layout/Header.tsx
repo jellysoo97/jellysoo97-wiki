@@ -17,7 +17,7 @@ const Header = () => {
       <header className="sticky top-0 z-40 w-full h-[var(--height-header)] layout-container">
         <div className="flex h-full justify-between items-center">
           <Link href={'/'}>
-            <Title className="mb-0">🚀 {siteConfig.title}</Title>
+            <Title>🚀 {siteConfig.title}</Title>
           </Link>
 
           <div className="flex items-center gap-x-2">

@@ -5,12 +5,12 @@ import { cn } from '@/utils/cn'
 const Title = ({ className, ...props }: React.ComponentProps<'h1'>) => {
   return (
     <h1
-      {...props}
       className={cn(
-        'font-serifBold text-primary text-lg md:text-xl',
-        'mb-4',
+        'font-serifBold text-primary text-base md:text-lg',
+        'whitespace-pre-line',
         className
       )}
+      {...props}
     />
   )
 }

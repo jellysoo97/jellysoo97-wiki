@@ -11,7 +11,7 @@ type Props = {
 const BlogHeader = ({ post }: Props) => {
   return (
     <div className="flex flex-col items-center py-6 gap-y-2">
-      <Title className="mb-0">{post.title}</Title>
+      <Title>{post.title}</Title>
       <span className="text-secondary text-sm">- {post.description} -</span>
       <div className="flex items-center gap-x-1">
         <CalendarIcon className="w-5 h-5" />
