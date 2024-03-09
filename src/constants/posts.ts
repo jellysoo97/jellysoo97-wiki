@@ -14,7 +14,7 @@ export const allSeries: { series: string; url: string; thumbnail?: string }[] =
       allPosts
         .filter((post) => !!post.series)
         .map((post) => ({
-          series: post.series || '',
+          series: post.url.split('/')[1],
           url: post.url,
           thumbnail: post.thumbnail,
         }))

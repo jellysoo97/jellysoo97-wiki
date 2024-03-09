@@ -8,7 +8,7 @@ type Props = {
   post: Post
 }
 
-const BlogHeader = ({ post }: Props) => {
+const PostHeader = ({ post }: Props) => {
   return (
     <div className="flex flex-col items-center py-6 gap-y-2">
       <Title>{post.title}</Title>
@@ -23,4 +23,4 @@ const BlogHeader = ({ post }: Props) => {
   )
 }
 
-export default BlogHeader
+export default PostHeader

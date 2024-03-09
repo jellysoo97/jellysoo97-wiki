@@ -22,7 +22,7 @@ export default function HomePage() {
         </Link>
       </section>
 
-      <section className="flex flex-col">
+      <section className="flex flex-col gap-y-4">
         <Title>Recent Posts</Title>
         <div className="grid gap-4 md:grid-cols-4">
           {recentPosts.map((post) => (
@@ -44,11 +44,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="flex flex-col">
+      <section className="flex flex-col gap-y-4">
         <Title>Series</Title>
         <div className="grid gap-4 md:grid-cols-4">
           {allSeries.map((series) => (
-            <Link key={series.url} href={series.url}>
+            <Link key={series.url} href={`/series/${series.series}`}>
               <Card.VerticalCard
                 title={series.series}
                 thumbnail={series.thumbnail}
