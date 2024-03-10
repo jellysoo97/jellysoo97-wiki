@@ -2,10 +2,7 @@ import React from 'react'
 
 import { cn } from '@/utils/cn'
 
-const ArrowRightIcon = ({
-  className,
-  ...props
-}: React.ComponentProps<'svg'>) => {
+const CircleIcon = ({ className, ...props }: React.ComponentProps<'svg'>) => {
   return (
     <svg
       className={cn('w-6 h-6', className)}
@@ -23,4 +20,4 @@ const ArrowRightIcon = ({
   )
 }
 
-export default ArrowRightIcon
+export default CircleIcon

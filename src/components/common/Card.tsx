@@ -69,19 +69,19 @@ const VerticalCard = ({ title, thumbnail, description }: Props) => {
 
   return (
     <div className="h-full flex flex-col gap-y-2 bg-secondary p-4 rounded-lg">
-      <div className="min-h-40 flex justify-center items-center bg-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-350 ">
+      <div className="w-full h-48 flex justify-center items-center bg-neutral-200 rounded-lg overflow-hidden dark:bg-neutral-350 ">
         {isThumbnailImage ? (
           <img
             src={thumbnail}
             alt={title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain"
           />
         ) : (
           <>{thumbnail}</>
         )}
       </div>
 
-      <div className="flex flex-col gap-y-2">
+      <div className="flex flex-col flex-1 justify-between gap-y-2">
         <Title className="text-sm md:text-base">{title}</Title>
         {description && <p className="text-sm text-secondary">{description}</p>}
       </div>
