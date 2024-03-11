@@ -4,13 +4,26 @@ import Card from '@/components/common/Card'
 import Title from '@/components/common/Title'
 import ArrowRightIcon from '@/components/icons/ArrowRightIcon'
 import TagIcon, { TagEnum } from '@/components/icons/TagIcon'
-import { ALL_POSTS_TAG, allSeries, recentPosts } from '@/constants/posts'
+import PixelBanner from '@/components/PixelBanner'
+import { siteConfig } from '@/constants/config'
+import {
+  ALL_POSTS_TAG,
+  allSeries,
+  allSortedPosts,
+  recentPosts,
+} from '@/constants/posts'
 import { generateTag } from '@/utils/generate-tag'
 
 export default function HomePage() {
   return (
     <div className="flex flex-col gap-y-8 mt-8">
-      <section className="flex h-40 bg-slate-400">graph section</section>
+      <section>
+        <PixelBanner
+          img={siteConfig.banner.img}
+          pixelSize={siteConfig.banner.pixelSize}
+          postCount={allSortedPosts.length}
+        />
+      </section>
 
       <section>
         <Link
@@ -50,7 +63,7 @@ export default function HomePage() {
           {allSeries.map((series) => (
             <Link key={series.url} href={`/series/${series.series}`}>
               <Card.VerticalCard
-                title={series.series}
+                title={series.title}
                 thumbnail={series.thumbnail}
               />
             </Link>
