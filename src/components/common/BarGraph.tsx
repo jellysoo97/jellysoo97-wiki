@@ -1,0 +1,62 @@
+import { CSSProperties } from 'react'
+
+import { cn } from '@/utils/cn'
+
+import CircleIcon from '../icons/CircleIcon'
+
+export type BarGraphData = {
+  item: string
+  percentage: number
+  color: string
+}
+
+type Props = {
+  data: BarGraphData[]
+  width?: CSSProperties['width']
+  height?: CSSProperties['height']
+}
+
+const BarGraph = ({ data, width = 'w-full', height = 'h-2' }: Props) => {
+  const sortedData = data.sort((a, b) => a.percentage - b.percentage)
+
+  return (
+    <>
+      <div
+        className={cn(width, height, 'flex mb-4', 'rounded-lg overflow-hidden')}
+      >
+        {sortedData.map((data, index) => (
+          <div
+            key={data.item}
+            className={cn(
+              'h-full',
+              index < sortedData.length - 1 &&
+                'border-r-2 border-r-neutral-200 dark:border-r-neutral-800'
+            )}
+            style={{
+              width: `${data.percentage}%`,
+              backgroundColor: data.color,
+            }}
+          />
+        ))}
+      </div>
+
+      <ul className="flex flex-wrap items-center gap-4">
+        {sortedData.map((data) => (
+          <li key={data.item} className="flex items-center">
+            <CircleIcon
+              className="w-3 h-3 mr-2"
+              fill={data.color}
+              stroke={data.color}
+            />
+            <span className="font-serifBold text-sm mr-1">{data.item}</span>
+            <span className="text-secondary text-xs">
+              {data.percentage.toFixed(1)}%
+            </span>
+          </li>
+        ))}
+      </ul>
+    </>
+  )
+}
+
+export default BarGraph
