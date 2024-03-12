@@ -8,18 +8,23 @@ export const allSortedPosts: Post[] = allPosts.sort(
 
 export const recentPosts: Post[] = allSortedPosts.slice(0, 5)
 
-export const allSeries: { series: string; url: string; thumbnail?: string }[] =
-  [
-    ...new Set(
-      allPosts
-        .filter((post) => !!post.series)
-        .map((post) => ({
-          series: post.url.split('/')[1],
-          url: post.url,
-          thumbnail: post.thumbnail,
-        }))
-    ),
-  ]
+export const allSeries: {
+  series: string
+  title: string
+  url: string
+  thumbnail?: string
+}[] = [
+  ...new Set(
+    allPosts
+      .filter((post) => !!post.series)
+      .map((post) => ({
+        series: post.url.split('/')[1],
+        title: post.series || '',
+        url: post.url,
+        thumbnail: post.thumbnail,
+      }))
+  ),
+]
 
 export const allTags: string[] = [
   ...new Set([ALL_POSTS_TAG].concat(...allPosts.map((post) => post.tags))),

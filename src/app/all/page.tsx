@@ -7,7 +7,12 @@ import Badge from '@/components/common/Badge'
 import Card from '@/components/common/Card'
 import Title from '@/components/common/Title'
 import TagIcon, { TagEnum } from '@/components/icons/TagIcon'
-import { ALL_POSTS_TAG, allSortedPosts, allTags } from '@/constants/posts'
+import {
+  ALL_POSTS_TAG,
+  allSortedPosts,
+  allTags,
+  getPostsFilteredByTag,
+} from '@/constants/posts'
 import { cn } from '@/utils/cn'
 import { generateTag } from '@/utils/generate-tag'
 
@@ -18,7 +23,7 @@ const AllPostsPage = () => {
     () =>
       currentTag === ALL_POSTS_TAG
         ? allSortedPosts
-        : allSortedPosts.filter((post) => post.tags.includes(currentTag)),
+        : getPostsFilteredByTag(currentTag),
     [currentTag]
   )
   const selectTag = (tag: string) => {
@@ -33,7 +38,11 @@ const AllPostsPage = () => {
         {allTags.map((tag) => (
           <Badge
             key={tag}
-            text={generateTag(tag === ALL_POSTS_TAG ? '전체글' : tag)}
+            text={generateTag(
+              tag === ALL_POSTS_TAG
+                ? `전체글 (${allSortedPosts.length})`
+                : `${tag} (${getPostsFilteredByTag(tag).length})`
+            )}
             onClick={() => selectTag(tag)}
             className={cn(tag === currentTag && 'bg-secondary')}
           />

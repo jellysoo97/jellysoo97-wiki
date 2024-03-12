@@ -14,7 +14,7 @@ import ThemeSwitch from '../ThemeSwitch'
 const Header = () => {
   return (
     <>
-      <header className="sticky top-0 z-40 w-full h-[var(--height-header)] layout-container">
+      <header className="sticky top-0 z-40 w-full h-[var(--height-header)] layout-container bg-primary">
         <div className="flex h-full justify-between items-center">
           <Link href={'/'}>
             <Title>🚀 {siteConfig.title}</Title>

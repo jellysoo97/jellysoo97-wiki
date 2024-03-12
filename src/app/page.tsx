@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import BarGraph, { BarGraphData } from '@/components/common/BarGraph'
 import Card from '@/components/common/Card'
 import Title from '@/components/common/Title'
 import ArrowRightIcon from '@/components/icons/ArrowRightIcon'
@@ -10,19 +11,33 @@ import {
   ALL_POSTS_TAG,
   allSeries,
   allSortedPosts,
+  allTags,
+  getPostsFilteredByTag,
   recentPosts,
 } from '@/constants/posts'
+import { DEFAULT_TAG_COLOR, tagColor } from '@/constants/tagColor'
 import { generateTag } from '@/utils/generate-tag'
 
 export default function HomePage() {
+  const graphData: BarGraphData[] = allTags.slice(1).map((tag) => ({
+    item: tag,
+    percentage:
+      (getPostsFilteredByTag(tag).length / allSortedPosts.length) * 100,
+    color: tagColor[tag as TagEnum] || DEFAULT_TAG_COLOR,
+  }))
+
   return (
     <div className="flex flex-col gap-y-8 mt-8">
       <section className="flex gap-x-4">
-        <div className="flex-1 bg-neutral-300">graph</div>
+        <div className="flex flex-1 flex-col">
+          <div className="flex-1 bg-secondary">Hi there!</div>
+          <Title className="mb-4">Tags</Title>
+          <BarGraph data={graphData} />
+        </div>
         <PixelBanner
           img={siteConfig.banner.img}
           pixelSize={siteConfig.banner.pixelSize}
-          postCount={allSortedPosts.length}
+          posts={allSortedPosts}
         />
       </section>
 
