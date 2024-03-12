@@ -1,5 +1,6 @@
 'use client'
 
+import { Post } from 'contentlayer/generated'
 import { useEffect, useRef } from 'react'
 
 import { cn } from '@/utils/cn'
@@ -7,14 +8,14 @@ import { cn } from '@/utils/cn'
 type Props = {
   img: string
   pixelSize: number
-  postCount: number
+  posts: Post[]
   bannerSize?: { width: number; height: number }
 }
 
 const PixelBanner = ({
   img,
   pixelSize,
-  postCount,
+  posts,
   bannerSize = { width: 300, height: 300 },
 }: Props) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -67,6 +68,8 @@ const PixelBanner = ({
           {new Array(pixelSize).fill('').map((_, rowIndex) => (
             <tr key={rowIndex}>
               {new Array(pixelSize).fill('').map((_, colIndex) => {
+                const isPostPixel =
+                  rowIndex * pixelSize + colIndex <= posts.length
                 const pixelWidth = Math.floor(bannerSize.width / pixelSize)
                 const x = colIndex * pixelWidth
                 const y = rowIndex * pixelWidth
@@ -75,7 +78,8 @@ const PixelBanner = ({
                   <td
                     key={`${rowIndex}-${colIndex}`}
                     className={cn(
-                      rowIndex * pixelSize + colIndex <= postCount
+                      'relative',
+                      isPostPixel
                         ? pickPixelColor(x, y)
                         : 'bg-black bg-opacity-80'
                     )}
