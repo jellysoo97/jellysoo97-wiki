@@ -17,7 +17,8 @@ import { generateTag } from '@/utils/generate-tag'
 export default function HomePage() {
   return (
     <div className="flex flex-col gap-y-8 mt-8">
-      <section>
+      <section className="flex gap-x-4">
+        <div className="flex-1 bg-neutral-300">graph</div>
         <PixelBanner
           img={siteConfig.banner.img}
           pixelSize={siteConfig.banner.pixelSize}

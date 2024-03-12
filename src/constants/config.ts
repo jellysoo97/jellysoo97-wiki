@@ -9,7 +9,7 @@ export const siteConfig = {
     github: 'https://github.com/jellysoo97/jellysoo97-playground',
   },
   banner: {
-    img: 'https://i.pinimg.com/564x/a0/38/97/a03897ad7fc9a40824ecba186b5ca14d.jpg',
+    img: '/img/banner-cat.jpeg',
     pixelSize: 50,
   },
 }

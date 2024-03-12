@@ -8,52 +8,84 @@ type Props = {
   img: string
   pixelSize: number
   postCount: number
+  bannerSize?: { width: number; height: number }
 }
 
-const PixelBanner = ({ img, pixelSize, postCount }: Props) => {
+const PixelBanner = ({
+  img,
+  pixelSize,
+  postCount,
+  bannerSize = { width: 300, height: 300 },
+}: Props) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  const ctx = canvasRef.current?.getContext('2d')
 
-  const pickColor = (x: number, y: number) => {
-    const pixel = ctx?.getImageData(x, y, 1, 1)
-    const data = pixel?.data
-    const [red, green, blue, alpha] = data || []
+  const pickPixelColor = (x: number, y: number) => {
+    if (canvasRef.current) {
+      const ctx = canvasRef.current.getContext('2d')
+      const pixel = ctx?.getImageData(x, y, 1, 1)
+      const colorData = pixel?.data
+      const [red, green, blue, alpha] = colorData || []
 
-    return `rgb(${red} ${green} ${blue} / ${alpha / 255})`
+      return `rgb(${red} ${green} ${blue} / ${alpha / 255})`
+    }
   }
 
   useEffect(() => {
-    console.log(ctx)
-    if (img && ctx) {
-      const image = new Image()
-      image.crossOrigin = 'anonymous'
-      image.src = img
-
-      ctx.drawImage(image, 0, 0)
-      console.log(ctx)
-      image.style.display = 'none'
+    if (canvasRef.current) {
+      const ctx = canvasRef.current.getContext('2d')
+      const backgroundImage = new Image()
+      backgroundImage.src = img
+      backgroundImage.onload = () => {
+        ctx?.drawImage(
+          backgroundImage,
+          0,
+          0,
+          bannerSize.width,
+          bannerSize.height
+        )
+        backgroundImage.style.display = 'none'
+      }
     }
-  }, [ctx])
+  }, [])
 
   return (
-    <div className="relative">
-      <canvas ref={canvasRef} width={300} height={300} />
+    <div
+      className={cn('relative', `hidden md:block`)}
+      style={{
+        width: `${bannerSize.width}px`,
+        height: `${bannerSize.height}px`,
+      }}
+    >
+      <canvas
+        ref={canvasRef}
+        width={bannerSize.width}
+        height={bannerSize.height}
+      />
 
-      <div
-        className={cn(
-          'absolute top-0 left-0',
-          `grid grid-rows-[${pixelSize}] grid-cols-[${pixelSize}]`
-        )}
-      >
-        {new Array(postCount).map((pixel, index) => (
-          <div
-            key={index}
-            className={cn(
-              `bg-[${pickColor(index, Math.floor(index / pixelSize))}]`
-            )}
-          />
-        ))}
-      </div>
+      <table className={cn('absolute top-0 left-0', 'w-full h-full')}>
+        <tbody>
+          {new Array(pixelSize).fill('').map((_, rowIndex) => (
+            <tr key={rowIndex}>
+              {new Array(pixelSize).fill('').map((_, colIndex) => {
+                const pixelWidth = Math.floor(bannerSize.width / pixelSize)
+                const x = colIndex * pixelWidth
+                const y = rowIndex * pixelWidth
+
+                return (
+                  <td
+                    key={`${rowIndex}-${colIndex}`}
+                    className={cn(
+                      rowIndex * pixelSize + colIndex <= postCount
+                        ? pickPixelColor(x, y)
+                        : 'bg-black bg-opacity-80'
+                    )}
+                  />
+                )
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   )
 }
