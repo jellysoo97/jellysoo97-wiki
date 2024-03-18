@@ -8,29 +8,21 @@ export const allSortedPosts: Post[] = allPosts.sort(
 
 export const recentPosts: Post[] = allSortedPosts.slice(0, 5)
 
-export const allSeries: {
-  series: string
-  title: string
-  url: string
-  thumbnail?: string
-}[] = [
+export const allParts: string[] = [
+  ...new Set(allSortedPosts.map((post) => post.part)),
+]
+
+export const allCategories = [
   ...new Set(
-    allPosts
-      .filter((post) => !!post.series)
-      .map((post) => ({
-        series: post.url.split('/')[1],
-        title: post.series || '',
-        url: post.url,
-        thumbnail: post.thumbnail,
-      }))
+    allSortedPosts.map((post) => ({
+      part: post.part,
+      category: post.category,
+      url: post.url.split('/').slice(2).join(''),
+    }))
   ),
 ]
 
-export const allTags: string[] = [
-  ...new Set([ALL_POSTS_TAG].concat(...allPosts.map((post) => post.tags))),
-]
-
-export const getPostsFilteredByTag = (tag: string): Post[] =>
+export const getCategoryPosts = (category: string): Post[] =>
   allPosts
-    .filter((post) => post.tags.includes(tag))
+    .filter((post) => post.category === category)
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
