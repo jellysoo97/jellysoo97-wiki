@@ -31,7 +31,7 @@ const MDXContent = ({ code }: Props) => {
   const Component = useMDXComponent(code)
 
   return (
-    <article className="prose prose-neutral w-full max-w-full dark:prose-dark">
+    <article className="prose prose-neutral w-full py-4 max-w-full dark:prose-dark">
       <Component components={MDXComponents} />
     </article>
   )

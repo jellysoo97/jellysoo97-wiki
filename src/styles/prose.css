@@ -3,7 +3,7 @@
 }
 
 .prose p {
-  @apply my-2;
+  @apply mb-2;
 }
 
 .prose h2 {
@@ -19,7 +19,7 @@
 }
 
 .prose strong {
-  @apply p-1 bg-[var(--bg-highlight-yellow)] rounded-md font-black;
+  @apply p-1;
 }
 
 .prose ul {
@@ -54,8 +54,9 @@
   @apply font-mono text-base;
 }
 
+/* inline code */
 .prose code:not([data-language]) {
-  @apply font-sans text-red-500 dark:text-red-400;
+  @apply font-serif text-red-500 dark:text-red-400;
   @apply p-1 rounded-md bg-secondary;
 
   &::before,
@@ -75,20 +76,19 @@
 }
 
 .prose pre code span[data-highlighted-line] {
-  @apply border-l-2 border-yellow-500 bg-[var(--bg-code-block-title)];
+  @apply border-l-2 border-yellow-500;
 }
 
 .prose div[data-rehype-pretty-code-fragment] {
-  @apply w-full overflow-hidden bg-[var(--bg-code-block)] rounded-lg my-6;
+  @apply w-full overflow-hidden rounded-lg my-6;
 
   pre {
     @apply overflow-x-auto m-0 p-2;
-    @apply bg-[var(--bg-code-block)];
   }
 }
 
 .prose div[data-rehype-pretty-code-title] {
-  @apply font-mono font-semibold text-neutral-350 px-2 py-1 bg-[var(--bg-code-block-title)];
+  @apply font-mono text-neutral-350 px-2 py-1;
 }
 
 .prose blockquote {

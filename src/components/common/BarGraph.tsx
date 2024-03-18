@@ -20,10 +20,8 @@ const BarGraph = ({ data, width = 'w-full', height = 'h-2' }: Props) => {
   const sortedData = data.sort((a, b) => a.percentage - b.percentage)
 
   return (
-    <>
-      <div
-        className={cn(width, height, 'flex mb-4', 'rounded-lg overflow-hidden')}
-      >
+    <div className="flex flex-col gap-y-2">
+      <div className={cn(width, height, 'flex', 'rounded-lg overflow-hidden')}>
         {sortedData.map((data, index) => (
           <div
             key={data.item}
@@ -48,14 +46,14 @@ const BarGraph = ({ data, width = 'w-full', height = 'h-2' }: Props) => {
               fill={data.color}
               stroke={data.color}
             />
-            <span className="font-serifBold text-sm mr-1">{data.item}</span>
+            <span className="font-serif-bold text-sm mr-1">{data.item}</span>
             <span className="text-secondary text-xs">
               {data.percentage.toFixed(1)}%
             </span>
           </li>
         ))}
       </ul>
-    </>
+    </div>
   )
 }
 
