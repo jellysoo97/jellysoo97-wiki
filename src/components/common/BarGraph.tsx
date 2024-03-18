@@ -20,7 +20,7 @@ const BarGraph = ({ data, width = 'w-full', height = 'h-2' }: Props) => {
   const sortedData = data.sort((a, b) => a.percentage - b.percentage)
 
   return (
-    <div className="flex flex-col gap-y-2">
+    <div className="flex flex-col gap-y-4">
       <div className={cn(width, height, 'flex', 'rounded-lg overflow-hidden')}>
         {sortedData.map((data, index) => (
           <div
@@ -38,11 +38,11 @@ const BarGraph = ({ data, width = 'w-full', height = 'h-2' }: Props) => {
         ))}
       </div>
 
-      <ul className="flex flex-wrap items-center gap-4">
+      <ul className="flex flex-wrap items-center gap-2">
         {sortedData.map((data) => (
           <li key={data.item} className="flex items-center">
             <CircleIcon
-              className="w-3 h-3 mr-2"
+              className="w-3 h-3 mr-1"
               fill={data.color}
               stroke={data.color}
             />

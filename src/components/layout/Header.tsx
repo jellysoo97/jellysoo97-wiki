@@ -29,7 +29,7 @@ const Header = () => {
             >
               <GithubIcon className="w-6 h-6 text-secondary" />
             </Link>
-            <IconButton>
+            <IconButton className="block md:hidden">
               <MenuIcon className="w-6 h-6 text-secondary" />
             </IconButton>
           </div>

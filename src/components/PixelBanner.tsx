@@ -69,7 +69,7 @@ const PixelBanner = ({
             <tr key={rowIndex}>
               {new Array(pixelSize).fill('').map((_, colIndex) => {
                 const isPostPixel =
-                  rowIndex * pixelSize + colIndex <= posts.length
+                  rowIndex * pixelSize + colIndex < posts.length
                 const pixelWidth = Math.floor(bannerSize.width / pixelSize)
                 const x = colIndex * pixelWidth
                 const y = rowIndex * pixelWidth

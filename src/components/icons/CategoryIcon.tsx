@@ -209,9 +209,11 @@ const CategoryIcon = ({ category, ...props }: Props) => {
     case CategoryEnum.Css:
       return <CssIcon {...props} />
     case CategoryEnum.Network:
-      return <NetworkIcon {...props} />
+      return <span className={props.className}>🛜</span>
     case CategoryEnum.OS:
-      return <OsIcon {...props} />
+      return <span className={props.className}>⚙️</span>
+    case CategoryEnum.Algorithm:
+      return <span className={props.className}>🔑</span>
     default:
       return <CodeIcon {...props} />
   }
