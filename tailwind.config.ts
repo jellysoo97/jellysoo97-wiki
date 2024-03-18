@@ -8,7 +8,7 @@ const config: Config = {
     fontFamily: {
       sans: [...fontFamily.sans],
       serif: ['var(--font-serif)', ...fontFamily.serif],
-      serifBold: ['var(--font-serif-bold)', ...fontFamily.serif],
+      'serif-bold': ['var(--font-serif-bold)', ...fontFamily.serif],
       mono: ['var(--font-mono)', ...fontFamily.mono],
     },
     extend: {

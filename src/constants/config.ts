@@ -1,15 +1,15 @@
 export const siteConfig = {
-  title: 'jellysoo97.playground',
+  title: 'jellysoo97.wiki',
   description: '',
   author: {
     name: 'jellysoo97',
     avatar: 'https://avatars.githubusercontent.com/u/91869170?v=4',
   },
   url: {
-    github: 'https://github.com/jellysoo97/jellysoo97-playground',
+    github: 'https://github.com/jellysoo97/jellysoo97-wiki',
   },
   banner: {
-    img: '/img/banner-cat.jpeg',
-    pixelSize: 50,
+    img: '/img/banner-duck.jpeg',
+    pixelSize: 32,
   },
 }

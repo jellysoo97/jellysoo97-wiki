@@ -6,7 +6,7 @@ import { useMemo, useState } from 'react'
 import Badge from '@/components/common/Badge'
 import Card from '@/components/common/Card'
 import Title from '@/components/common/Title'
-import TagIcon, { TagEnum } from '@/components/icons/TagIcon'
+import TagIcon, { TagEnum } from '@/components/icons/CategoryIcon'
 import {
   ALL_POSTS_TAG,
   allSortedPosts,

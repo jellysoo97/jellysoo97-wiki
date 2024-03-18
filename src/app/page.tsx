@@ -1,89 +1,72 @@
-import Link from 'next/link'
-
 import BarGraph, { BarGraphData } from '@/components/common/BarGraph'
-import Card from '@/components/common/Card'
+import IconLink from '@/components/common/IconLink'
 import Title from '@/components/common/Title'
-import ArrowRightIcon from '@/components/icons/ArrowRightIcon'
-import TagIcon, { TagEnum } from '@/components/icons/TagIcon'
+import CategoryIcon, { CategoryEnum } from '@/components/icons/CategoryIcon'
 import PixelBanner from '@/components/PixelBanner'
+import {
+  categoryColor,
+  categoryText,
+  DEFAULT_CATEGORY_COLOR,
+} from '@/constants/category'
 import { siteConfig } from '@/constants/config'
 import {
-  ALL_POSTS_TAG,
-  allSeries,
+  allCategories,
+  allParts,
   allSortedPosts,
-  allTags,
-  getPostsFilteredByTag,
-  recentPosts,
+  getCategoryPosts,
 } from '@/constants/posts'
-import { DEFAULT_TAG_COLOR, tagColor } from '@/constants/tagColor'
-import { generateTag } from '@/utils/generate-tag'
 
 export default function HomePage() {
-  const graphData: BarGraphData[] = allTags.slice(1).map((tag) => ({
-    item: tag,
+  const graphData: BarGraphData[] = allCategories.map((item) => ({
+    item: categoryText[item.category as CategoryEnum],
     percentage:
-      (getPostsFilteredByTag(tag).length / allSortedPosts.length) * 100,
-    color: tagColor[tag as TagEnum] || DEFAULT_TAG_COLOR,
+      (getCategoryPosts(item.category).length / allSortedPosts.length) * 100,
+    color:
+      categoryColor[item.category as CategoryEnum] || DEFAULT_CATEGORY_COLOR,
   }))
 
   return (
     <div className="flex flex-col gap-y-8 mt-8">
-      <section className="flex gap-x-4">
-        <div className="flex flex-1 flex-col">
-          <div className="flex-1 bg-secondary">Hi there!</div>
-          <Title className="mb-4">Tags</Title>
+      <section>
+        <div className="flex items-center gap-x-4">
+          <PixelBanner
+            img={siteConfig.banner.img}
+            pixelSize={siteConfig.banner.pixelSize}
+            posts={allSortedPosts}
+            bannerSize={{ width: 200, height: 200 }}
+          />
           <BarGraph data={graphData} />
         </div>
-        <PixelBanner
-          img={siteConfig.banner.img}
-          pixelSize={siteConfig.banner.pixelSize}
-          posts={allSortedPosts}
-        />
       </section>
 
       <section>
-        <Link
-          href={`/${ALL_POSTS_TAG}`}
-          className="flex justify-between items-center"
-        >
-          <Title>All Posts</Title>
-          <ArrowRightIcon />
-        </Link>
-      </section>
+        <div className="flex flex-col gap-4 md:grid grid-cols-2">
+          {allParts.map((part) => {
+            const categories = allCategories.filter(
+              (category) => category.part === part
+            )
 
-      <section className="flex flex-col gap-y-4">
-        <Title>Recent Posts</Title>
-        <div className="grid gap-4 md:grid-cols-4">
-          {recentPosts.map((post) => (
-            <Link key={post.title} href={post.url}>
-              <Card.VerticalCard
-                title={post.title}
-                thumbnail={
-                  post.thumbnail || (
-                    <TagIcon
-                      tag={post.tags[0] as TagEnum}
-                      className="w-20 h-20"
-                    />
-                  )
-                }
-                description={post.tags.map((tag) => generateTag(tag)).join(' ')}
-              />
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      <section className="flex flex-col gap-y-4">
-        <Title>Series</Title>
-        <div className="grid gap-4 md:grid-cols-4">
-          {allSeries.map((series) => (
-            <Link key={series.url} href={`/series/${series.series}`}>
-              <Card.VerticalCard
-                title={series.title}
-                thumbnail={series.thumbnail}
-              />
-            </Link>
-          ))}
+            return (
+              <div key={part} className="flex flex-col gap-y-2">
+                <Title className="bg-secondary">{part}</Title>
+                <ul>
+                  {categories.map((item) => (
+                    <li key={item.category} className="mb-1">
+                      <IconLink
+                        icon={
+                          <CategoryIcon
+                            category={item.category as CategoryEnum}
+                          />
+                        }
+                        text={categoryText[item.category as CategoryEnum]}
+                        url={item.url}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+          })}
         </div>
       </section>
     </div>
