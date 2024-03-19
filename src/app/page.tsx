@@ -27,16 +27,20 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col gap-y-8 mt-8">
-      <section>
+      <section className="hidden md:block">
         <div className="flex items-center gap-x-4">
           <PixelBanner
             img={siteConfig.banner.img}
             pixelSize={siteConfig.banner.pixelSize}
             posts={allSortedPosts}
-            bannerSize={{ width: 200, height: 200 }}
+            bannerSize={{ width: 250, height: 250 }}
           />
-          <BarGraph data={graphData} />
+          <div>recent post</div>
         </div>
+      </section>
+
+      <section>
+        <BarGraph data={graphData} />
       </section>
 
       <section>

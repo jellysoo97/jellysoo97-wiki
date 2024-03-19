@@ -1,9 +1,10 @@
 'use client'
 
 import { Post } from 'contentlayer/generated'
-import { useEffect, useRef } from 'react'
+import { MouseEvent, useEffect, useRef, useState } from 'react'
 
 import { cn } from '@/utils/cn'
+import { convertRgbToHex } from '@/utils/convert-rgb-to-hex'
 
 type Props = {
   img: string
@@ -12,6 +13,8 @@ type Props = {
   bannerSize?: { width: number; height: number }
 }
 
+const BORDER_WIDTH = 0.3
+
 const PixelBanner = ({
   img,
   pixelSize,
@@ -19,16 +22,30 @@ const PixelBanner = ({
   bannerSize = { width: 300, height: 300 },
 }: Props) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [isImageLoaded, setIsImageLoaded] = useState<boolean>(false)
+  const pixelWidth = Math.floor(bannerSize.width / pixelSize)
 
-  const pickPixelColor = (x: number, y: number) => {
+  const changePixelBgColor = (
+    e: MouseEvent<HTMLTableCellElement>,
+    x: number,
+    y: number
+  ) => {
     if (canvasRef.current) {
       const ctx = canvasRef.current.getContext('2d')
       const pixel = ctx?.getImageData(x, y, 1, 1)
       const colorData = pixel?.data
-      const [red, green, blue, alpha] = colorData || []
+      const [red, green, blue] = colorData || []
 
-      return `rgb(${red} ${green} ${blue} / ${alpha / 255})`
+      e.currentTarget.style.backgroundColor = convertRgbToHex({
+        red,
+        green,
+        blue,
+      })
     }
+  }
+
+  const revertPixelBgColor = (e: MouseEvent<HTMLTableCellElement>) => {
+    e.currentTarget.style.backgroundColor = 'transparent'
   }
 
   useEffect(() => {
@@ -45,13 +62,14 @@ const PixelBanner = ({
           bannerSize.height
         )
         backgroundImage.style.display = 'none'
+        setIsImageLoaded(true)
       }
     }
   }, [])
 
   return (
     <div
-      className={cn('relative', `hidden md:block`)}
+      className="relative"
       style={{
         width: `${bannerSize.width}px`,
         height: `${bannerSize.height}px`,
@@ -63,33 +81,38 @@ const PixelBanner = ({
         height={bannerSize.height}
       />
 
-      <table className={cn('absolute top-0 left-0', 'w-full h-full')}>
-        <tbody>
-          {new Array(pixelSize).fill('').map((_, rowIndex) => (
-            <tr key={rowIndex}>
-              {new Array(pixelSize).fill('').map((_, colIndex) => {
-                const isPostPixel =
-                  rowIndex * pixelSize + colIndex < posts.length
-                const pixelWidth = Math.floor(bannerSize.width / pixelSize)
-                const x = colIndex * pixelWidth
-                const y = rowIndex * pixelWidth
+      {isImageLoaded && (
+        <table className={cn('absolute top-0 left-0', 'w-full h-full')}>
+          <tbody>
+            {new Array(pixelSize).fill('').map((_, rowIndex) => (
+              <tr key={rowIndex}>
+                {new Array(pixelSize).fill('').map((_, colIndex) => {
+                  const isPostPixel =
+                    rowIndex * pixelSize + colIndex < posts.length
+                  const x = (colIndex + 1) * (pixelWidth - BORDER_WIDTH)
+                  const y = (rowIndex + 1) * (pixelWidth - BORDER_WIDTH)
 
-                return (
-                  <td
-                    key={`${rowIndex}-${colIndex}`}
-                    className={cn(
-                      'relative',
-                      isPostPixel
-                        ? pickPixelColor(x, y)
-                        : 'bg-black bg-opacity-80'
-                    )}
-                  />
-                )
-              })}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                  return (
+                    <td
+                      key={`${rowIndex}-${colIndex}`}
+                      className={cn(
+                        'relative',
+                        isPostPixel
+                          ? `bg-transparent hover:scale-150 cursor-pointer`
+                          : `bg-black bg-opacity-80`
+                      )}
+                      onMouseOver={(e) =>
+                        isPostPixel && changePixelBgColor(e, x, y)
+                      }
+                      onMouseLeave={(e) => isPostPixel && revertPixelBgColor(e)}
+                    />
+                  )
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   )
 }
