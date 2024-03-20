@@ -1,10 +1,16 @@
 'use client'
 
 import { Post } from 'contentlayer/generated'
-import { MouseEvent, useEffect, useRef, useState } from 'react'
+import Link from 'next/link'
+import { Fragment, MouseEvent, useEffect, useRef, useState } from 'react'
 
+import { allSortedPosts } from '@/constants/posts'
 import { cn } from '@/utils/cn'
 import { convertRgbToHex } from '@/utils/convert-rgb-to-hex'
+import { convertSize } from '@/utils/convert-size'
+import { DateFormatTypeEnum, formatDate } from '@/utils/format-date'
+
+import Tooltip from './common/Tooltip'
 
 type Props = {
   img: string
@@ -23,14 +29,16 @@ const PixelBanner = ({
 }: Props) => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [isImageLoaded, setIsImageLoaded] = useState<boolean>(false)
-  const pixelWidth = Math.floor(bannerSize.width / pixelSize)
+  const pixelWidth = bannerSize.width / pixelSize
 
-  const changePixelBgColor = (
+  const handleMouseOver = (
     e: MouseEvent<HTMLTableCellElement>,
-    x: number,
-    y: number
+    rowIndex: number,
+    colIndex: number
   ) => {
     if (canvasRef.current) {
+      const x = (colIndex + 1) * (pixelWidth - BORDER_WIDTH)
+      const y = (rowIndex + 1) * (pixelWidth - BORDER_WIDTH)
       const ctx = canvasRef.current.getContext('2d')
       const pixel = ctx?.getImageData(x, y, 1, 1)
       const colorData = pixel?.data
@@ -44,7 +52,7 @@ const PixelBanner = ({
     }
   }
 
-  const revertPixelBgColor = (e: MouseEvent<HTMLTableCellElement>) => {
+  const handleMouseLeave = (e: MouseEvent<HTMLTableCellElement>) => {
     e.currentTarget.style.backgroundColor = 'transparent'
   }
 
@@ -69,10 +77,10 @@ const PixelBanner = ({
 
   return (
     <div
-      className="relative"
+      className="relative hidden md:block"
       style={{
-        width: `${bannerSize.width}px`,
-        height: `${bannerSize.height}px`,
+        width: convertSize(bannerSize.width),
+        height: convertSize(bannerSize.height),
       }}
     >
       <canvas
@@ -81,31 +89,64 @@ const PixelBanner = ({
         height={bannerSize.height}
       />
 
+      {/* dark pixel */}
       {isImageLoaded && (
         <table className={cn('absolute top-0 left-0', 'w-full h-full')}>
           <tbody>
             {new Array(pixelSize).fill('').map((_, rowIndex) => (
-              <tr key={rowIndex}>
+              <tr
+                key={rowIndex}
+                className="flex"
+                style={{ height: convertSize(pixelWidth) }}
+              >
                 {new Array(pixelSize).fill('').map((_, colIndex) => {
-                  const isPostPixel =
-                    rowIndex * pixelSize + colIndex < posts.length
-                  const x = (colIndex + 1) * (pixelWidth - BORDER_WIDTH)
-                  const y = (rowIndex + 1) * (pixelWidth - BORDER_WIDTH)
+                  const postIndex = rowIndex * pixelSize + colIndex
+                  const isPostPixel = postIndex < posts.length
+                  const post = allSortedPosts[postIndex]
 
                   return (
-                    <td
-                      key={`${rowIndex}-${colIndex}`}
-                      className={cn(
-                        'relative',
-                        isPostPixel
-                          ? `bg-transparent hover:scale-150 cursor-pointer`
-                          : `bg-black bg-opacity-80`
+                    <Fragment key={`${rowIndex}-${colIndex}`}>
+                      {/* post pixel */}
+                      {isPostPixel && (
+                        <Tooltip
+                          content={
+                            <p>
+                              {formatDate(
+                                post.date,
+                                DateFormatTypeEnum.DateOnlyWithDot
+                              )}{' '}
+                              |{' '}
+                              <strong className="font-serif-bold">
+                                {post.title}
+                              </strong>
+                            </p>
+                          }
+                        >
+                          <Link href={post.url}>
+                            <td
+                              className="hover:scale-[1.7]"
+                              style={{
+                                width: convertSize(pixelWidth),
+                                height: convertSize(pixelWidth),
+                              }}
+                              onMouseOver={(e) =>
+                                handleMouseOver(e, rowIndex, colIndex)
+                              }
+                              onMouseLeave={(e) => handleMouseLeave(e)}
+                            />
+                          </Link>
+                        </Tooltip>
                       )}
-                      onMouseOver={(e) =>
-                        isPostPixel && changePixelBgColor(e, x, y)
-                      }
-                      onMouseLeave={(e) => isPostPixel && revertPixelBgColor(e)}
-                    />
+                      {/* dark pixel */}
+                      {!isPostPixel && (
+                        <td
+                          className="bg-black bg-opacity-80"
+                          style={{
+                            width: convertSize(pixelWidth),
+                          }}
+                        />
+                      )}
+                    </Fragment>
                   )
                 })}
               </tr>
