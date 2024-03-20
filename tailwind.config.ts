@@ -51,7 +51,7 @@ const config: Config = {
         },
         // layout
         '.layout-container': {
-          '@apply mx-auto max-w-3xl px-4 md:max-w-6xl md:px-8': '',
+          '@apply mx-auto max-w-3xl px-4 md:max-w-4xl md:px-8': '',
         },
       })
     },

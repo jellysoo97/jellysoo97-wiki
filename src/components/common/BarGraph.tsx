@@ -20,7 +20,7 @@ const BarGraph = ({ data, width = 'w-full', height = 'h-2' }: Props) => {
   const sortedData = data.sort((a, b) => a.percentage - b.percentage)
 
   return (
-    <div className="flex flex-col gap-y-4">
+    <div className="flex flex-col gap-y-3">
       <div className={cn(width, height, 'flex', 'rounded-lg overflow-hidden')}>
         {sortedData.map((data, index) => (
           <div
