@@ -1,3 +1,6 @@
-export const generateTag = (tag: string): string => {
-  return `#${tag.replace(/[a-zA-Z]/, (char) => char.toUpperCase())}`
+import { CategoryEnum } from '@/components/icons/CategoryIcon'
+import { categoryText } from '@/constants/category'
+
+export const generateTag = (part: string, category: string): string[] => {
+  return [part, categoryText[category as CategoryEnum]].map((tag) => `#${tag}`)
 }
