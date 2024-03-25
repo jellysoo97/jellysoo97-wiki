@@ -17,7 +17,7 @@ type Props = {
 }
 
 const BarGraph = ({ data, width = 'w-full', height = 'h-2' }: Props) => {
-  const sortedData = data.sort((a, b) => a.percentage - b.percentage)
+  const sortedData = data.sort((a, b) => b.percentage - a.percentage)
 
   return (
     <div className="flex flex-col gap-y-3">
@@ -46,8 +46,10 @@ const BarGraph = ({ data, width = 'w-full', height = 'h-2' }: Props) => {
               fill={data.color}
               stroke={data.color}
             />
-            <span className="font-serif-bold text-sm mr-1">{data.item}</span>
-            <span className="text-secondary text-xs">
+            <span className="font-serif-bold text-size-small mr-1">
+              {data.item}
+            </span>
+            <span className="text-secondary text-size-small">
               {data.percentage.toFixed(1)}%
             </span>
           </li>

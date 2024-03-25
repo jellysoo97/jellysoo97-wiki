@@ -19,7 +19,7 @@ type Props = {
   bannerSize?: { width: number; height: number }
 }
 
-const BORDER_WIDTH = 0.3
+const PIXEL_BORDER_WIDTH = 0.3
 
 const PixelBanner = ({
   img,
@@ -37,8 +37,8 @@ const PixelBanner = ({
     colIndex: number
   ) => {
     if (canvasRef.current) {
-      const x = (colIndex + 1) * (pixelWidth - BORDER_WIDTH)
-      const y = (rowIndex + 1) * (pixelWidth - BORDER_WIDTH)
+      const x = (colIndex + 1) * (pixelWidth - PIXEL_BORDER_WIDTH)
+      const y = (rowIndex + 1) * (pixelWidth - PIXEL_BORDER_WIDTH)
       const ctx = canvasRef.current.getContext('2d')
       const pixel = ctx?.getImageData(x, y, 1, 1)
       const colorData = pixel?.data

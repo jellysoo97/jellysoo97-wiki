@@ -6,7 +6,7 @@ const Title = ({ className, ...props }: React.ComponentProps<'h1'>) => {
   return (
     <h1
       className={cn(
-        'font-serif-bold text-primary text-base md:text-lg',
+        'font-serif-bold text-primary text-size-large',
         'whitespace-pre-line',
         className
       )}

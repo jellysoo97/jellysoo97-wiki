@@ -55,6 +55,6 @@
 @layer base {
   body {
     @apply m-0 p-0 min-h-dvh relative;
-    @apply font-serif text-primary bg-primary;
+    @apply font-serif text-primary bg-primary text-size-base;
   }
 }

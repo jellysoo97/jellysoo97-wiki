@@ -12,10 +12,12 @@ const PostHeader = ({ post }: Props) => {
   return (
     <div className="flex flex-col items-center py-6 gap-y-2">
       <Title>{post.title}</Title>
-      <span className="text-secondary text-sm">- {post.description} -</span>
+      <span className="text-secondary text-size-secondary">
+        - {post.description} -
+      </span>
       <div className="flex items-center gap-x-1">
         <CalendarIcon className="w-5 h-5" />
-        <span className="text-sm">
+        <span className="text-size-secondary">
           {formatDate(post.date, DateFormatTypeEnum.DateOnly)}
         </span>
       </div>

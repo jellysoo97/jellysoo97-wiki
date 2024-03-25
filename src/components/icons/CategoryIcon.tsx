@@ -1,19 +1,7 @@
 import React from 'react'
 
+import { CategoryEnum } from '@/constants/category'
 import { cn } from '@/utils/cn'
-
-export enum CategoryEnum {
-  Network = 'Network',
-  OS = 'OS',
-  Algorithm = 'Algorithm',
-  React = 'React',
-  Nextjs = 'Nextjs',
-  JavaScript = 'JavaScript',
-  TypeScript = 'TypeScript',
-  Css = 'CSS',
-  HTML = 'HTML',
-  JobApply = 'Job Apply',
-}
 
 type Props = {
   category: CategoryEnum
@@ -208,12 +196,6 @@ const CategoryIcon = ({ category, ...props }: Props) => {
       return <TypeScriptIcon {...props} />
     case CategoryEnum.Css:
       return <CssIcon {...props} />
-    case CategoryEnum.Network:
-      return <span className={props.className}>🛜</span>
-    case CategoryEnum.OS:
-      return <span className={props.className}>⚙️</span>
-    case CategoryEnum.Algorithm:
-      return <span className={props.className}>🔑</span>
     default:
       return <CodeIcon {...props} />
   }

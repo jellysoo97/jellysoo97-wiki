@@ -49,6 +49,16 @@ const config: Config = {
         '.text-secondary': {
           '@apply text-neutral-500 dark:text-neutral-400': '',
         },
+        // fontSize
+        '.text-size-base': {
+          '@apply text-base': '',
+        },
+        '.text-size-small': {
+          '@apply text-xs md:text-sm': '',
+        },
+        '.text-size-large': {
+          '@apply text-lg md:text-xl': '',
+        },
         // layout
         '.layout-container': {
           '@apply mx-auto max-w-3xl px-4 md:max-w-4xl md:px-8': '',
