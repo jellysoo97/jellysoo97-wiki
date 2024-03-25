@@ -8,8 +8,8 @@ export enum CategoryEnum {
   TypeScript = 'TypeScript',
   Css = 'CSS',
   HTML = 'HTML',
-  JobApply = 'Job Apply',
-  ComputerArchitecture = 'Computer Architecture',
+  JobApply = 'Job-Apply',
+  ComputerArchitecture = 'Computer-Architecture',
 }
 
 export const DEFAULT_CATEGORY_COLOR = '#e34c26'

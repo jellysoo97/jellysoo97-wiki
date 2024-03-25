@@ -6,23 +6,21 @@ import PixelBanner from '@/components/PixelBanner'
 import {
   categoryColor,
   CategoryEnum,
-  categoryText,
   DEFAULT_CATEGORY_COLOR,
 } from '@/constants/category'
 import { siteConfig } from '@/constants/config'
 import {
   allCategories,
-  allParts,
+  allPartsWithCategories,
   allSortedPosts,
-  getCategoryPosts,
 } from '@/constants/posts'
 import { calculatePercentage } from '@/utils/calculate-percentage'
 
 export default function HomePage() {
   const graphData: BarGraphData[] = allCategories.map((item) => ({
-    item: categoryText[item.category as CategoryEnum],
+    item: item.text,
     percentage: calculatePercentage({
-      value: getCategoryPosts(item.category).length,
+      value: item.postCount,
       total: allSortedPosts.length,
     }),
     color:
@@ -48,31 +46,25 @@ export default function HomePage() {
 
       <section>
         <div className="flex flex-col gap-4 md:grid grid-cols-2">
-          {allParts.map((part) => {
-            const categories = allCategories.filter(
-              (category) => category.part === part
-            )
-
-            return (
-              <div key={part} className="flex flex-col gap-y-2">
-                <Title className="px-2 py-1 bg-secondary text-size-base">
-                  📌 {part}
-                </Title>
-                <ul>
-                  {categories.map((item) => (
-                    <li key={item.category} className="mb-2">
-                      <Link
-                        href={item.url}
-                        className="font-serif-bold border-b border-neutral-400 dark:border-b dark:border-neutral-700"
-                      >
-                        {categoryText[item.category as CategoryEnum]}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )
-          })}
+          {allPartsWithCategories.slice(1).map((part) => (
+            <div key={part.url} className="flex flex-col gap-y-2">
+              <Title className="px-2 py-1 bg-secondary text-size-base">
+                📌 &nbsp;{part.text}
+              </Title>
+              <ul>
+                {part.categories.map((category) => (
+                  <li key={category.url} className="mb-2">
+                    <Link
+                      href={category.url}
+                      className="font-serif-bold border-b border-neutral-400 dark:border-b dark:border-neutral-700"
+                    >
+                      {category.text}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </section>
     </div>
