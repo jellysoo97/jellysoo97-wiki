@@ -1,13 +1,11 @@
 import Link from 'next/link'
 
 import BarGraph, { BarGraphData } from '@/components/common/BarGraph'
-import Divider from '@/components/common/Divider'
-import IconLink from '@/components/common/IconLink'
 import Title from '@/components/common/Title'
-import CategoryIcon, { CategoryEnum } from '@/components/icons/CategoryIcon'
 import PixelBanner from '@/components/PixelBanner'
 import {
   categoryColor,
+  CategoryEnum,
   categoryText,
   DEFAULT_CATEGORY_COLOR,
 } from '@/constants/category'
@@ -18,34 +16,32 @@ import {
   allSortedPosts,
   getCategoryPosts,
 } from '@/constants/posts'
+import { calculatePercentage } from '@/utils/calculate-percentage'
 
 export default function HomePage() {
   const graphData: BarGraphData[] = allCategories.map((item) => ({
     item: categoryText[item.category as CategoryEnum],
-    percentage:
-      (getCategoryPosts(item.category).length / allSortedPosts.length) * 100,
+    percentage: calculatePercentage({
+      value: getCategoryPosts(item.category).length,
+      total: allSortedPosts.length,
+    }),
     color:
       categoryColor[item.category as CategoryEnum] || DEFAULT_CATEGORY_COLOR,
   }))
 
   return (
     <div className="flex flex-col gap-y-8 mt-8">
-      <section className="flex items-center gap-x-4">
+      <section className="flex gap-x-4">
         <PixelBanner
           img={siteConfig.banner.img}
           pixelSize={siteConfig.banner.pixelSize}
           posts={allSortedPosts}
           bannerSize={{ width: 200, height: 200 }}
         />
-        <div className="flex flex-col gap-y-4">
-          <div className="flex flex-col">
-            <Link href={''} className=" font-serif-bold">
-              @jellysoo97
-            </Link>
-            <p>나는 어떤 개발자인가!!!!!!!!!!!!!!!!!!!!!</p>
-            <p>고민이 많다</p>
-            <p>글쓰기 어렵다 어려워</p>
-          </div>
+        <div className="flex flex-col gap-y-4 md:justify-between">
+          <Link href={''} className=" font-serif-bold">
+            @jellysoo97
+          </Link>
           <BarGraph data={graphData} />{' '}
         </div>
       </section>
@@ -59,19 +55,18 @@ export default function HomePage() {
 
             return (
               <div key={part} className="flex flex-col gap-y-2">
-                <Title className="bg-secondary">{part}</Title>
+                <Title className="px-2 py-1 bg-secondary text-size-base">
+                  📌 {part}
+                </Title>
                 <ul>
                   {categories.map((item) => (
-                    <li key={item.category} className="mb-1">
-                      <IconLink
-                        icon={
-                          <CategoryIcon
-                            category={item.category as CategoryEnum}
-                          />
-                        }
-                        text={categoryText[item.category as CategoryEnum]}
-                        url={item.url}
-                      />
+                    <li key={item.category} className="mb-2">
+                      <Link
+                        href={item.url}
+                        className="font-serif-bold border-b border-neutral-400 dark:border-b dark:border-neutral-700"
+                      >
+                        {categoryText[item.category as CategoryEnum]}
+                      </Link>
                     </li>
                   ))}
                 </ul>

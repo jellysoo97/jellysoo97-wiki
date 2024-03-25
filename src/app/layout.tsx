@@ -4,6 +4,7 @@ import React from 'react'
 
 import Footer from '@/components/layout/Footer'
 import Header from '@/components/layout/Header'
+import Sidebar from '@/components/layout/Sidebar'
 import NextThemeProvider from '@/components/provider/NextThemeProvider'
 
 export default function RootLayout({
@@ -16,7 +17,10 @@ export default function RootLayout({
       <body>
         <NextThemeProvider>
           <Header />
-          <main className="layout-container">{children}</main>
+          <main className="layout-container flex">
+            <Sidebar />
+            {children}
+          </main>
           <Footer />
         </NextThemeProvider>
       </body>
