@@ -3,10 +3,10 @@ import React from 'react'
 import { cn } from '@/utils/cn'
 
 type Props = {
-  text: string
+  content: string
 } & React.ComponentProps<'div'>
 
-const Badge = ({ text, className, ...props }: Props) => {
+const Badge = ({ content, className, ...props }: Props) => {
   return (
     <div
       className={cn(
@@ -16,7 +16,7 @@ const Badge = ({ text, className, ...props }: Props) => {
       )}
       {...props}
     >
-      {text}
+      {content}
     </div>
   )
 }
