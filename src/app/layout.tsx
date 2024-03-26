@@ -17,7 +17,7 @@ export default function RootLayout({
       <body>
         <NextThemeProvider>
           <Header />
-          <main className="layout-container flex">
+          <main className="layout-container flex mt-8">
             <Sidebar />
             {children}
           </main>

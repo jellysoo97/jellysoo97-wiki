@@ -1,8 +1,23 @@
 import { allPosts, Post } from 'contentlayer/generated'
+import { UrlObject } from 'url'
 
-import { CategoryEnum, categoryText } from './category'
+import {
+  categoryColor,
+  CategoryEnum,
+  categoryKR,
+  PartEnum,
+  partKR,
+} from './menus'
 
-export const ALL_POSTS_TAG = 'all'
+export type MenuItem = {
+  value: string
+  valueKR: string
+  postCount: number
+  url: string
+  color?: string
+  parent?: string
+  children?: MenuItem[]
+}
 
 export const allSortedPosts: Post[] = allPosts.sort(
   (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
@@ -10,40 +25,30 @@ export const allSortedPosts: Post[] = allPosts.sort(
 
 export const recentPosts: Post[] = allSortedPosts.slice(0, 5)
 
-export const allPartsWithCategories = [
-  '전체글',
+export const allParts: MenuItem[] = [
+  PartEnum.All,
   ...new Set(allPosts.map((post) => post.part)),
-].map((part, index) => {
-  const partPosts = allPosts.filter((post) => post.part === part)
+].map((part) => ({
+  value: part,
+  valueKR: partKR[part as PartEnum],
+  postCount:
+    part === PartEnum.All
+      ? allPosts.length
+      : allPosts.filter((post) => post.part === part).length,
+  url: `/${part}`,
+}))
+
+export const allCategories: MenuItem[] = [
+  ...new Set(allPosts.map((post) => post.category)),
+].map((category) => {
+  const part = allPosts.find((post) => post.category === category)?.part
 
   return {
-    part,
-    text: part,
-    postCount: index ? partPosts.length : allPosts.length,
-    url: index ? `/posts/${part}`.toLowerCase() : '/posts',
-    categories: [...new Set(partPosts.map((post) => post.category))].map(
-      (category) => ({
-        category,
-        text: categoryText[category as CategoryEnum],
-        postCount: partPosts.filter((post) => post.category === category)
-          .length,
-        url: `/posts/${part}/${category}`.toLowerCase(),
-      })
-    ),
+    value: category,
+    valueKR: categoryKR[category as CategoryEnum],
+    postCount: allPosts.filter((post) => post.category === category).length,
+    url: `/${part}/${category}`,
+    parent: part,
+    color: categoryColor[category as CategoryEnum],
   }
 })
-
-export const allCategories = [
-  ...new Set(
-    allPosts
-      .map((post) => ({
-        category: post.category,
-        text: categoryText[post.category as CategoryEnum],
-      }))
-      .map((item) => ({
-        ...item,
-        postCount: allPosts.filter((post) => post.category === item.category)
-          .length,
-      }))
-  ),
-]

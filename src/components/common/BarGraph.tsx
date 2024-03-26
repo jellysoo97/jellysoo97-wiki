@@ -44,7 +44,7 @@ const BarGraph = ({ data, width = 'w-full', height = 'h-2' }: Props) => {
             <CircleIcon
               className="w-3 h-3 mr-1"
               fill={data.color}
-              stroke={data.color}
+              stroke={'#30363db3'}
             />
             <span className="font-serif-bold text-size-small mr-1">
               {data.item}
