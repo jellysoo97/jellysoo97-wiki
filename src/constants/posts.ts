@@ -24,10 +24,7 @@ export const allSortedPosts: Post[] = sortPostsByDate(allPosts, true)
 
 export const recentPosts: Post[] = allSortedPosts.slice(0, 5)
 
-export const allParts: MenuItem[] = [
-  PartEnum.All,
-  ...new Set(allPosts.map((post) => post.part)),
-].map((part) => ({
+export const allParts: MenuItem[] = ['all', 'fe', 'cs', 'etc'].map((part) => ({
   value: part,
   valueKR: partKR[part as PartEnum],
   postCount:

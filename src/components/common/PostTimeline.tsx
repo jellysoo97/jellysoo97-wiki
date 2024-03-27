@@ -20,6 +20,7 @@ const PostTimeline = ({ posts }: Props) => {
 
         return (
           <li key={post.url} className="relative pl-16">
+            {/* TODO:  */}
             {/* https://tailwindcss.com/docs/content#referencing-an-attribute-value */}
             {/* issue: before:content-[${year}] not working */}
             {/* dynamically build classNames가 안되는 이유: https://stackoverflow.com/questions/69687530/dynamically-build-classnames-in-tailwindcss */}
