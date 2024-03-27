@@ -10,7 +10,7 @@ const Badge = ({ content, className, ...props }: Props) => {
   return (
     <div
       className={cn(
-        'flex justify-center items-center px-2 py-1 rounded-md border-2 border-neutral-300 dark:border-neutral-700',
+        'flex justify-center items-center px-2 py-1 rounded-md border border-neutral-300 dark:border-neutral-700',
         'text-size-small cursor-pointer',
         className
       )}
