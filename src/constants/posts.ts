@@ -1,5 +1,6 @@
 import { allPosts, Post } from 'contentlayer/generated'
-import { UrlObject } from 'url'
+
+import { sortPostsByDate } from '@/utils/sort-posts-by-date'
 
 import {
   categoryColor,
@@ -19,9 +20,7 @@ export type MenuItem = {
   children?: MenuItem[]
 }
 
-export const allSortedPosts: Post[] = allPosts.sort(
-  (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-)
+export const allSortedPosts: Post[] = sortPostsByDate(allPosts, true)
 
 export const recentPosts: Post[] = allSortedPosts.slice(0, 5)
 

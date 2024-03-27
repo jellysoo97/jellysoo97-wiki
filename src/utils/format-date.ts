@@ -7,6 +7,7 @@ export enum DateFormatTypeEnum {
   TimeOnly = 'HH:mm:ss',
   YearOnly = 'YYYY',
   MonthAndDay = 'MM-DD',
+  MonthAndDayWithDot = 'MM.DD',
 }
 
 export const today = dayjs().format()
@@ -30,6 +31,8 @@ export const formatDate = (
       return date.get('y')
     case DateFormatTypeEnum.MonthAndDay:
       return date.format(DateFormatTypeEnum.MonthAndDay)
+    case DateFormatTypeEnum.MonthAndDayWithDot:
+      return date.format(DateFormatTypeEnum.MonthAndDayWithDot)
     default:
       return date.format(DateFormatTypeEnum.DateOnly)
   }
