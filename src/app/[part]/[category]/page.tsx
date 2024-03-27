@@ -1,6 +1,6 @@
 import { Post } from 'contentlayer/generated'
-import Link from 'next/link'
 
+import PostTimeline from '@/components/common/PostTimeline'
 import Title from '@/components/common/Title'
 import { CategoryEnum, categoryKR } from '@/constants/menus'
 import { allSortedPosts } from '@/constants/posts'
@@ -15,15 +15,9 @@ const CategoryListPage = ({ params }: Props) => {
   )
 
   return (
-    <div className="flex flex-col gap-y-4">
+    <div className="flex flex-col gap-y-6">
       <Title>{categoryKR[params.category as CategoryEnum]}</Title>
-      <ul className="flex flex-col gap-y-2">
-        {posts.map((post) => (
-          <li key={post.url}>
-            <Link href={post.url}>{post.title}</Link>
-          </li>
-        ))}
-      </ul>
+      <PostTimeline posts={posts} />
     </div>
   )
 }

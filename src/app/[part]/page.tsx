@@ -1,11 +1,11 @@
 'use client'
 
 import { Post } from 'contentlayer/generated'
-import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useMemo, useState } from 'react'
 
 import Badge from '@/components/common/Badge'
+import PostTimeline from '@/components/common/PostTimeline'
 import Title from '@/components/common/Title'
 import { PartEnum } from '@/constants/menus'
 import {
@@ -41,9 +41,9 @@ const PartListPage = () => {
   }, [])
 
   return (
-    <div className="flex flex-col gap-y-4">
-      <Title>Posts</Title>
-      <div className="flex flex-wrap gap-2">
+    <div className="flex flex-col">
+      <Title className="mb-4">Posts</Title>
+      <div className="flex flex-wrap gap-2 mb-6">
         {tags.map((tag) => (
           <Badge
             key={tag.value}
@@ -55,15 +55,7 @@ const PartListPage = () => {
       </div>
 
       {/* TODO: add loading spinner later */}
-      {!!currentTag && (
-        <ul className="flex flex-col gap-y-2">
-          {posts.map((post) => (
-            <li key={post.url}>
-              <Link href={post.url}>{post.title}</Link>
-            </li>
-          ))}
-        </ul>
-      )}
+      {!!currentTag && <PostTimeline posts={posts} />}
     </div>
   )
 }
