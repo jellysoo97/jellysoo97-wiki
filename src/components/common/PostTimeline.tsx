@@ -27,8 +27,8 @@ const PostTimeline = ({ posts }: Props) => {
               <div
                 className={cn(
                   'text-size-small px-2 py-1 rounded-sm',
-                  'absolute -top-1 -left-0 bg-yellow-500',
-                  "before:content-[''] before:w-0 before:h-0 before:border-t-8 before:border-t-transparent before:border-b-8 before:border-b-transparent before:border-l-8 before:border-l-yellow-500",
+                  'absolute -top-1 -left-0 bg-yellow-500 bg-opacity-60 dark:bg-opacity-40',
+                  "before:content-[''] before:w-0 before:h-0 before:border-t-8 before:border-t-transparent before:border-b-8 before:border-b-transparent before:border-l-8 before:border-l-yellow-500 before:border-opacity-60 dark:before:border-opacity-40",
                   'before:absolute before:top-1 before:-right-2 md:before:top-[6px]'
                 )}
               >
