@@ -2,6 +2,7 @@ export enum PartEnum {
   All = 'all',
   Cs = 'cs',
   Fe = 'fe',
+  TroubleShooting = 'troubleshooting',
   Etc = 'etc',
 }
 
@@ -19,6 +20,7 @@ export const partKR: Record<PartEnum, string> = {
   [PartEnum.All]: '전체글',
   [PartEnum.Cs]: 'CS',
   [PartEnum.Fe]: 'FE',
+  [PartEnum.TroubleShooting]: 'TROUBLESHOOTING',
   [PartEnum.Etc]: 'ETC',
 }
 

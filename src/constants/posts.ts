@@ -24,27 +24,29 @@ export const allSortedPosts: Post[] = sortPostsByDate(allPosts, true)
 
 export const recentPosts: Post[] = allSortedPosts.slice(0, 5)
 
-export const allParts: MenuItem[] = ['all', 'fe', 'cs', 'etc'].map((part) => ({
-  value: part,
-  valueKR: partKR[part as PartEnum],
-  postCount:
-    part === PartEnum.All
-      ? allPosts.length
-      : allPosts.filter((post) => post.part === part).length,
-  url: `/${part}`,
-}))
+export const allParts: MenuItem[] = Object.keys(PartEnum)
+  .map((key) => PartEnum[key as keyof typeof PartEnum])
+  .map((part) => ({
+    value: part,
+    valueKR: partKR[part as PartEnum],
+    postCount:
+      part === PartEnum.All
+        ? allPosts.length
+        : allPosts.filter((post) => post.part === part).length,
+    url: `/${part}`,
+  }))
 
-export const allCategories: MenuItem[] = [
-  ...new Set(allPosts.map((post) => post.category)),
-].map((category) => {
-  const part = allPosts.find((post) => post.category === category)?.part
+export const allCategories: MenuItem[] = Object.keys(CategoryEnum)
+  .map((key) => CategoryEnum[key as keyof typeof CategoryEnum])
+  .map((category) => {
+    const part = allPosts.find((post) => post.category === category)?.part
 
-  return {
-    value: category,
-    valueKR: categoryKR[category as CategoryEnum],
-    postCount: allPosts.filter((post) => post.category === category).length,
-    url: `/${part}/${category}`,
-    parent: part,
-    color: categoryColor[category as CategoryEnum],
-  }
-})
+    return {
+      value: category,
+      valueKR: categoryKR[category as CategoryEnum],
+      postCount: allPosts.filter((post) => post.category === category).length,
+      url: `/${part}/${category}`,
+      parent: part,
+      color: categoryColor[category as CategoryEnum],
+    }
+  })
