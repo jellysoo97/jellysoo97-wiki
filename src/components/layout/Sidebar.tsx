@@ -20,7 +20,8 @@ const Sidebar = () => {
           return (
             <ul key={part.value} className="flex flex-col gap-y-2">
               <Link href={part.url} className="font-serif-bold">
-                {part.valueKR} ({part.postCount})
+                {part.valueKR}{' '}
+                <span className="text-size-small">({part.postCount})</span>
               </Link>
 
               {categories?.map((category) => {
