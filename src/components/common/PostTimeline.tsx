@@ -1,6 +1,7 @@
 import { Post } from 'contentlayer/generated'
 import Link from 'next/link'
 
+import { CategoryEnum, categoryKR } from '@/constants/menus'
 import { cn } from '@/utils/cn'
 import { DateFormatTypeEnum, formatDate } from '@/utils/format-date'
 
@@ -47,9 +48,21 @@ const PostTimeline = ({ posts }: Props) => {
                   'before:absolute before:top-[1px] before:-left-[6px] md:before:top-1'
                 )}
               >
-                <p className={cn('text-secondary text-size-small')}>
-                  {formatDate(post.date, DateFormatTypeEnum.MonthAndDayWithDot)}
-                </p>
+                <div className="flex items-center gap-x-2 text-secondary text-size-small">
+                  <span>
+                    {formatDate(
+                      post.date,
+                      DateFormatTypeEnum.MonthAndDayWithDot
+                    )}
+                  </span>
+                  <Link
+                    href={`/${post.part}/${post.category}`}
+                    className="underline hover:font-serif-bold"
+                  >
+                    #{categoryKR[post.category as CategoryEnum]}
+                  </Link>
+                </div>
+
                 <p className="font-serif-bold">{post.title}</p>
                 <p className="text-size-small text-secondary">
                   {post.description}

@@ -20,7 +20,7 @@ const PartListPage = () => {
   const pathname = usePathname()
   const [currentTag, setCurrentTag] = useState<string>('')
 
-  const tags: MenuItem[] = [...allParts, ...allCategories]
+  const tags: MenuItem[] = allParts
   const posts: Post[] = useMemo(
     () =>
       currentTag === PartEnum.All
