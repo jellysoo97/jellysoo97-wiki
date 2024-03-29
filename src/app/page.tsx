@@ -2,6 +2,7 @@ import Link from 'next/link'
 
 import BarGraph, { BarGraphData } from '@/components/common/BarGraph'
 import Title from '@/components/common/Title'
+import UnderlineLink from '@/components/common/UnderlineLink'
 import PixelBanner from '@/components/PixelBanner'
 import { siteConfig } from '@/constants/config'
 import { DEFAULT_CATEGORY_COLOR } from '@/constants/menus'
@@ -50,12 +51,9 @@ export default function HomePage() {
                 <ul>
                   {categories?.map((category) => (
                     <li key={category.value} className="mb-2">
-                      <Link
-                        href={category.url}
-                        className="font-serif-bold border-b border-neutral-400 dark:border-b dark:border-neutral-700"
-                      >
+                      <UnderlineLink href={category.url}>
                         {category.valueKR}
-                      </Link>
+                      </UnderlineLink>
                     </li>
                   ))}
                 </ul>

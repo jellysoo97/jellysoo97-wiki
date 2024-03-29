@@ -1,7 +1,7 @@
 'use client'
 
 import { Post } from 'contentlayer/generated'
-import { usePathname } from 'next/navigation'
+import { useParams } from 'next/navigation'
 import { useEffect, useMemo, useState } from 'react'
 
 import Badge from '@/components/common/Badge'
@@ -16,18 +16,16 @@ import {
 } from '@/constants/posts'
 import { cn } from '@/utils/cn'
 
-const PartListPage = () => {
-  const pathname = usePathname()
+const PartPostListPage = () => {
+  const { part } = useParams()
   const [currentTag, setCurrentTag] = useState<string>('')
 
-  const tags: MenuItem[] = allParts
+  const tags: MenuItem[] = [...allParts, ...allCategories]
   const posts: Post[] = useMemo(
     () =>
       currentTag === PartEnum.All
         ? allSortedPosts
-        : allSortedPosts.filter(
-            (post) => post.part === currentTag || post.category === currentTag
-          ),
+        : allSortedPosts.filter((post) => post.part === currentTag),
     [currentTag]
   )
   const handleTagSelect = (tag: string) => {
@@ -35,13 +33,13 @@ const PartListPage = () => {
   }
 
   useEffect(() => {
-    if (pathname.length) {
-      setCurrentTag(pathname.split('/')[1])
+    if (typeof part === 'string') {
+      setCurrentTag(part)
     }
   }, [])
 
   return (
-    <div className="flex flex-col">
+    <div className="w-full flex flex-col mt-4">
       <Title className="mb-4">Posts</Title>
       <div className="flex flex-wrap gap-2 mb-6">
         {tags.map((tag) => (
@@ -60,4 +58,4 @@ const PartListPage = () => {
   )
 }
 
-export default PartListPage
+export default PartPostListPage
