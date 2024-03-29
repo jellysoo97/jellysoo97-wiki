@@ -2,7 +2,7 @@
 
 import { Post } from 'contentlayer/generated'
 import Link from 'next/link'
-import { Fragment, MouseEvent, useEffect, useRef, useState } from 'react'
+import { MouseEvent, useEffect, useRef, useState } from 'react'
 
 import { allSortedPosts } from '@/constants/posts'
 import { cn } from '@/utils/cn'
@@ -32,7 +32,7 @@ const PixelBanner = ({
   const pixelWidth = bannerSize.width / pixelSize
 
   const handleMouseOver = (
-    e: MouseEvent<HTMLTableCellElement>,
+    e: MouseEvent<HTMLDivElement>,
     rowIndex: number,
     colIndex: number
   ) => {
@@ -52,7 +52,7 @@ const PixelBanner = ({
     }
   }
 
-  const handleMouseLeave = (e: MouseEvent<HTMLTableCellElement>) => {
+  const handleMouseLeave = (e: MouseEvent<HTMLDivElement>) => {
     e.currentTarget.style.backgroundColor = 'transparent'
   }
 
@@ -89,23 +89,18 @@ const PixelBanner = ({
         height={bannerSize.height}
       />
 
-      {/* dark pixel */}
       {isImageLoaded && (
         <table className={cn('absolute top-0 left-0', 'w-full h-full')}>
           <tbody>
             {new Array(pixelSize).fill('').map((_, rowIndex) => (
-              <tr
-                key={rowIndex}
-                className="flex"
-                style={{ height: convertSize(pixelWidth) }}
-              >
+              <tr key={rowIndex}>
                 {new Array(pixelSize).fill('').map((_, colIndex) => {
                   const postIndex = rowIndex * pixelSize + colIndex
                   const isPostPixel = postIndex < posts.length
                   const post = allSortedPosts[postIndex]
 
                   return (
-                    <Fragment key={`${rowIndex}-${colIndex}`}>
+                    <td key={`${rowIndex}-${colIndex}`} className="p-0">
                       {/* post pixel */}
                       {isPostPixel && (
                         <Tooltip
@@ -122,31 +117,25 @@ const PixelBanner = ({
                             </p>
                           }
                         >
-                          <Link href={post.url}>
-                            <td
-                              className="hover:scale-[1.7]"
-                              style={{
-                                width: convertSize(pixelWidth),
-                                height: convertSize(pixelWidth),
-                              }}
-                              onMouseOver={(e) =>
-                                handleMouseOver(e, rowIndex, colIndex)
-                              }
-                              onMouseLeave={(e) => handleMouseLeave(e)}
+                          <div
+                            className="w-full h-full hover:scale-[1.7]"
+                            onMouseOver={(e) =>
+                              handleMouseOver(e, rowIndex, colIndex)
+                            }
+                            onMouseLeave={(e) => handleMouseLeave(e)}
+                          >
+                            <Link
+                              href={post.url}
+                              className="w-full h-full block"
                             />
-                          </Link>
+                          </div>
                         </Tooltip>
                       )}
                       {/* dark pixel */}
                       {!isPostPixel && (
-                        <td
-                          className="bg-black bg-opacity-80"
-                          style={{
-                            width: convertSize(pixelWidth),
-                          }}
-                        />
+                        <div className="w-full h-full bg-black bg-opacity-80" />
                       )}
-                    </Fragment>
+                    </td>
                   )
                 })}
               </tr>
