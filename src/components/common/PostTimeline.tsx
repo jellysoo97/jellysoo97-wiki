@@ -1,7 +1,6 @@
 import { Post } from 'contentlayer/generated'
 import Link from 'next/link'
 
-import { CategoryEnum, categoryKR } from '@/constants/menus'
 import { cn } from '@/utils/cn'
 import { DateFormatTypeEnum, formatDate } from '@/utils/format-date'
 
@@ -38,37 +37,42 @@ const PostTimeline = ({ posts }: Props) => {
               </div>
             )}
 
-            <Link href={post.url}>
-              <div
-                className={cn(
-                  'relative pl-3 pb-3',
-                  'flex flex-col gap-y-1',
-                  'border-l border-l-neutral-400 dark:border-l-neutral-600',
-                  "before:content-[''] before:w-3 before:h-3 before:rounded-full before:bg-secondary before:border before:border-neutral-400 dark:before:border-neutral-600",
-                  'before:absolute before:top-[1px] before:-left-[6px] md:before:top-1'
-                )}
-              >
-                <div className="flex items-center gap-x-2 text-secondary text-size-small">
-                  <span>
-                    {formatDate(
-                      post.date,
-                      DateFormatTypeEnum.MonthAndDayWithDot
-                    )}
-                  </span>
-                  <Link
-                    href={`/${post.part}/${post.category}`}
-                    className="underline hover:font-serif-bold"
-                  >
-                    #{categoryKR[post.category as CategoryEnum]}
-                  </Link>
-                </div>
-
+            {/* TODO: */}
+            {/* issue: <a> 안의 <div>가 hydration error 유발 */}
+            {/* https://nextjs.org/docs/messages/react-hydration-error */}
+            <div
+              className={cn(
+                'relative pl-3 pb-3',
+                'flex flex-col gap-y-1',
+                'border-l border-l-neutral-400 dark:border-l-neutral-600',
+                "before:content-[''] before:w-3 before:h-3 before:rounded-full before:bg-secondary before:border before:border-neutral-400 dark:before:border-neutral-600",
+                'before:absolute before:top-[1px] before:-left-[6px] md:before:top-1'
+              )}
+            >
+              <Link href={post.url}>
+                <p>
+                  {formatDate(post.date, DateFormatTypeEnum.MonthAndDayWithDot)}
+                </p>
                 <p className="font-serif-bold">{post.title}</p>
                 <p className="text-size-small text-secondary">
                   {post.description}
                 </p>
+              </Link>
+            </div>
+            {/* <Link href={post.url}>
+              <div
+                
+              >
+                <div className="flex items-center gap-x-2 text-secondary text-size-small">
+                  
+                  <UnderlineLink href={`/${post.part}/${post.category}`}>
+                    #{categoryKR[post.category as CategoryEnum]}
+                  </UnderlineLink>
+                </div>
+
+                
               </div>
-            </Link>
+            </Link> */}
           </li>
         )
       })}
