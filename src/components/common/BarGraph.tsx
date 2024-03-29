@@ -42,9 +42,8 @@ const BarGraph = ({ data, width = 'w-full', height = 'h-2' }: Props) => {
         {sortedData.map((data) => (
           <li key={data.item} className="flex items-center">
             <CircleIcon
-              className="w-3 h-3 mr-1"
+              className="w-3 h-3 mr-1 stroke-neutral-300 dark:stroke-neutral-400"
               fill={data.color}
-              stroke={'#30363db3'}
             />
             <span className="font-serif-bold text-size-small mr-1">
               {data.item}

@@ -12,7 +12,7 @@ type Props = {
 
 const Tooltip = ({ children, position = 'top', content }: Props) => {
   return (
-    <div className={'group relative flex'}>
+    <div className={'w-full h-full group relative flex'}>
       {children}
 
       {/* TODO: add border triangles */}
