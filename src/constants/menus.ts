@@ -1,7 +1,7 @@
 export enum PartEnum {
   All = 'all',
-  Cs = 'cs',
   Fe = 'fe',
+  Cs = 'cs',
   TroubleShooting = 'troubleshooting',
   Etc = 'etc',
 }
