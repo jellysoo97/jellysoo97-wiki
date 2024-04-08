@@ -30,6 +30,10 @@ const config: Config = {
           800: 'var(--neutral-800)',
           900: 'var(--neutral-900)',
         },
+        yellow: {
+          'block-light': 'var(--block-yellow)',
+          'block-dark': 'var(--block-yellow-dark)',
+        },
       },
     },
   },
@@ -41,13 +45,13 @@ const config: Config = {
     ({ addUtilities }: Partial<Config>) => {
       addUtilities({
         // colors
-        '.bg-primary': { '@apply bg-neutral-200 dark:bg-neutral-800': '' },
-        '.bg-secondary': { '@apply bg-neutral-300 dark:bg-neutral-700': '' },
+        '.bg-primary': { '@apply bg-neutral-100 dark:bg-neutral-800': '' },
+        '.bg-secondary': { '@apply bg-neutral-200 dark:bg-neutral-700': '' },
         '.text-primary': {
-          '@apply text-neutral-600 dark:text-neutral-350': '',
+          '@apply text-neutral-700 dark:text-neutral-300': '',
         },
         '.text-secondary': {
-          '@apply text-neutral-500 dark:text-neutral-400': '',
+          '@apply text-neutral-600 dark:text-neutral-350': '',
         },
         // fontSize
         '.text-size-base': {
@@ -58,6 +62,9 @@ const config: Config = {
         },
         '.text-size-large': {
           '@apply text-lg md:text-xl': '',
+        },
+        '.text-size-xlarge': {
+          '@apply text-xl md:text-2xl': '',
         },
         // layout
         '.layout-container': {

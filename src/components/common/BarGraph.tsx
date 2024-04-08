@@ -28,6 +28,8 @@ const BarGraph = ({ data, width = 'w-full', height = 'h-2' }: Props) => {
             className={cn(
               'h-full',
               index < sortedData.length - 1 &&
+                data.percentage > 0 &&
+                data.percentage < 100 &&
                 'border-r-2 border-r-neutral-200 dark:border-r-neutral-800'
             )}
             style={{
@@ -45,12 +47,12 @@ const BarGraph = ({ data, width = 'w-full', height = 'h-2' }: Props) => {
               className="w-3 h-3 mr-1 stroke-neutral-300 dark:stroke-neutral-400"
               fill={data.color}
             />
-            <span className="font-serif-bold text-size-small mr-1">
-              {data.item}
-            </span>
-            <span className="text-secondary text-size-small">
-              {data.percentage.toFixed(1)}%
-            </span>
+            <div className="flex items-end">
+              <span className="text-size-small mr-1">{data.item}</span>
+              <span className="text-secondary text-xs">
+                {data.percentage.toFixed(1)}%
+              </span>
+            </div>
           </li>
         ))}
       </ul>

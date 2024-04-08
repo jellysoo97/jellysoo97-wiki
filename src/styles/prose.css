@@ -7,11 +7,15 @@
 }
 
 .prose h2 {
-  @apply mb-4;
+  @apply px-2 py-1 mb-4 text-primary rounded-md bg-yellow-block-light dark:bg-yellow-block-dark;
 }
 
 .prose h3 {
   @apply mb-2;
+}
+
+.prose hr {
+  @apply my-8 border-t border-neutral-200 dark:border-neutral-700;
 }
 
 .prose a {

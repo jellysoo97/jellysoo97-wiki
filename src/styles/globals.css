@@ -42,13 +42,16 @@
     --neutral-800: #262626;
     --neutral-900: #171717;
 
+    --block-yellow: #f7be6824;
+    --block-yellow-dark: #f0bb6c24;
+
     /* fonts */
     --font-serif: 'Nanum Myeongjo Regular';
     --font-serif-bold: 'Nanum Myeongjo ExtraBold';
     --font-mono: 'Cutive Mono';
 
     /* layout */
-    --height-header: 52px;
+    --height-header: 60px;
   }
 }
 

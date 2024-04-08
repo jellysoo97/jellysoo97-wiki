@@ -15,8 +15,7 @@ const UnderlineLink = ({ href, children, className }: Props) => {
     <Link
       href={href}
       className={cn(
-        'hover:font-serif-bold',
-        'underline decoration-1 underline-offset-2 decoration-neutral-400 dark:decoration-neutral-700',
+        'underline decoration-1 underline-offset-2 decoration-neutral-500 dark:decoration-neutral-400',
         className
       )}
     >

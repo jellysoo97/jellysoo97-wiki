@@ -10,8 +10,8 @@ const Sidebar = () => {
   const pathname = usePathname()
 
   return (
-    <aside className="hidden md:block min-w-52 min-h-full mr-4 bg-secondary">
-      <div className="flex flex-col p-2 gap-y-2">
+    <aside className="hidden md:block min-w-52 h-fit mr-4 bg-secondary">
+      <div className="flex flex-col px-2 pt-2 pb-8 gap-y-2">
         {allParts.map((part) => {
           const categories = allCategories.filter(
             (category) => category.parent === part.value
@@ -32,11 +32,11 @@ const Sidebar = () => {
                     key={category.value}
                     className={cn(
                       'ml-1 pl-2 font-serif text-secondary text-size-small cursor-pointer',
-                      'border-l-2 border-l-neutral-400 hover:border-l-yellow-500 hover:font-serif-bold',
+                      'border-l-2 border-l-neutral-400 hover:border-l-yellow-500',
                       isCurrentPage && 'border-l-yellow-500 font-serif-bold'
                     )}
                   >
-                    <Link href={category.url}>
+                    <Link href={category.url} className="block w-full">
                       {category.valueKR} ({category.postCount})
                     </Link>
                   </li>

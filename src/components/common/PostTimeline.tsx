@@ -50,29 +50,15 @@ const PostTimeline = ({ posts }: Props) => {
               )}
             >
               <Link href={post.url}>
-                <p>
+                <p className="text-size-small">
                   {formatDate(post.date, DateFormatTypeEnum.MonthAndDayWithDot)}
                 </p>
-                <p className="font-serif-bold">{post.title}</p>
+                <p className="font-serif-bold text-size-large">{post.title}</p>
                 <p className="text-size-small text-secondary">
                   {post.description}
                 </p>
               </Link>
             </div>
-            {/* <Link href={post.url}>
-              <div
-                
-              >
-                <div className="flex items-center gap-x-2 text-secondary text-size-small">
-                  
-                  <UnderlineLink href={`/${post.part}/${post.category}`}>
-                    #{categoryKR[post.category as CategoryEnum]}
-                  </UnderlineLink>
-                </div>
-
-                
-              </div>
-            </Link> */}
           </li>
         )
       })}

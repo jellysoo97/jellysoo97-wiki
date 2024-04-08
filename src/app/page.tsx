@@ -45,9 +45,9 @@ export default function HomePage() {
 
             return (
               <div key={part.value} className="flex flex-col gap-y-2">
-                <Title className="px-2 py-1 bg-secondary text-size-base">
+                <p className="text-primary text-size-base px-2 py-1 bg-secondary text-size-base">
                   📌 &nbsp;{part.valueKR}
-                </Title>
+                </p>
                 <ul>
                   {categories?.map((category) => (
                     <li key={category.value} className="mb-2">
