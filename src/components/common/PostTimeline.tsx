@@ -53,6 +53,7 @@ const PostTimeline = ({ posts }: Props) => {
                 <p className="text-size-small">
                   {formatDate(post.date, DateFormatTypeEnum.MonthAndDayWithDot)}
                 </p>
+                {post.thumbnail && <img src={post.thumbnail} />}
                 <p className="font-serif-bold text-size-large">{post.title}</p>
                 <p className="text-size-small text-secondary">
                   {post.description}

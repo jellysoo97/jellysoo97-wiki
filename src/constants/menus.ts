@@ -16,6 +16,10 @@ export enum CategoryEnum {
   JobApply = 'job-apply',
 }
 
+export enum SeriesEnum {
+  ModernJavascriptDeepDive = 'modern-javascript-deep-dive',
+}
+
 export const partKR: Record<PartEnum, string> = {
   [PartEnum.All]: '전체글',
   [PartEnum.Cs]: 'CS',
@@ -32,6 +36,10 @@ export const categoryKR: Record<CategoryEnum, string> = {
   [CategoryEnum.Typescript]: 'TypeScript',
   [CategoryEnum.ComputerArchitecture]: '컴퓨터 구조',
   [CategoryEnum.JobApply]: '취준',
+}
+
+export const seriesKR: Record<SeriesEnum, string> = {
+  [SeriesEnum.ModernJavascriptDeepDive]: '모던 자바스크립트 Deep Dive',
 }
 
 export const DEFAULT_CATEGORY_COLOR = '#e34c26'

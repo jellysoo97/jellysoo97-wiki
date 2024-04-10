@@ -11,6 +11,7 @@ import { PartEnum } from '@/constants/menus'
 import {
   allCategories,
   allParts,
+  allSeries,
   allSortedPosts,
   MenuItem,
 } from '@/constants/posts'
@@ -20,7 +21,7 @@ const PartPostListPage = () => {
   const { part } = useParams()
   const [currentTag, setCurrentTag] = useState<string>('')
 
-  const tags: MenuItem[] = [...allParts, ...allCategories]
+  const tags: MenuItem[] = [...allParts, ...allCategories, ...allSeries]
   const posts: Post[] = useMemo(
     () =>
       currentTag === PartEnum.All

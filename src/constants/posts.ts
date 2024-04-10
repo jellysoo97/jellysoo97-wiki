@@ -8,6 +8,8 @@ import {
   categoryKR,
   PartEnum,
   partKR,
+  SeriesEnum,
+  seriesKR,
 } from './menus'
 
 export type MenuItem = {
@@ -50,3 +52,12 @@ export const allCategories: MenuItem[] = Object.keys(CategoryEnum)
       color: categoryColor[category as CategoryEnum],
     }
   })
+
+export const allSeries: MenuItem[] = Object.keys(SeriesEnum)
+  .map((key) => SeriesEnum[key as keyof typeof SeriesEnum])
+  .map((series) => ({
+    value: series,
+    valueKR: seriesKR[series as SeriesEnum],
+    postCount: allPosts.filter((post) => post.series === series).length,
+    url: '',
+  }))
