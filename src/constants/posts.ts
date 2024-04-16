@@ -2,15 +2,7 @@ import { allPosts, Post } from 'contentlayer/generated'
 
 import { sortPostsByDate } from '@/utils/sort-posts-by-date'
 
-import {
-  categoryColor,
-  CategoryEnum,
-  categoryKR,
-  PartEnum,
-  partKR,
-  SeriesEnum,
-  seriesKR,
-} from './menus'
+import { CategoryEnum, categoryKR, tagColor, TagEnum, tagKR } from './menus'
 
 export type MenuItem = {
   value: string
@@ -18,46 +10,44 @@ export type MenuItem = {
   postCount: number
   url: string
   color?: string
-  parent?: string
-  children?: MenuItem[]
+  category?: string
 }
 
 export const allSortedPosts: Post[] = sortPostsByDate(allPosts, true)
 
 export const recentPosts: Post[] = allSortedPosts.slice(0, 5)
 
-export const allParts: MenuItem[] = Object.keys(PartEnum)
-  .map((key) => PartEnum[key as keyof typeof PartEnum])
-  .map((part) => ({
-    value: part,
-    valueKR: partKR[part as PartEnum],
-    postCount:
-      part === PartEnum.All
-        ? allPosts.length
-        : allPosts.filter((post) => post.part === part).length,
-    url: `/${part}`,
-  }))
-
 export const allCategories: MenuItem[] = Object.keys(CategoryEnum)
   .map((key) => CategoryEnum[key as keyof typeof CategoryEnum])
-  .map((category) => {
-    const part = allPosts.find((post) => post.category === category)?.part
-
-    return {
-      value: category,
-      valueKR: categoryKR[category as CategoryEnum],
-      postCount: allPosts.filter((post) => post.category === category).length,
-      url: `/${part}/${category}`,
-      parent: part,
-      color: categoryColor[category as CategoryEnum],
-    }
-  })
-
-export const allSeries: MenuItem[] = Object.keys(SeriesEnum)
-  .map((key) => SeriesEnum[key as keyof typeof SeriesEnum])
-  .map((series) => ({
-    value: series,
-    valueKR: seriesKR[series as SeriesEnum],
-    postCount: allPosts.filter((post) => post.series === series).length,
-    url: '',
+  .map((category) => ({
+    value: category,
+    valueKR: categoryKR[category as CategoryEnum],
+    postCount:
+      category === CategoryEnum.All
+        ? allPosts.length
+        : allPosts.filter((post) => post.category === category).length,
+    url: `/${category}`,
   }))
+
+export const allTags: MenuItem[] = Object.keys(TagEnum)
+  .map((key) => TagEnum[key as keyof typeof TagEnum])
+  .map((tag) => ({
+    value: tag,
+    valueKR: tagKR[tag as TagEnum],
+    postCount: allPosts.filter((post) => post.tags.includes(tag)).length,
+    url: `/${tag}`,
+    color: tagColor[tag as TagEnum],
+    category: allPosts.find((post) => post.tags.includes(tag))?.category,
+  }))
+
+export const menuTags: MenuItem[] = [
+  TagEnum.Javascript,
+  TagEnum.Algorithm,
+  TagEnum.Git,
+].map((tag) => ({
+  value: tag,
+  valueKR: tagKR[tag as TagEnum],
+  postCount: allPosts.filter((post) => post.tags.includes(tag)).length,
+  url: `/${tag}`,
+  category: allPosts.find((post) => post.tags.includes(tag))?.category,
+}))
