@@ -17,7 +17,9 @@ type Props = {
 }
 
 const BarGraph = ({ data, width = 'w-full', height = 'h-2' }: Props) => {
-  const sortedData = data.sort((a, b) => b.percentage - a.percentage)
+  const sortedData = data
+    .filter((data) => data.percentage > 0)
+    .sort((a, b) => b.percentage - a.percentage)
 
   return (
     <div className="flex flex-col gap-y-3">

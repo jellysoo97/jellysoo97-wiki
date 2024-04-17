@@ -1,35 +1,25 @@
 'use client'
 
-import { Post } from 'contentlayer/generated'
 import Link from 'next/link'
 import { MouseEvent, useEffect, useRef, useState } from 'react'
 
+import { siteConfig } from '@/constants/config'
 import { allSortedPosts } from '@/constants/posts'
 import { cn } from '@/utils/cn'
 import { convertRgbToHex } from '@/utils/convert-rgb-to-hex'
-import { convertSize } from '@/utils/convert-size'
 import { DateFormatTypeEnum, formatDate } from '@/utils/format-date'
 
 import Tooltip from './common/Tooltip'
 
-type Props = {
-  img: string
-  pixelSize: number
-  posts: Post[]
-  bannerSize?: { width: number; height: number }
-}
-
 const PIXEL_BORDER_WIDTH = 0.3
+const DEFAULT_BANNER_SIZE = 200
 
-const PixelBanner = ({
-  img,
-  pixelSize,
-  posts,
-  bannerSize = { width: 300, height: 300 },
-}: Props) => {
+const PixelBanner = () => {
+  const pixelSize = siteConfig.banner.pixelSize
+
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [isImageLoaded, setIsImageLoaded] = useState<boolean>(false)
-  const pixelWidth = bannerSize.width / pixelSize
+  const pixelWidth = DEFAULT_BANNER_SIZE / pixelSize
 
   const handleMouseOver = (
     e: MouseEvent<HTMLDivElement>,
@@ -60,14 +50,14 @@ const PixelBanner = ({
     if (canvasRef.current) {
       const ctx = canvasRef.current.getContext('2d')
       const backgroundImage = new Image()
-      backgroundImage.src = img
+      backgroundImage.src = siteConfig.banner.img
       backgroundImage.onload = () => {
         ctx?.drawImage(
           backgroundImage,
           0,
           0,
-          bannerSize.width,
-          bannerSize.height
+          DEFAULT_BANNER_SIZE,
+          DEFAULT_BANNER_SIZE
         )
         backgroundImage.style.display = 'none'
         setIsImageLoaded(true)
@@ -77,16 +67,15 @@ const PixelBanner = ({
 
   return (
     <div
-      className="relative hidden md:block"
-      style={{
-        width: convertSize(bannerSize.width),
-        height: convertSize(bannerSize.height),
-      }}
+      className={cn(
+        'relative hidden md:block',
+        `w-[${DEFAULT_BANNER_SIZE}px] h-[${DEFAULT_BANNER_SIZE}px]`
+      )}
     >
       <canvas
         ref={canvasRef}
-        width={bannerSize.width}
-        height={bannerSize.height}
+        width={DEFAULT_BANNER_SIZE}
+        height={DEFAULT_BANNER_SIZE}
       />
 
       {isImageLoaded && (
@@ -96,7 +85,7 @@ const PixelBanner = ({
               <tr key={rowIndex}>
                 {new Array(pixelSize).fill('').map((_, colIndex) => {
                   const postIndex = rowIndex * pixelSize + colIndex
-                  const isPostPixel = postIndex < posts.length
+                  const isPostPixel = postIndex < allSortedPosts.length
                   const post = allSortedPosts[postIndex]
 
                   return (
