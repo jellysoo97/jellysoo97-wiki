@@ -14,7 +14,7 @@ const Sidebar = () => {
       <div className="flex flex-col px-2 pt-2 pb-8 gap-y-2">
         {allCategories.map((category) => (
           <ul key={category.value} className="flex flex-col gap-y-2">
-            <Link href={category.url} className="font-serif-bold">
+            <Link href={category.url}>
               {category.valueKR}{' '}
               <span className="text-size-small">({category.postCount})</span>
             </Link>
@@ -29,8 +29,9 @@ const Sidebar = () => {
                     key={tag.value}
                     className={cn(
                       'ml-1 pl-2 font-serif text-secondary text-size-small cursor-pointer',
-                      'border-l-2 border-l-neutral-400 hover:border-l-yellow-500',
-                      isCurrentPage && 'border-l-yellow-500 font-serif-bold'
+                      'border-l-2 border-l-neutral-400 hover:border-l-yellow-400 dark:hover:border-l-yellow-500',
+                      isCurrentPage &&
+                        'border-l-yellow-400 dark:border-l-yellow-500'
                     )}
                   >
                     <Link href={tag.url} className="block w-full">

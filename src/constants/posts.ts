@@ -28,26 +28,26 @@ export const allCategories: MenuItem[] = Object.keys(CategoryEnum)
         : allPosts.filter((post) => post.category === category).length,
     url: `/${category}`,
   }))
+  .filter((category) => category.postCount > 0)
 
 export const allTags: MenuItem[] = Object.keys(TagEnum)
   .map((key) => TagEnum[key as keyof typeof TagEnum])
-  .map((tag) => ({
-    value: tag,
-    valueKR: tagKR[tag as TagEnum],
-    postCount: allPosts.filter((post) => post.tags.includes(tag)).length,
-    url: `/${tag}`,
-    color: tagColor[tag as TagEnum],
-    category: allPosts.find((post) => post.tags.includes(tag))?.category,
-  }))
+  .map((tag) => {
+    const category = allPosts.find((post) => post.tags.includes(tag))?.category
 
-export const menuTags: MenuItem[] = [
-  TagEnum.Javascript,
-  TagEnum.Algorithm,
-  TagEnum.Git,
-].map((tag) => ({
-  value: tag,
-  valueKR: tagKR[tag as TagEnum],
-  postCount: allPosts.filter((post) => post.tags.includes(tag)).length,
-  url: `/${tag}`,
-  category: allPosts.find((post) => post.tags.includes(tag))?.category,
-}))
+    return {
+      value: tag,
+      valueKR: tagKR[tag as TagEnum],
+      postCount: allPosts.filter((post) => post.tags.includes(tag)).length,
+      url: `/${category}/${tag}`,
+      color: tagColor[tag as TagEnum],
+      category,
+    }
+  })
+  .filter((category) => category.postCount > 0)
+
+export const menuTags: MenuItem[] = allTags.filter((tag) =>
+  [TagEnum.Javascript, TagEnum.Algorithm, TagEnum.Git].includes(
+    tag.value as TagEnum
+  )
+)

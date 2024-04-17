@@ -3,7 +3,6 @@ import Link from 'next/link'
 import BarGraph, { BarGraphData } from '@/components/common/BarGraph'
 import UnderlineLink from '@/components/common/UnderlineLink'
 import PixelBanner from '@/components/PixelBanner'
-import { siteConfig } from '@/constants/config'
 import { DEFAULT_TAG_COLOR } from '@/constants/menus'
 import { allCategories, allSortedPosts, menuTags } from '@/constants/posts'
 import { calculatePercentage } from '@/utils/calculate-percentage'
@@ -21,17 +20,10 @@ export default function HomePage() {
   return (
     <div className="w-full flex flex-col gap-y-8">
       <section className="flex gap-x-4">
-        <PixelBanner
-          img={siteConfig.banner.img}
-          pixelSize={siteConfig.banner.pixelSize}
-          posts={allSortedPosts}
-          bannerSize={{ width: 200, height: 200 }}
-        />
+        <PixelBanner />
         <div className="flex flex-col flex-1 gap-y-4 md:justify-between">
-          <Link href={''} className=" font-serif-bold">
-            @jellysoo97
-          </Link>
-          <BarGraph data={graphData} />{' '}
+          <Link href={''}>@jellysoo97</Link>
+          <BarGraph data={graphData} />
         </div>
       </section>
 
@@ -43,11 +35,15 @@ export default function HomePage() {
                 📌 &nbsp;{category.valueKR}
               </p>
               <ul>
-                {menuTags?.map((tag) => (
-                  <li key={tag.value} className="mb-2">
-                    <UnderlineLink href={tag.url}>{tag.valueKR}</UnderlineLink>
-                  </li>
-                ))}
+                {menuTags
+                  .filter((tag) => tag.category === category.value)
+                  ?.map((tag) => (
+                    <li key={tag.value} className="mb-2">
+                      <UnderlineLink href={tag.url}>
+                        {tag.valueKR}
+                      </UnderlineLink>
+                    </li>
+                  ))}
               </ul>
             </div>
           ))}

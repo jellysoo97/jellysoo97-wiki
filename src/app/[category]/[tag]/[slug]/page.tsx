@@ -4,13 +4,13 @@ import { notFound } from 'next/navigation'
 import MDXContent from '@/components/MDXContent'
 
 type Props = {
-  params: { part: string; category: string; slug: string }
+  params: { category: string; tag: string; slug: string }
 }
 
 const PostPage = ({ params }: Props) => {
-  const { part, category, slug } = params
+  const { category, tag, slug } = params
   const post = allPosts.find(
-    (post) => post.url === `/${part}/${category}/${slug}`
+    (post) => post.url === `/${category}/${tag}/${slug}`
   )
 
   if (!post) {

@@ -6,13 +6,13 @@ import PostHeader from '@/components/layout/post/PostHeader'
 import { allSortedPosts } from '@/constants/posts'
 
 type Props = {
-  params: { part: string; category: string; slug: string }
+  params: { category: string; tag: string; slug: string }
   children: React.ReactNode
 }
 
 const PostPageLayout = ({ params, children }: Props) => {
   const post = allSortedPosts.find(
-    (post) => post.url === `/${params.part}/${params.category}/${params.slug}`
+    (post) => post.url === `/${params.category}/${params.tag}/${params.slug}`
   )
 
   if (!post) {
