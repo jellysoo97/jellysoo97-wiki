@@ -6,19 +6,19 @@
 
 @font-face {
   font-family: 'Nanum Myeongjo Regular';
-  src: url('../fonts/NanumMyeongjo-Regular.woff') format('woff');
+  src: url('../../public/fonts/NanumMyeongjo-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'Nanum Myeongjo ExtraBold';
-  src: url('../fonts/NanumMyeongjo-ExtraBold.woff') format('woff');
+  src: url('../../public/fonts/NanumMyeongjo-ExtraBold.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: 'Cutive Mono';
-  src: url('../fonts/CutiveMono-Regular.woff') format('woff');
+  src: url('../../public/fonts/CutiveMono-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
