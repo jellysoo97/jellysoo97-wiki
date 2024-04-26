@@ -9,7 +9,7 @@ export const siteConfig = {
     github: 'https://github.com/jellysoo97/jellysoo97-wiki',
   },
   banner: {
-    img: '/img/banner-duck.jpeg',
+    img: '/images/banner-duck.jpeg',
     pixelSize: 32,
   },
 }

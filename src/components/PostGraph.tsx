@@ -14,7 +14,7 @@ import Tooltip from './common/Tooltip'
 const PIXEL_BORDER_WIDTH = 0.3
 const DEFAULT_BANNER_SIZE = 200
 
-const PixelBanner = () => {
+const PostGraph = () => {
   const pixelSize = siteConfig.banner.pixelSize
 
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -136,4 +136,4 @@ const PixelBanner = () => {
   )
 }
 
-export default PixelBanner
+export default PostGraph
