@@ -47,7 +47,7 @@ export const allTags: MenuItem[] = Object.keys(TagEnum)
   .filter((category) => category.postCount > 0)
 
 export const menuTags: MenuItem[] = allTags.filter((tag) =>
-  [TagEnum.Javascript, TagEnum.Algorithm, TagEnum.Git].includes(
+  [...new Set(allSortedPosts.map((post) => post.tags[0]))].includes(
     tag.value as TagEnum
   )
 )
