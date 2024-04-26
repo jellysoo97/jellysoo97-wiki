@@ -8,8 +8,4 @@ export const siteConfig = {
   url: {
     github: 'https://github.com/jellysoo97/jellysoo97-wiki',
   },
-  banner: {
-    img: '/images/banner-duck.jpeg',
-    pixelSize: 32,
-  },
 }
