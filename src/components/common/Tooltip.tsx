@@ -12,7 +12,7 @@ type Props = {
 
 const Tooltip = ({ children, position = 'top', content }: Props) => {
   return (
-    <div className={'w-full h-full group relative flex'}>
+    <div className={'h-full group relative flex'}>
       {children}
 
       {/* TODO: add border triangles */}
@@ -24,7 +24,7 @@ const Tooltip = ({ children, position = 'top', content }: Props) => {
           // TODO: 2. add position
           // {/* https://gist.github.com/ndpniraj/633474d23145499c5a3c39b017f43be4 */}
           'absolute -top-7',
-          'p-1 bg-secondary rounded-md text-size-small z-30 whitespace-nowrap',
+          'px-[6px] py-1 bg-secondary rounded-md text-size-small z-30 whitespace-nowrap',
           'group-hover:block'
         )}
       >

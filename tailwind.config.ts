@@ -53,6 +53,12 @@ const config: Config = {
         '.text-secondary': {
           '@apply text-neutral-600 dark:text-neutral-350': '',
         },
+        '.border-primary': {
+          '@apply border border-neutral-500 dark:border-neutral-400': '',
+        },
+        '.border-secondary': {
+          '@apply border border-neutral-200 dark:border-neutral-700': '',
+        },
         // fontSize
         '.text-size-base': {
           '@apply text-base': '',
