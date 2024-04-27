@@ -2,8 +2,6 @@ import { CSSProperties } from 'react'
 
 import { cn } from '@/utils/cn'
 
-import CircleIcon from '../icons/CircleIcon'
-
 export type BarGraphData = {
   item: string
   percentage: number
@@ -45,9 +43,12 @@ const BarGraph = ({ data, width = 'w-full', height = 'h-2' }: Props) => {
       <ul className="flex flex-wrap items-center gap-2">
         {sortedData.map((data) => (
           <li key={data.item} className="flex items-center">
-            <CircleIcon
-              className="w-3 h-3 mr-1 stroke-neutral-300 dark:stroke-neutral-400"
-              fill={data.color}
+            <div
+              className={cn(
+                'w-3 h-3 rounded-full border border-neutral-300 dark:border-neutral-400',
+                'mr-1'
+              )}
+              style={{ backgroundColor: data.color }}
             />
             <div className="flex items-end">
               <span className="text-size-small mr-1">{data.item}</span>
