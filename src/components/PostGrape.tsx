@@ -52,16 +52,16 @@ const PostGrape = () => {
             )}
           >
             {posts.map((postIndex, colIndex) => {
-              const isFilledPost = postIndex < postCount
+              const isFilled = postIndex < postCount
 
               return (
                 <Fragment key={`${rowIndex}-${colIndex}`}>
-                  {isFilledPost && (
+                  {isFilled && (
                     <Tooltip content={<p>{allSortedPosts[postIndex].title}</p>}>
                       <div
                         className={cn(
                           'w-4 h-4 rounded-full border border-purple-500 dark:border-purple-400',
-                          'bg-purple-400 dark:bg-purple-500 hover:scale-125'
+                          'bg-purple-400 dark:bg-purple-500 hover:scale-110'
                         )}
                       >
                         <Link
@@ -72,7 +72,7 @@ const PostGrape = () => {
                     </Tooltip>
                   )}
 
-                  {!isFilledPost && (
+                  {!isFilled && (
                     <div
                       key={`${rowIndex}-${colIndex}`}
                       className={cn('w-4 h-4 rounded-full border-primary')}
