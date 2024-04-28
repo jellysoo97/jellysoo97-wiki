@@ -3,15 +3,15 @@
 }
 
 .prose p {
-  @apply mb-2;
+  @apply mt-0 mb-2;
 }
 
 .prose h2 {
-  @apply px-2 py-1 mb-4 text-primary rounded-md bg-yellow-block-light dark:bg-yellow-block-dark;
+  @apply px-2 py-1 mb-4 text-primary text-xl rounded-md bg-yellow-block-light dark:bg-yellow-block-dark;
 }
 
 .prose h3 {
-  @apply mb-2;
+  @apply text-lg mb-2;
 }
 
 .prose hr {
