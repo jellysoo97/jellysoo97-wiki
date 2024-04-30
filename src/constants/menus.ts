@@ -37,7 +37,7 @@ export const tagKR: Record<TagEnum, string> = {
   [TagEnum.Nextjs]: 'Next.js',
   [TagEnum.Algorithm]: '알고리즘',
   [TagEnum.Git]: 'Git',
-  [TagEnum.Blog]: 'Blog',
+  [TagEnum.Blog]: '블로그 개발',
   // [TagEnum.TroubleShooting]: '트러블슈팅',
   // [TagEnum.Retrospect]: '회고',
 }
