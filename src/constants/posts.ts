@@ -26,7 +26,7 @@ export const allCategories: MenuItem[] = Object.keys(CategoryEnum)
       category === CategoryEnum.All
         ? allPosts.length
         : allPosts.filter((post) => post.category === category).length,
-    url: `/${category}`,
+    url: `/posts/${category}`,
   }))
   .filter((category) => category.postCount > 0)
 
@@ -39,7 +39,7 @@ export const allTags: MenuItem[] = Object.keys(TagEnum)
       value: tag,
       valueKR: tagKR[tag as TagEnum],
       postCount: allPosts.filter((post) => post.tags.includes(tag)).length,
-      url: `/${category}/${tag}`,
+      url: `/posts/${category}/${tag}`,
       color: tagColor[tag as TagEnum],
       category,
     }

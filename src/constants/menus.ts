@@ -3,6 +3,7 @@ export enum CategoryEnum {
   Fe = 'fe',
   Be = 'be',
   Development = 'development',
+  Projects = 'projects',
   Cs = 'cs',
   Etc = 'etc',
 }
@@ -16,6 +17,7 @@ export enum TagEnum {
   Algorithm = 'algorithm',
   // development
   Git = 'git',
+  // projects
   Blog = 'blog',
   // TroubleShooting = 'troubleshooting',
   // etc
@@ -27,6 +29,7 @@ export const categoryKR: Record<CategoryEnum, string> = {
   [CategoryEnum.Fe]: 'FE',
   [CategoryEnum.Be]: 'BE',
   [CategoryEnum.Development]: 'Development',
+  [CategoryEnum.Projects]: '프로젝트',
   [CategoryEnum.Cs]: 'CS',
   [CategoryEnum.Etc]: 'ETC',
 }
