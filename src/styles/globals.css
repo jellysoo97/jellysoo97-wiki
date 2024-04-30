@@ -5,14 +5,14 @@
 @import 'prose.css';
 
 @font-face {
-  font-family: 'Nanum Myeongjo Regular';
-  src: url('../../public/fonts/NanumMyeongjo-Regular.woff') format('woff');
+  font-family: 'Gowun Batang';
+  src: url('../../public/fonts/GowunBatang-Regular.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Nanum Myeongjo ExtraBold';
-  src: url('../../public/fonts/NanumMyeongjo-ExtraBold.woff') format('woff');
+  font-family: 'Gowun Batang Bold';
+  src: url('../../public/fonts/GowunBatang-Bold.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -46,8 +46,8 @@
     --block-yellow-dark: #f0bb6c24;
 
     /* fonts */
-    --font-serif: 'Nanum Myeongjo Regular';
-    --font-serif-bold: 'Nanum Myeongjo ExtraBold';
+    --font-serif: 'Gowun Batang';
+    --font-serif-bold: 'Gowun Batang Bold';
     --font-mono: 'Cutive Mono';
 
     /* layout */
