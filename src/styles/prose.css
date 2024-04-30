@@ -3,7 +3,7 @@
 }
 
 .prose p {
-  @apply mt-0 mb-2;
+  @apply mt-0 mb-1;
 }
 
 .prose h2 {
@@ -61,7 +61,7 @@
 /* inline code */
 .prose code:not([data-language]) {
   @apply font-serif text-red-500 dark:text-red-400;
-  @apply p-1 rounded-md bg-secondary;
+  @apply p-1 rounded-md bg-neutral-300 dark:bg-neutral-750;
 
   &::before,
   &::after {
@@ -96,7 +96,7 @@
 }
 
 .prose blockquote {
-  @apply border-l-4 border-yellow-500 not-italic bg-neutral-250 dark:bg-neutral-700 text-primary rounded-md py-2;
+  @apply border-l-4 border-yellow-400 dark:border-yellow-500 not-italic bg-secondary text-primary rounded-md py-2;
 }
 
 .prose blockquote p {
