@@ -1,8 +1,5 @@
-'use client'
-
 import { Post } from 'contentlayer/generated'
-import { useParams } from 'next/navigation'
-import { useEffect, useMemo, useState } from 'react'
+import Link from 'next/link'
 
 import Badge from '@/components/common/Badge'
 import TimelinePost from '@/components/common/TimelinePost'
@@ -12,47 +9,39 @@ import { allCategories, allSortedPosts, allTags } from '@/constants/posts'
 import { cn } from '@/utils/cn'
 import { DateFormatTypeEnum, formatDate } from '@/utils/format-date'
 
-const PostListPage = () => {
-  const { category } = useParams()
-  const [currentTag, setCurrentTag] = useState<string>('')
+type Props = {
+  slug: string[]
+}
 
-  const tags = [...allCategories, ...allTags]
-  const posts: Post[] = useMemo(
-    () =>
-      currentTag === CategoryEnum.All
-        ? allSortedPosts
-        : allSortedPosts.filter(
-            (post) =>
-              post.category === currentTag || post.tags.includes(currentTag)
-          ),
-    [currentTag]
-  )
-  const handleTagSelect = (tag: string) => {
-    setCurrentTag(tag)
-  }
-
-  useEffect(() => {
-    if (typeof category === 'string' && !!category) {
-      setCurrentTag(category)
-    }
-  }, [])
+const PostListPage = ({ slug }: Props) => {
+  const [category, tag] = slug
+  const linkTags = [...allCategories, ...allTags]
+  const posts: Post[] =
+    category === CategoryEnum.All
+      ? allSortedPosts
+      : allSortedPosts.filter(
+          (post) => post.category === category || post.tags.includes(tag)
+        )
+  console.log('list', slug, posts.length)
 
   return (
     <div className="w-full flex flex-col mt-4">
       <Title className="mb-4">Posts</Title>
       <div className="flex flex-wrap gap-2 mb-6">
-        {tags.map((tag) => (
-          <Badge
-            key={tag.value}
-            content={`#${tag.valueKR}`}
-            onClick={() => handleTagSelect(tag.value)}
-            className={cn(tag.value === currentTag && 'bg-secondary')}
-          />
+        {linkTags.map((linkTag) => (
+          <Link key={linkTag.value} href={linkTag.url}>
+            <Badge
+              content={`#${linkTag.valueKR}`}
+              className={cn(
+                linkTag.url === `/posts/${slug.join('/')}` && 'bg-secondary'
+              )}
+            />
+          </Link>
         ))}
       </div>
 
       {/* TODO: add loading spinner later */}
-      {!!currentTag && (
+      {!!category && (
         <ul>
           {posts.map((post, index) => {
             const currentPostYear = formatDate(
