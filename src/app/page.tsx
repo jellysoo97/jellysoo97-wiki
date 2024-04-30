@@ -28,34 +28,36 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section>
-        <Link href={`/${CategoryEnum.All}`}>
-          <p className="text-primary text-size-base px-2 py-1 bg-secondary mb-4">
-            📌 &nbsp;{allCategories[0].valueKR}&nbsp;(
-            {allCategories[0].postCount})
-          </p>
-        </Link>
-        <div className="flex flex-col gap-4 md:grid grid-cols-2">
-          {allCategories.slice(1).map((category) => (
-            <div key={category.value} className="flex flex-col gap-y-2">
-              <h3 className="text-primary text-size-base px-2 py-1 bg-secondary cursor-default">
-                📌 &nbsp;{category.valueKR}&nbsp;({category.postCount})
-              </h3>
-              <ul>
-                {menuTags
-                  .filter((tag) => tag.category === category.value)
-                  ?.map((tag) => (
-                    <li key={tag.value} className="mb-2">
-                      <UnderlineLink href={tag.url}>
-                        {tag.valueKR}
-                      </UnderlineLink>
-                    </li>
-                  ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </section>
+      {allCategories.length > 1 && (
+        <section>
+          <Link href={`/${CategoryEnum.All}`}>
+            <p className="text-primary text-size-base px-2 py-1 bg-secondary mb-4">
+              📌 &nbsp;{allCategories[0].valueKR}&nbsp;(
+              {allCategories[0].postCount})
+            </p>
+          </Link>
+          <div className="flex flex-col gap-4 md:grid grid-cols-2">
+            {allCategories.slice(1).map((category) => (
+              <div key={category.value} className="flex flex-col gap-y-2">
+                <h3 className="text-primary text-size-base px-2 py-1 bg-secondary cursor-default">
+                  📌 &nbsp;{category.valueKR}&nbsp;({category.postCount})
+                </h3>
+                <ul>
+                  {menuTags
+                    .filter((tag) => tag.category === category.value)
+                    ?.map((tag) => (
+                      <li key={tag.value} className="mb-2">
+                        <UnderlineLink href={tag.url}>
+                          {tag.valueKR}
+                        </UnderlineLink>
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   )
 }
