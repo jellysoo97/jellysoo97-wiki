@@ -1,0 +1,170 @@
+---
+title: '03. 게시글 페이지 만들기'
+description: '마크다운을 웹 페이지에 띄워보자'
+date: 2024-01-29 17:54:14
+category: 'projects'
+tags: ['blog', 'nextjs']
+---
+
+## mdx 컴포넌트 만들기
+
+`next-contentlayer`의 `useMDXComponent` 훅은 마크다운을 JSX로 변환해서 리턴한다.
+
+props로 `post.body.code`를 받아 `useMDXComponent` 훅에 넘겨주면 된다.
+
+간편한 스타일링을 위해 article 태그로 MDX 컴포넌트를 감싸고 `prose` 클래스를 추가한다.
+
+```tsx
+// components/MDXContent.tsx
+import { useMDXComponent } from 'next-contentlayer/hooks'
+
+type Props = {
+  code: string
+}
+
+const MDXContent = ({ code }: Props) => {
+  const Component = useMDXComponent(code)
+
+  return (
+    // 먼저 tailwind.config.ts에 plugin 설정해야 한다.
+    // @tailwindcss/typography가 제공하는 HTML 스타일을 사용하기 위해 prose를 추가
+    <article className="prose prose-neutral w-full py-4 max-w-full dark:prose-dark">
+      <Component />
+    </article>
+  )
+}
+
+export default MDXContent
+```
+
+### +α
+
+MDX 컴포넌트에 props로 컴포넌트 객체를 넘겨주면 해당 태그에 커스텀한 컴포넌트가 렌더링된다.
+
+```tsx {16-19}
+// components/MDXContent.tsx
+const img = ({ src, alt, ...props }: React.ComponentProps<'img'>) => {
+  return <img src={src || ''} alt={alt || 'image'} {...props} />
+}
+
+const pre = ({ title, children }: React.ComponentProps<'pre'>) => {
+  return (
+    <div>
+      {/* code block 위에 title 추가 */}
+      {title && <>{title}</>}
+      <pre className="relative">{children}</pre>
+    </div>
+  )
+}
+
+const MDXComponents = {
+  img,
+  pre,
+}
+
+const MDXContent = ({ code }: Props) => {
+  const Component = useMDXComponent(code)
+
+  return (
+    <article className="prose prose-neutral w-full py-4 max-w-full dark:prose-dark">
+      <Component components={MDXComponents} />
+    </article>
+  )
+}
+```
+
+## 게시글 페이지 만들기
+
+이제 게시글 페이지에 MDX 컴포넌트를 넣어주기만 하면 된다.
+
+게시글 같은 정적 콘텐츠를 가진 페이지를 SSG를 적용하여 빌드 타임에 준비해두면 빠르게 로딩할 수 있다.
+
+<br />
+
+아래 예시를 들자면,
+
+[generateStaticParams](https://nextjs.org/docs/app/api-reference/functions/generate-static-params) 함수는 동적 라우팅 slug 리스트를 리턴한다. SSG를 적용할 페이지 리스트이다.
+
+그러면 동적 라우팅에 해당하는 페이지(모든 게시글 페이지) 여러 개가 정적 생성된다.
+
+사용자가 `/posts/test` 페이지 요청을 보내면 서버에서 미리 생성된 HTML 파일을 보내준다.
+
+SSR과 달리 request time에 렌더링 되지 않고 build time에 렌더링 되어 CDN에 캐시된 페이지이다.
+
+참고) pages router의 `getStaticPaths` 함수이다.
+
+```tsx {12-16}
+// 예시를 위해 라우팅을 단순화
+// app/posts/[slug]/page.tsx
+import MDXContent from '@/components/MDXContent'
+import { allPosts } from 'contentlayer/generated'
+import { notFound } from 'next/navigation'
+
+type Props = {
+  params: { slug: string }
+}
+
+// SSG, return a list of `params` to populate the [slug] dynamic segment
+export async function generateStaticParams(): Promise<Props['params'][]> {
+  return allPosts.map((post) => ({
+    slug: post._raw.flattenedPath,
+  }))
+}
+
+// multiple versions of this page will be statically generated
+// using the `params` returned by `generateStaticParams`
+const PostPage = ({ params }: Props) => {
+  const { slug } = params
+
+  const post = allPosts.find((post) => post.url === `/posts/${slug}`)
+
+  if (!post) {
+    return notFound()
+  }
+
+  return (
+    <div className="w-full flex flex-col gap-y-4">
+      <p>title: {post.title}</p>
+      <p>description: {post.description}</p>
+      <hr />
+      <section>
+        <MDXContent code={post.body.code} />
+      </section>
+    </div>
+  )
+}
+
+export default PostPage
+```
+
+정적 렌더링은 선택사항이지 필수는 아니다.
+
+사용자에 따라 데이터가 달라지거나 request time에만 알 수 있는 데이터가 포함된 경우에는 적합하지 않다.
+
+```tsx
+// 정적 렌더링 뺀 예시
+// app/posts/[slug]/page.tsx
+import MDXContent from '@/components/MDXContent'
+import { allPosts } from 'contentlayer/generated'
+import { notFound } from 'next/navigation'
+
+const PostPage = ({ params }: { params: { slug: string } }) => {
+  const { slug } = params
+
+  const post = allPosts.find((post) => post.url === `/posts/${slug}`)
+
+  // ...
+}
+
+export default PostPage
+```
+
+`/posts/test` 페이지로 이동하면 작성한 mdx가 제대로 렌더링되고 있다.
+
+`post` 프로퍼티들을 하나씩 뜯어보면서 여러 정보를 추가하고 스타일링 할 수 있다.
+
+![/posts/test 페이지](/images/projects/01.png)
+
+<hr />
+
+다음 글에서는 **다크모드**를 구현할 것이다.
