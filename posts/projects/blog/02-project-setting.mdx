@@ -172,6 +172,10 @@ yarn dev
 
 하위의 `generated/Post`에 내가 작성한 글들이 들어가 있다. 이 파일들이 나중에 HTML로 파싱된다.
 
+그리고 `generated/index.d.ts`는 `allPosts`를 export한다. allPosts는 Post 타입의 포스트를 모두 담고 있는 배열이다.
+
+게시글 페이지에서 allPosts를 import해서 url과 일치하는 포스트를 필터링해서 사용한다.
+
 <hr />
 
-다음 글에서 작성한 게시글을 웹 페이지에 렌더링해 볼 것이다.
+다음 글에서 **작성한 게시글을 웹 페이지에 렌더링**해 볼 것이다.
