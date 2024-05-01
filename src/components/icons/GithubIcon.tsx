@@ -1,5 +1,3 @@
-import React from 'react'
-
 const GithubIcon = ({ className, ...props }: React.ComponentProps<'svg'>) => {
   return (
     <svg

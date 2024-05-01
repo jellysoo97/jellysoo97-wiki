@@ -23,7 +23,7 @@
 }
 
 .prose strong {
-  @apply p-1;
+  @apply text-primary font-serif-bold text-lg;
 }
 
 .prose ul {
