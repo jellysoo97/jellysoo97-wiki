@@ -6,6 +6,14 @@
   @apply mt-0 mb-1;
 }
 
+.prose p:has(img) {
+  @apply relative inline-block overflow-hidden w-full aspect-video;
+}
+
+.prose img {
+  @apply my-2;
+}
+
 .prose h2 {
   @apply px-2 py-1 mb-4 font-serif-bold text-primary text-2xl rounded-md bg-yellow-block-light dark:bg-yellow-block-dark;
 }

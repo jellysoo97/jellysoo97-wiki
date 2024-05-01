@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 import { useRef, useState } from 'react'
 
@@ -13,8 +14,8 @@ type Props = {
   code: string
 }
 
-const img = ({ src, alt, ...props }: React.ComponentProps<'img'>) => {
-  return <img src={src || ''} alt={alt || 'image'} {...props} />
+const img = ({ src, alt }: React.ComponentProps<'img'>) => {
+  return <Image src={src || ''} alt={alt || 'image'} fill objectFit="contain" />
 }
 
 const pre = ({ children }: React.ComponentProps<'pre'>) => {
