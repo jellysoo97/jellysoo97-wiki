@@ -30,16 +30,12 @@
   list-style-type: '◻️';
   padding-inline-start: 1ch;
   @apply pl-8;
-
-  :has(input[type='checkbox']:checked) {
-    list-style-type: '✅';
-    padding-inline-start: 1ch;
-  }
 }
 
 .prose li:has(ul) ul {
   list-style-type: '▪';
   padding-inline-start: 1ch;
+  @apply my-1;
 }
 
 .prose li {
