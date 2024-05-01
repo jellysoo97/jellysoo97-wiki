@@ -11,7 +11,7 @@ type Props = {
 
 const PostHeader = ({ post }: Props) => {
   return (
-    <div className="flex flex-col gap-y-2 mt-4">
+    <div className="flex flex-col gap-y-2">
       <div className="flex items-center gap-x-1">
         <p className="text-secondary text-size-small mr-2">
           {formatDate(post.date, DateFormatTypeEnum.DateOnlyWithDot)}

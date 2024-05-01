@@ -61,7 +61,7 @@
 /* inline code */
 .prose code:not([data-language]) {
   @apply font-serif text-red-500 dark:text-red-400;
-  @apply p-1 rounded-md bg-neutral-300 dark:bg-neutral-750;
+  @apply p-1 rounded-md bg-neutral-200 dark:bg-neutral-750;
 
   &::before,
   &::after {
@@ -69,18 +69,20 @@
   }
 }
 
-.prose code[data-line-numbers] {
-  counter-reset: lineNumber;
+/* code block */
+.prose div[data-rehype-pretty-code-fragment] pre {
+  counter-reset: line;
+  @apply bg-neutral-900;
 }
 
 .prose pre code span[data-line]::before {
-  counter-increment: lineNumber;
-  content: counter(lineNumber);
-  @apply inline-block text-right mr-3 w-4 text-primary;
+  counter-increment: line;
+  content: counter(line);
+  @apply inline-block text-right mr-3 w-4 text-neutral-400;
 }
 
 .prose pre code span[data-highlighted-line] {
-  @apply border-l-2 border-yellow-500;
+  @apply bg-yellow-block-light border-l-2 border-yellow-400 dark:border-yellow-500;
 }
 
 .prose div[data-rehype-pretty-code-fragment] {
@@ -91,13 +93,9 @@
   }
 }
 
-.prose div[data-rehype-pretty-code-title] {
-  @apply font-mono text-neutral-350 px-2 py-1;
-}
-
 .prose blockquote {
   @apply border-l-4 border-yellow-400 dark:border-yellow-500 not-italic;
-  @apply bg-secondary text-primary rounded-md py-1;
+  @apply bg-neutral-150 dark:bg-neutral-700 text-primary rounded-md px-2 py-1;
 }
 
 .prose blockquote p {

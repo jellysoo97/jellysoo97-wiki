@@ -46,6 +46,7 @@ const PostPage = ({ params }: Props) => {
       <Divider />
 
       {/* post footer */}
+      <div>post comments</div>
     </div>
   )
 }
