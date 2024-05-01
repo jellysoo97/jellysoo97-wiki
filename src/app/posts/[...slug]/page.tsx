@@ -16,25 +16,30 @@ export async function generateStaticParams(): Promise<Props['params'][]> {
   }))
 }
 
+function getPostByParams(slug: string[]) {
+  const [category, tag, title] = slug
+
+  return allSortedPosts.find(
+    (post) => post.url === `/posts/${category}/${tag}/${title}`
+  )
+}
+
 const PostPage = ({ params }: Props) => {
   const { slug } = params
-  const [category, tag, title] = slug
   const isPostListPage = slug.length < 3
 
   if (isPostListPage) {
     return <PostListPage slug={slug} />
   }
 
-  const post = allSortedPosts.find(
-    (post) => post.url === `/posts/${category}/${tag}/${title}`
-  )
+  const post = getPostByParams(slug)
 
   if (!post) {
     return notFound()
   }
 
   return (
-    <div className="flex flex-1 flex-col gap-y-4">
+    <div className="w-full flex flex-col gap-y-4">
       <PostHeader post={post} />
 
       <Divider />
