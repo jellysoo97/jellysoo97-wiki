@@ -14,7 +14,7 @@ const IconButton = ({
       type={type}
       className={cn(
         'flex w-8 h-8 justify-center items-center',
-        'transition ease-in-out duration-300 hover:scale-110 md:transform-none',
+        'scale-sm',
         className
       )}
     >
