@@ -3,7 +3,9 @@ export const siteConfig = {
   description: '',
   author: {
     name: 'jellysoo97',
-    avatar: 'https://avatars.githubusercontent.com/u/91869170?v=4',
+    profile: '/images/about/profile.png',
+    email: 'jellysoo97@gmail.com',
+    github: 'https://github.com/jellysoo97',
   },
   url: {
     github: 'https://github.com/jellysoo97/jellysoo97-wiki',
