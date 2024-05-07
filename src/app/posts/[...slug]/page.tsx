@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation'
 
 import Divider from '@/components/common/Divider'
+import MDXContent from '@/components/common/MDXContent'
 import PostHeader from '@/components/layout/post/PostHeader'
-import MDXContent from '@/components/MDXContent'
-import PostListPage from '@/components/PostListPage'
+import PostListPage from '@/components/posts/PostListPage'
 import { allSortedPosts } from '@/constants/posts'
 
 type Props = {

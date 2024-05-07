@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 
 import useSwitchTheme from '@/hooks/use-switch-theme'
 
-import IconButton from './common/IconButton'
-import ThemeIcon from './icons/ThemeIcon'
+import ThemeIcon from '../icons/ThemeIcon'
+import IconButton from './IconButton'
 
 const ThemeSwitch = () => {
   const [mounted, setMounted] = useState(false)
@@ -19,10 +19,7 @@ const ThemeSwitch = () => {
 
   return (
     <IconButton onClick={switchTheme}>
-      <ThemeIcon
-        isDarkTheme={isDarkTheme}
-        className="w-5 h-5 text-yellow-400 dark:text-yellow-500"
-      />
+      <ThemeIcon isDarkTheme={isDarkTheme} className="w-5 h-5 text-yellow" />
     </IconButton>
   )
 }
