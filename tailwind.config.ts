@@ -47,11 +47,15 @@ const config: Config = {
         // colors
         '.bg-primary': { '@apply bg-neutral-100 dark:bg-neutral-800': '' },
         '.bg-secondary': { '@apply bg-neutral-200 dark:bg-neutral-700': '' },
+        '.bg-yellow': { '@apply bg-yellow-400 dark:bg-yellow-500': '' },
         '.text-primary': {
           '@apply text-neutral-700 dark:text-neutral-300': '',
         },
         '.text-secondary': {
           '@apply text-neutral-600 dark:text-neutral-350': '',
+        },
+        '.text-yellow': {
+          '@apply text-yellow-400 dark:text-yellow-500': '',
         },
         '.border-primary': {
           '@apply border border-neutral-500 dark:border-neutral-400': '',
@@ -75,6 +79,22 @@ const config: Config = {
         // layout
         '.layout-container': {
           '@apply mx-auto max-w-3xl px-4 md:max-w-4xl md:px-8': '',
+        },
+        // scale
+        '.scale-sm': {
+          '@apply transition ease-in-out duration-300 hover:scale-110 md:transform-none':
+            '',
+        },
+        // list
+        '.parent-ul': {
+          'list-style-type': "'◻️'",
+          'padding-inline-start': '1ch',
+          '@apply pl-4': '',
+        },
+        '.child-ul': {
+          'list-style-type': "'▪'",
+          'padding-inline-start': '1ch',
+          '@apply pl-4': '',
         },
       })
     },

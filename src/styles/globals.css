@@ -52,12 +52,20 @@
 
     /* layout */
     --height-header: 60px;
+    --height-footer: 60px;
+    --height-main: calc(
+      100dvh - var(--height-header) - var(--height-footer) - 2px
+    );
   }
 }
 
 @layer base {
   body {
-    @apply m-0 p-0 min-h-dvh relative;
+    @apply m-0 p-0 min-h-dvh relative layout-container;
     @apply font-serif text-primary bg-primary text-size-base;
+  }
+
+  ul li {
+    @apply pl-2 my-1;
   }
 }
