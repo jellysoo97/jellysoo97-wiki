@@ -1,5 +1,3 @@
-'use client'
-
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -71,7 +69,7 @@ const Profile = () => {
             </h2>
             <br />
             <p className="font-serif">서비스가 어떻게 돌아가는지 이해하고,</p>
-            <p className="font-serif">서비스를 만들고자 합니다.</p>
+            <p className="font-serif">만들고자 합니다.</p>
           </div>
           <Divider className="h-[1.5px] bg-yellow" />
           <div className="flex justify-center items-center mt-4 gap-x-4">
