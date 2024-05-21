@@ -6,7 +6,11 @@ category: 'projects'
 tags: ['blog', 'nextjs']
 ---
 
+게시글 페이지를 만들어 [이전에 작성한 테스트글](/posts/projects/blog/02-project-setting)을 화면에 띄워보고자 한다.
+
 ## mdx 컴포넌트 만들기
+
+우선 마크다운으로 작성된 글을 JSX 코드로 변환해야 한다.
 
 `next-contentlayer`의 `useMDXComponent` 훅은 마크다운을 JSX로 변환해서 리턴한다.
 
@@ -41,8 +45,9 @@ export default MDXContent
 
 MDX 컴포넌트에 props로 컴포넌트 객체를 넘겨주면 해당 태그에 커스텀한 컴포넌트가 렌더링된다.
 
-```tsx {16-19}
+```tsx {17-20}
 // components/MDXContent.tsx
+// 커스텀 img, pre 태그
 const img = ({ src, alt, ...props }: React.ComponentProps<'img'>) => {
   return <img src={src || ''} alt={alt || 'image'} {...props} />
 }
@@ -52,7 +57,7 @@ const pre = ({ title, children }: React.ComponentProps<'pre'>) => {
     <div>
       {/* code block 위에 title 추가 */}
       {title && <>{title}</>}
-      <pre className="relative">{children}</pre>
+      <pre>{children}</pre>
     </div>
   )
 }
@@ -87,7 +92,7 @@ const MDXContent = ({ code }: Props) => {
 
 그러면 동적 라우팅에 해당하는 페이지(모든 게시글 페이지) 여러 개가 정적 생성된다.
 
-사용자가 `/posts/test` 페이지 요청을 보내면 서버에서 미리 생성된 HTML 파일을 보내준다.
+사용자가 `/posts/test` 페이지 요청을 보내면 서버에서 미리 생성해놓은 HTML 파일을 보내준다.
 
 SSR과 달리 request time에 렌더링 되지 않고 build time에 렌더링 되어 CDN에 캐시된 페이지이다.
 
@@ -142,7 +147,7 @@ export default PostPage
 사용자에 따라 데이터가 달라지거나 request time에만 알 수 있는 데이터가 포함된 경우에는 적합하지 않다.
 
 ```tsx
-// 정적 렌더링 뺀 예시
+// SSG 뺀 예시
 // app/posts/[slug]/page.tsx
 import MDXContent from '@/components/MDXContent'
 import { allPosts } from 'contentlayer/generated'
