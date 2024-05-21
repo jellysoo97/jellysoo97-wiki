@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 
 import Divider from '@/components/common/Divider'
 import MDXContent from '@/components/common/MDXContent'
+import PostFooter from '@/components/layout/post/PostFooter'
 import PostHeader from '@/components/layout/post/PostHeader'
 import PostListPage from '@/components/posts/PostListPage'
 import { allSortedPosts } from '@/constants/posts'
@@ -39,7 +40,7 @@ const PostPage = ({ params }: Props) => {
   }
 
   return (
-    <div className="w-full flex flex-col gap-y-4">
+    <div className="w-full flex flex-col gap-y-8">
       <PostHeader post={post} />
 
       <Divider />
@@ -50,8 +51,7 @@ const PostPage = ({ params }: Props) => {
 
       <Divider />
 
-      {/* post footer */}
-      <div>post comments</div>
+      <PostFooter post={post} />
     </div>
   )
 }
