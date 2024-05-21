@@ -42,11 +42,11 @@ const pre = ({ children }: React.ComponentProps<'pre'>) => {
 
   return (
     <pre ref={preRef} className="relative">
-      <IconButton className="absolute top-2 right-2" onClick={handleCodeCopy}>
+      <IconButton className="absolute top-1 right-1" onClick={handleCodeCopy}>
         {isCopied ? (
           <CheckIcon className="w-6 h-6 text-green-700" />
         ) : (
-          <CopyIcon className="w-6 h-6 text-secondary" />
+          <CopyIcon className="w-6 h-6 text-neutral-250 dark:text-neutral-600" />
         )}
       </IconButton>
 
@@ -64,7 +64,7 @@ const MDXContent = ({ code }: Props) => {
   const Component = useMDXComponent(code)
 
   return (
-    <article className="prose prose-neutral w-full py-4 max-w-full dark:prose-dark">
+    <article className="prose prose-neutral w-full max-w-full dark:prose-dark">
       <Component components={MDXComponents} />
     </article>
   )
