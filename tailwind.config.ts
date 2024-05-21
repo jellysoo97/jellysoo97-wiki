@@ -89,12 +89,12 @@ const config: Config = {
         '.parent-ul': {
           'list-style-type': "'◻️'",
           'padding-inline-start': '1ch',
-          '@apply pl-4': '',
+          '@apply pl-8': '',
         },
         '.child-ul': {
           'list-style-type': "'▪'",
           'padding-inline-start': '1ch',
-          '@apply pl-4': '',
+          '@apply my-1': '',
         },
       })
     },
