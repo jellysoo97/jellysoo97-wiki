@@ -35,15 +35,11 @@
 }
 
 .prose ul {
-  list-style-type: '◻️';
-  padding-inline-start: 1ch;
-  @apply pl-8;
+  @apply parent-ul;
 }
 
 .prose li:has(ul) ul {
-  list-style-type: '▪';
-  padding-inline-start: 1ch;
-  @apply my-1;
+  @apply child-ul;
 }
 
 .prose li {
@@ -65,7 +61,7 @@
 /* inline code */
 .prose code:not([data-language]) {
   @apply font-serif text-red-500 dark:text-red-400;
-  @apply p-1 rounded-md bg-neutral-200 dark:bg-neutral-750;
+  @apply p-1 rounded-md bg-neutral-250 dark:bg-neutral-750;
 
   &::before,
   &::after {
@@ -99,7 +95,7 @@
 
 .prose blockquote {
   @apply border-l-4 border-yellow-400 dark:border-yellow-500 not-italic;
-  @apply bg-neutral-150 dark:bg-neutral-700 text-primary rounded-md px-2 py-1;
+  @apply bg-neutral-150 dark:bg-neutral-700 text-primary rounded-md pl-4 py-4;
 }
 
 .prose blockquote p {
