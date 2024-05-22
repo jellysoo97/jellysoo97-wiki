@@ -19,8 +19,11 @@ const PostListPage = ({ slug }: Props) => {
   const posts: Post[] =
     category === CategoryEnum.All
       ? allSortedPosts
-      : allSortedPosts.filter(
-          (post) => post.category === category || post.tags.includes(tag)
+      : allSortedPosts.filter((post) =>
+          tag
+            ? (post.category === category && post.tags[0] === tag) ||
+              post.tags.includes(tag)
+            : post.category === category
         )
 
   return (
