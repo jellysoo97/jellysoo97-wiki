@@ -82,65 +82,24 @@ ThemeProvider 내부 로직은 다음과 같다.
 
 ## 해결방안
 
-생각해본 해결방안은 두가지다.
+[공식문서](https://github.com/pacocoursey/next-themes?tab=readme-ov-file#avoid-hydration-mismatch)대로 클라이언트에서 페이지가 마운트된 이후에만 ThemeSwitch를 렌더링한다.
 
-### 해결방안1
+테마 관련 커스텀 훅도 따로 만들었다.
 
-[공식문서](https://github.com/pacocoursey/next-themes?tab=readme-ov-file#avoid-hydration-mismatch)대로 클라이언트에서 페이지가 마운트된 이후에만 ThemeSwitch를 렌더링하는 방법이다.
-
-```tsx
-import { useState, useEffect } from 'react'
-import { useTheme } from 'next-themes'
-
-const ThemeSwitch = () => {
-  const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
-
-  // useEffect only runs on the client, so now we can safely show the UI
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) {
-    return null
-  }
-
-  return (
-    <select value={theme} onChange={(e) => setTheme(e.target.value)}>
-      <option value="system">System</option>
-      <option value="dark">Dark</option>
-      <option value="light">Light</option>
-    </select>
-  )
-}
-
-export default ThemeSwitch
-```
-
-서버에서는 `mounted === false`이고 아무것도 렌더링하지 않는다.
-
-클라이언트에서는 페이지 마운트 -> useEffect 실행, `mounted === true`로 바뀜 -> UI 렌더링 과정을 거친다.
-
-### 해결방안2
-
-테마 관련 커스텀 훅을 따로 만들었다.
-
-```ts {7,8}
+```ts
 // hooks/use-switch-theme.ts
 import { useTheme } from 'next-themes'
 
 const useSwitchTheme = () => {
   const { resolvedTheme, setTheme } = useTheme()
 
-  const hasTheme = !!resolvedTheme
-  const isDarkTheme = hasTheme && resolvedTheme === 'dark'
+  const isDarkTheme = !!resolvedTheme && resolvedTheme === 'dark'
 
   const switchTheme = () => {
     setTheme(isDarkTheme ? 'light' : 'dark')
   }
 
   return {
-    hasTheme,
     isDarkTheme,
     switchTheme,
   }
@@ -149,9 +108,15 @@ const useSwitchTheme = () => {
 export default useSwitchTheme
 ```
 
-```tsx {15-17}
+서버 & 페이지 마운트 이전에는 resolvedTheme === undefined이다.
+
+그리고 페이지 마운트 후에 테마값이 제대로 들어가면 다크모드인지 아닌지에 따라 아이콘을 조건부 렌더링한다.
+
+```tsx {18-24}
 // components/ThemeSwitch.tsx
 'use client'
+
+import { useEffect, useState } from 'react'
 
 import useSwitchTheme from '@/hooks/use-switch-theme'
 
@@ -159,12 +124,17 @@ import ThemeIcon from '../icons/ThemeIcon'
 import IconButton from './IconButton'
 
 const ThemeSwitch = () => {
-  const { hasTheme, isDarkTheme, switchTheme } = useSwitchTheme()
+  const [mounted, setMounted] = useState<boolean>(false)
+  const { isDarkTheme, switchTheme } = useSwitchTheme()
 
-  // false false -> true true(시스템 설정이 dark인 경우)
-  console.log(hasTheme, isDarkTheme)
+  // false (theme === undefined) -> true (시스템 설정이 dark인 경우)
+  console.log(isDarkTheme)
 
-  if (!hasTheme) {
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
     return null
   }
 
@@ -175,14 +145,12 @@ const ThemeSwitch = () => {
   )
 }
 
-export default ThemeSwitch
+export default ThemeSwitchㄴ
 ```
 
-서버 & 페이지 마운트 이전에는 resolvedTheme === undefined이다.
+서버에서는 `mounted === false`이고 아무것도 렌더링하지 않는다.
 
-커스텀 훅에 `hasTheme`을 만들어 resolvedTheme이 undefined이면 아무것도 렌더링하지 않게 만들었다.
-
-그리고 페이지 마운트 후에 테마값이 제대로 들어가면 다크모드인지 아닌지에 따라 아이콘을 조건부 렌더링한다.
+클라이언트에서는 페이지 마운트 -> useEffect 실행, `mounted === true`로 바뀜 -> UI 렌더링 과정을 거친다.
 
 <hr />
 
