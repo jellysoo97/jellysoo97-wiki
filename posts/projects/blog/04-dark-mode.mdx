@@ -153,7 +153,7 @@ Hydration mismatch error가 난다.
 1. `theme`의 초기 상태값이 다르다.
 
    `ThemeProvider` 컨텍스트 내부 로직에 따라 서버에서 theme의 초기 상태값은 `undefined`이다.
-   클라이언트에서는 기본값(light)이거나 현재 사용자가 시스템상에 설정한 테마이다.
+   클라이언트에서는 기본 테마(system)이다.
 
 2. 초기 상태값이 다르기 때문에 이를 기반으로 렌더링한 HTML도 다르다.
 
@@ -208,4 +208,4 @@ mounted 상태값: (서버) false -> (클라이언트에서 컴포넌트 마운�
 
 보다 자세한 트러블슈팅 기록은 [여기로](/posts/projects/troubleshooting/hydration-error)
 
-다음글에서는 **sitemap, metadata** 기능을 추가할 것이다.
+다음글에서는 **Vercel로 배포**가 잘되는지 확인할 것이다.
