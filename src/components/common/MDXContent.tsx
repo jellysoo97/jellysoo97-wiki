@@ -41,17 +41,18 @@ const pre = ({ children }: React.ComponentProps<'pre'>) => {
   }
 
   return (
-    <pre ref={preRef} className="relative">
-      <IconButton className="absolute top-1 right-1" onClick={handleCodeCopy}>
+    <div className="flex bg-neutral-900">
+      <pre ref={preRef} className="flex-1">
+        {children}
+      </pre>
+      <IconButton className="m-1" onClick={handleCodeCopy}>
         {isCopied ? (
           <CheckIcon className="w-6 h-6 text-green-700" />
         ) : (
           <CopyIcon className="w-6 h-6 text-neutral-250 dark:text-neutral-600" />
         )}
       </IconButton>
-
-      {children}
-    </pre>
+    </div>
   )
 }
 

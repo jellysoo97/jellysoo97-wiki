@@ -95,7 +95,7 @@
 
 .prose blockquote {
   @apply border-l-4 border-yellow-400 dark:border-yellow-500 not-italic;
-  @apply bg-neutral-150 dark:bg-neutral-700 text-primary rounded-md pl-4 py-4;
+  @apply bg-neutral-150 dark:bg-neutral-700 text-primary rounded-md p-4;
 }
 
 .prose blockquote p {
