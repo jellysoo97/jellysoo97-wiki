@@ -1,21 +1,14 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-
 import useSwitchTheme from '@/hooks/use-switch-theme'
 
 import ThemeIcon from '../icons/ThemeIcon'
 import IconButton from './IconButton'
 
 const ThemeSwitch = () => {
-  const [mounted, setMounted] = useState(false)
-  const { isDarkTheme, switchTheme } = useSwitchTheme()
+  const { hasTheme, isDarkTheme, switchTheme } = useSwitchTheme()
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) {
+  if (!hasTheme) {
     return null
   }
 

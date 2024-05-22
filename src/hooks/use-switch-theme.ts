@@ -3,18 +3,15 @@ import { useTheme } from 'next-themes'
 const useSwitchTheme = () => {
   const { resolvedTheme, setTheme } = useTheme()
 
-  const isDarkTheme = resolvedTheme === 'dark'
+  const hasTheme = !!resolvedTheme
+  const isDarkTheme = hasTheme && resolvedTheme === 'dark'
 
   const switchTheme = () => {
-    if (resolvedTheme === 'light') {
-      setTheme('dark')
-    } else {
-      setTheme('light')
-    }
+    setTheme(isDarkTheme ? 'light' : 'dark')
   }
 
   return {
-    theme: resolvedTheme,
+    hasTheme,
     isDarkTheme,
     switchTheme,
   }
