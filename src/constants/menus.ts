@@ -13,13 +13,14 @@ export enum TagEnum {
   Javascript = 'javascript',
   ModernJavascriptDeepDive = 'modern-javascript-deep-dive',
   Nextjs = 'nextjs',
+  React = 'react',
   // cs
   Algorithm = 'algorithm',
   // development
   Git = 'git',
   // projects
   Blog = 'blog',
-  // TroubleShooting = 'troubleshooting',
+  TroubleShooting = 'troubleshooting',
   // etc
   // Retrospect = 'retrospect',
 }
@@ -38,10 +39,11 @@ export const tagKR: Record<TagEnum, string> = {
   [TagEnum.Javascript]: 'JavaScript',
   [TagEnum.ModernJavascriptDeepDive]: '모던 자바스크립트 Deep Dive',
   [TagEnum.Nextjs]: 'Next.js',
+  [TagEnum.React]: 'React',
   [TagEnum.Algorithm]: '알고리즘',
   [TagEnum.Git]: 'Git',
   [TagEnum.Blog]: '블로그 개발',
-  // [TagEnum.TroubleShooting]: '트러블슈팅',
+  [TagEnum.TroubleShooting]: '트러블슈팅',
   // [TagEnum.Retrospect]: '회고',
 }
 
@@ -53,7 +55,7 @@ export const tagColor: Record<TagEnum, string> = {
   [TagEnum.Nextjs]: '#000000',
   // [TagEnum.Css]: '#563d7c',
   // [TagEnum.HTML]: '#e34c26',
-  // [TagEnum.React]: '#61DAFB',
+  [TagEnum.React]: '#61DAFB',
   // [TagEnum.Typescript]: '#007acc',
   [TagEnum.Algorithm]: '#EFBC9B',
   // [TagEnum.Network]: '#9BCF53',
@@ -62,6 +64,6 @@ export const tagColor: Record<TagEnum, string> = {
   // [TagEnum.ComputerArchitecture]: '#f472b6',
   [TagEnum.Git]: '#424c54',
   [TagEnum.Blog]: '#f472b6',
-  // [TagEnum.TroubleShooting]: '',
+  [TagEnum.TroubleShooting]: DEFAULT_TAG_COLOR,
   // [TagEnum.Retrospect]: '',
 }
