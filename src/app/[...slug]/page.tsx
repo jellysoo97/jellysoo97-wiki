@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation'
 
 import Divider from '@/components/common/Divider'
-import MDXContent from '@/components/common/MDXContent'
 import PostFooter from '@/components/layout/post/PostFooter'
 import PostHeader from '@/components/layout/post/PostHeader'
+import MDXContent from '@/components/posts/MDXContent'
 import PostListPage from '@/components/posts/PostListPage'
 import { allSortedPosts } from '@/constants/posts'
 
@@ -13,7 +13,7 @@ type Props = {
 
 export async function generateStaticParams(): Promise<Props['params'][]> {
   return allSortedPosts.map((post) => ({
-    slug: post.url.split('/').filter((url) => url !== '/'),
+    slug: post._raw.flattenedPath.split('/'),
   }))
 }
 

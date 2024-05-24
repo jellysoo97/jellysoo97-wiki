@@ -10,7 +10,7 @@ type Props = {
   isLastPostOfYear: boolean
 }
 
-const TimelinePost = ({ post, year, isLastPostOfYear }: Props) => {
+const PostTimeline = ({ post, year, isLastPostOfYear }: Props) => {
   return (
     <li key={post.url} className="relative pl-16 my-0">
       {/* TODO:  */}
@@ -55,4 +55,4 @@ const TimelinePost = ({ post, year, isLastPostOfYear }: Props) => {
   )
 }
 
-export default TimelinePost
+export default PostTimeline

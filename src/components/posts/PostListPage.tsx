@@ -2,8 +2,8 @@ import { Post } from 'contentlayer/generated'
 import Link from 'next/link'
 
 import Badge from '@/components/common/Badge'
-import TimelinePost from '@/components/common/TimelinePost'
 import Title from '@/components/common/Title'
+import PostTimeline from '@/components/posts/PostTimeline'
 import { allCategories, allSortedPosts, allTags } from '@/constants/posts'
 import { CategoryEnum } from '@/constants/tags'
 import { cn } from '@/utils/cn'
@@ -58,7 +58,7 @@ const PostListPage = ({ slug }: Props) => {
               index === 0 || currentPostYear !== prevPostYear
 
             return (
-              <TimelinePost
+              <PostTimeline
                 key={post.url}
                 post={post}
                 year={currentPostYear}

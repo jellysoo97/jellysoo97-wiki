@@ -6,9 +6,9 @@ import { useRef, useState } from 'react'
 
 import { useTimeOut } from '@/hooks/use-time-out'
 
+import IconButton from '../common/IconButton'
 import CheckIcon from '../icons/CheckIcon'
 import CopyIcon from '../icons/CopyIcon'
-import IconButton from './IconButton'
 
 type Props = {
   code: string
