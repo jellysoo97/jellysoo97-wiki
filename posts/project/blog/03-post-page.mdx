@@ -92,7 +92,7 @@ const MDXContent = ({ code }: Props) => {
 
 그러면 동적 라우팅에 해당하는 페이지(모든 게시글 페이지) 여러 개가 정적 생성된다.
 
-사용자가 `/posts/test` 페이지 요청을 보내면 서버에서 미리 생성해놓은 HTML 파일을 보내준다.
+사용자가 `/test` 페이지 요청을 보내면 서버에서 미리 생성해놓은 HTML 파일을 보내준다.
 
 SSR과 달리 request time에 렌더링 되지 않고 build time에 렌더링 되어 CDN에 캐시된 페이지이다.
 
@@ -112,7 +112,7 @@ type Props = {
 // SSG, return a list of `params` to populate the [slug] dynamic segment
 export async function generateStaticParams(): Promise<Props['params'][]> {
   return allPosts.map((post) => ({
-    slug: post._raw.flattenedPath,
+    slug: post._raw.flattenedPath.split('/').slice(1),
   }))
 }
 
@@ -142,13 +142,22 @@ const PostPage = ({ params }: Props) => {
 export default PostPage
 ```
 
+빌드를 해보면 아래와 같이 SSG 설정한 페이지들이 잘 나타나는 것을 볼 수 있다.
+
+SSG 적용한 페이지들을 정적인 HTML로 prerendering 한다.
+
+![build 결과](/images/project/02.png)
+
+<br />
+<br />
+
 정적 렌더링은 선택사항이지 필수는 아니다.
 
 사용자에 따라 데이터가 달라지거나 request time에만 알 수 있는 데이터가 포함된 경우에는 적합하지 않다.
 
 ```tsx
 // SSG 뺀 예시
-// app/posts/[slug]/page.tsx
+// app/[slug]/page.tsx
 import MDXContent from '@/components/MDXContent'
 import { allPosts } from 'contentlayer/generated'
 import { notFound } from 'next/navigation'
@@ -156,7 +165,7 @@ import { notFound } from 'next/navigation'
 const PostPage = ({ params }: { params: { slug: string } }) => {
   const { slug } = params
 
-  const post = allPosts.find((post) => post.url === `/posts/${slug}`)
+  const post = allPosts.find((post) => post.url === `/${slug}`)
 
   // ...
 }
@@ -164,11 +173,11 @@ const PostPage = ({ params }: { params: { slug: string } }) => {
 export default PostPage
 ```
 
-`/posts/test` 페이지로 이동하면 작성한 mdx가 제대로 렌더링되고 있다.
+`/test` 페이지로 이동하면 작성한 mdx가 제대로 렌더링되고 있다.
 
 `post` 프로퍼티들을 하나씩 뜯어보면서 여러 정보를 추가하고 스타일링 할 수 있다.
 
-![/posts/test 페이지](/images/projects/01.png)
+![/test 페이지](/images/project/01.png)
 
 <hr />
 

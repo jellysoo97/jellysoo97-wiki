@@ -23,7 +23,8 @@ const ThemeSwitch = () => {
 
   return (
     <div>
-      {/* The current theme is: system */}
+      {/* server -> The current theme is: undefined */}
+      {/* client -> The current theme is: system */}
       The current theme is: {theme}
       <button onClick={() => setTheme('light')}>Light Mode</button>
       <button onClick={() => setTheme('dark')}>Dark Mode</button>
@@ -44,7 +45,7 @@ export default ThemeSwitch
 >
 > server HTML의 div 태그 내에 "system" 텍스트 노드와 매칭되는게 없다
 
-클라이언트에서 `{theme}`에 들어가는 텍스트 노드가 "system"인데 서버에서는 다른 값이 들어가고 있나보다.
+클라이언트에서 `{theme}`에 들어가는 텍스트 노드가 "system"인데 서버에서는 다른 값이 들어가고 있다.
 
 theme 초기 상태 다름 -> 다른 초기값에 따른 다른 HTML -> hydration error 발생이다.
 
@@ -60,7 +61,7 @@ ThemeProvider는 두 개의 상태를 관리한다.
 - `resolvedTheme`: 같은 활성화된 테마인데 시스템 테마를 사용할 경우에만 theme과 차이가 있다. 활성화된 테마가 system이면
   theme에는 "system"이, resolvedTheme에는 시스템에 설정된 테마가 "dark"인지 "light"인지 구체적으로 저장된다.
 
-두 값 모두 전역 상태 관리되고 있는 테마이다.
+결국 두 값 모두 전역 상태 관리되고 있는 테마이다.
 
 ThemeProvider 내부 로직은 다음과 같다.
 
@@ -71,7 +72,8 @@ ThemeProvider 내부 로직은 다음과 같다.
 5. 사용자가 테마를 바꾸면 그때마다 상태값 업데이트 후 로컬스토리지에 저장한다.
 
 서버에서는 Browser API 즉, 로컬스토리지를 사용할 수 없기 때문에 theme 초기값이 undefined가 된다.
-서버가 브라우저에 설정된 테마를 알 수 없다.
+로컬스토리지 값을 찾는 로직까지 가기전에 undefined를 early return한다.
+아무튼 서버는 브라우저에 설정된 테마를 알 수 없다.
 
 그리고 3-5단계는 서버에서는 실행이 안되고 클라이언트에서만 실행이 된다.
 해당 로직들이 `useEffect` 내부에 있어 컴포넌트가 마운트된 후에 theme이 다시 업데이트된다.
@@ -84,7 +86,11 @@ ThemeProvider 내부 로직은 다음과 같다.
 
 [공식문서](https://github.com/pacocoursey/next-themes?tab=readme-ov-file#avoid-hydration-mismatch)대로 클라이언트에서 페이지가 마운트된 이후에만 ThemeSwitch를 렌더링한다.
 
-테마 관련 커스텀 훅도 따로 만들었다.
+테마를 관리하는 커스텀 훅을 따로 만들었다.
+
+서버 & 페이지 마운트 이전에는 `resolvedTheme === undefined`이다.
+
+그리고 페이지 마운트 후에 테마값이 제대로 들어가면 다크모드인지 아닌지에 따라 아이콘을 조건부 렌더링한다.
 
 ```ts
 // hooks/use-switch-theme.ts
@@ -108,9 +114,9 @@ const useSwitchTheme = () => {
 export default useSwitchTheme
 ```
 
-서버 & 페이지 마운트 이전에는 resolvedTheme === undefined이다.
+서버에서는 `mounted === false`이고 아무것도 렌더링하지 않는다.
 
-그리고 페이지 마운트 후에 테마값이 제대로 들어가면 다크모드인지 아닌지에 따라 아이콘을 조건부 렌더링한다.
+클라이언트에서는 페이지 마운트 -> useEffect 실행, `mounted === true`로 바뀜 -> UI 렌더링 과정을 거친다.
 
 ```tsx {18-24}
 // components/ThemeSwitch.tsx
@@ -148,10 +154,6 @@ const ThemeSwitch = () => {
 export default ThemeSwitchㄴ
 ```
 
-서버에서는 `mounted === false`이고 아무것도 렌더링하지 않는다.
-
-클라이언트에서는 페이지 마운트 -> useEffect 실행, `mounted === true`로 바뀜 -> UI 렌더링 과정을 거친다.
-
 <hr />
 
-hydration에 대한 자세한 내용은 [여기로](/posts/fe/react/hydration)
+hydration에 대한 자세한 내용은 [여기로](/fe/react/hydration)
