@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { allCategories, menuTags } from '@/constants/posts'
+import { allCategories, mainTags } from '@/constants/posts'
 import { cn } from '@/utils/cn'
 
 const Sidebar = () => {
@@ -15,11 +15,11 @@ const Sidebar = () => {
         {allCategories.map((category) => (
           <ul key={category.value} className="flex flex-col gap-y-2">
             <Link href={category.url}>
-              {category.valueKR}{' '}
+              {category.label}{' '}
               <span className="text-size-small">({category.postCount})</span>
             </Link>
 
-            {menuTags
+            {mainTags
               .filter((tag) => tag.category === category.value)
               ?.map((tag) => {
                 const isCurrentPage = pathname.includes(tag.url)
@@ -35,7 +35,7 @@ const Sidebar = () => {
                     )}
                   >
                     <Link href={tag.url} className="block w-full">
-                      {tag.valueKR} ({tag.postCount})
+                      {tag.label} ({tag.postCount})
                     </Link>
                   </li>
                 )

@@ -4,8 +4,8 @@ import Link from 'next/link'
 import Badge from '@/components/common/Badge'
 import TimelinePost from '@/components/common/TimelinePost'
 import Title from '@/components/common/Title'
-import { CategoryEnum } from '@/constants/menus'
 import { allCategories, allSortedPosts, allTags } from '@/constants/posts'
+import { CategoryEnum } from '@/constants/tags'
 import { cn } from '@/utils/cn'
 import { DateFormatTypeEnum, formatDate } from '@/utils/format-date'
 
@@ -14,15 +14,15 @@ type Props = {
 }
 
 const PostListPage = ({ slug }: Props) => {
-  const [category, tag] = slug
+  const [category, mainTag] = slug
   const linkTags = [...allCategories, ...allTags]
   const posts: Post[] =
     category === CategoryEnum.All
       ? allSortedPosts
       : allSortedPosts.filter((post) =>
-          tag
-            ? (post.category === category && post.tags[0] === tag) ||
-              post.tags.includes(tag)
+          mainTag
+            ? (post.category === category && post.tags[0] === mainTag) ||
+              post.tags.includes(mainTag)
             : post.category === category
         )
 
@@ -33,9 +33,9 @@ const PostListPage = ({ slug }: Props) => {
         {linkTags.map((linkTag) => (
           <Link key={linkTag.value} href={linkTag.url}>
             <Badge
-              content={`#${linkTag.valueKR}`}
+              content={`#${linkTag.label}`}
               className={cn(
-                linkTag.url === `/posts/${slug.join('/')}` && 'bg-secondary'
+                linkTag.url === `/${slug.join('/')}` && 'bg-secondary'
               )}
             />
           </Link>

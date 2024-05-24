@@ -2,7 +2,12 @@ import { Post } from 'contentlayer/generated'
 
 import Title from '@/components/common/Title'
 import UnderlineLink from '@/components/common/UnderlineLink'
-import { CategoryEnum, categoryKR, TagEnum, tagKR } from '@/constants/menus'
+import {
+  CategoryEnum,
+  categoryLabel,
+  TagEnum,
+  tagLabel,
+} from '@/constants/tags'
 import { DateFormatTypeEnum, formatDate } from '@/utils/format-date'
 
 type Props = {
@@ -20,7 +25,7 @@ const PostHeader = ({ post }: Props) => {
           href={`/posts/${post.category}`}
           className="text-secondary text-size-small"
         >
-          #{categoryKR[post.category as CategoryEnum]}
+          #{categoryLabel[post.category as CategoryEnum]}
         </UnderlineLink>
         {post.tags.map((tag) => (
           <UnderlineLink
@@ -28,7 +33,7 @@ const PostHeader = ({ post }: Props) => {
             href={`/posts/${post.category}/${tag}`}
             className="text-secondary text-size-small"
           >
-            #{tagKR[tag as TagEnum]}
+            #{tagLabel[tag as TagEnum]}
           </UnderlineLink>
         ))}
       </div>

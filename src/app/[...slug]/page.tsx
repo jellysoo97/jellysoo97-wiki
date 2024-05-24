@@ -18,10 +18,10 @@ export async function generateStaticParams(): Promise<Props['params'][]> {
 }
 
 function getPostByParams(slug: string[]) {
-  const [category, tag, title] = slug
+  const [category, mainTag, title] = slug
 
   return allSortedPosts.find(
-    (post) => post.url === `/posts/${category}/${tag}/${title}`
+    (post) => post.url === `/${category}/${mainTag}/${title}`
   )
 }
 
