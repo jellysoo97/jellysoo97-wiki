@@ -22,7 +22,7 @@ const PostHeader = ({ post }: Props) => {
           {formatDate(post.date, DateFormatTypeEnum.DateOnlyWithDot)}
         </p>
         <UnderlineLink
-          href={`/posts/${post.category}`}
+          href={`/${post.category}`}
           className="text-secondary text-size-small"
         >
           #{categoryLabel[post.category as CategoryEnum]}
@@ -30,7 +30,7 @@ const PostHeader = ({ post }: Props) => {
         {post.tags.map((tag) => (
           <UnderlineLink
             key={tag}
-            href={`/posts/${post.category}/${tag}`}
+            href={`/${post.category}/${tag}`}
             className="text-secondary text-size-small"
           >
             #{tagLabel[tag as TagEnum]}

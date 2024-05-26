@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useMDXComponent } from 'next-contentlayer/hooks'
-import { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 import { useTimeOut } from '@/hooks/use-time-out'
 
@@ -56,9 +56,18 @@ const pre = ({ children }: React.ComponentProps<'pre'>) => {
   )
 }
 
+const a = ({ children, ...props }: React.ComponentProps<'a'>) => {
+  return (
+    <a target="_blank" {...props}>
+      {children}
+    </a>
+  )
+}
+
 const MDXComponents = {
   img,
   pre,
+  a,
 }
 
 const MDXContent = ({ code }: Props) => {

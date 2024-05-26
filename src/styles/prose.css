@@ -3,7 +3,7 @@
 }
 
 .prose p {
-  @apply mt-0 mb-1;
+  @apply mt-0 mb-1 leading-8;
 }
 
 .prose p:has(img) {
