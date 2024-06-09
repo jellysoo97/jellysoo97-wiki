@@ -84,7 +84,7 @@ ThemeProvider 내부 로직은 다음과 같다.
 
 ## 해결방안
 
-[공식문서](https://github.com/pacocoursey/next-themes?tab=readme-ov-file#avoid-hydration-mismatch)대로 클라이언트에서 페이지가 마운트된 이후에만 ThemeSwitch를 렌더링한다.
+[공식문서](https://github.com/pacocoursey/next-themes?tab=readme-ov-file#avoid-hydration-mismatch)대로 클라이언트에서 페이지가 마운트된 이후에만 ThemeSwitch를 렌더링하는 방식으로 변경했다.
 
 테마를 관리하는 커스텀 훅을 따로 만들었다.
 
@@ -153,7 +153,3 @@ const ThemeSwitch = () => {
 
 export default ThemeSwitchㄴ
 ```
-
-<hr />
-
-hydration에 대한 자세한 내용은 [여기로](/fe/react/hydration)
