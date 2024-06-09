@@ -12,14 +12,14 @@ type Props = {
 
 const Tooltip = ({ children, position = 'top', content }: Props) => {
   const tooltipPosition: Record<Position, React.CSSProperties> = {
-    top: { top: '-24px', left: '-150%' },
+    top: { top: '-28px', left: '-150%' },
     right: { top: '0px', right: '0px' },
-    bottom: { bottom: '-24px', left: '-150%' },
+    bottom: { bottom: '0px', left: '0px' },
     left: { top: '0px', left: '0px' },
   }
 
   return (
-    <div className={'h-full group relative flex'}>
+    <div className={'inline-block h-full group relative'}>
       {children}
 
       {/* TODO: add border triangles */}
@@ -31,7 +31,7 @@ const Tooltip = ({ children, position = 'top', content }: Props) => {
           // TODO: 2. add position
           // {/* https://gist.github.com/ndpniraj/633474d23145499c5a3c39b017f43be4 */}
           `absolute`,
-          'px-[6px] py-1 bg-secondary rounded-md text-size-small z-30 whitespace-nowrap',
+          'px-[6px] py-1 bg-yellow rounded-md text-size-small z-30 whitespace-nowrap',
           'group-hover:block'
         )}
         style={tooltipPosition[position]}

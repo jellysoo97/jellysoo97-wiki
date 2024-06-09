@@ -31,7 +31,7 @@
 }
 
 .prose strong {
-  @apply text-primary font-serif-bold text-lg;
+  @apply text-primary font-serif-bold;
 }
 
 .prose ul {
@@ -102,5 +102,25 @@
   &::before,
   &::after {
     @apply content-none;
+  }
+}
+
+.prose thead {
+  @apply bg-secondary;
+
+  th {
+    @apply p-2;
+
+    &:first-child {
+      @apply border-r-[1px] border-r-neutral-300;
+    }
+  }
+}
+
+.prose tbody tr {
+  @apply border-b-[1px] border-b-neutral-300;
+
+  td:first-child {
+    @apply border-r-[1px] border-r-neutral-300;
   }
 }

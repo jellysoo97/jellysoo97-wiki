@@ -15,7 +15,14 @@ type Props = {
 }
 
 const img = ({ src, alt }: React.ComponentProps<'img'>) => {
-  return <Image src={src || ''} alt={alt || 'image'} fill objectFit="contain" />
+  return (
+    <Image
+      src={src || ''}
+      alt={alt || 'image'}
+      fill
+      style={{ objectFit: 'contain' }}
+    />
+  )
 }
 
 const pre = ({ children }: React.ComponentProps<'pre'>) => {
