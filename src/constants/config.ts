@@ -5,9 +5,10 @@ export const siteConfig = {
     name: 'jellysoo97',
     profile: '/images/about/profile.png',
     email: 'jellysoo97@gmail.com',
-    github: 'https://github.com/jellysoo97',
   },
   url: {
+    author: 'https://github.com/jellysoo97',
     github: 'https://github.com/jellysoo97/jellysoo97-wiki',
+    blog: 'https://jellysoo97-wiki.vercel.app/',
   },
 }
