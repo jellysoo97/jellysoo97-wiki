@@ -65,7 +65,7 @@
     @apply font-serif text-primary bg-primary text-size-base;
   }
 
-  ul li {
+  li {
     @apply pl-2 my-1;
   }
 }

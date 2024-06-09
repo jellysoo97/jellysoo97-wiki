@@ -12,7 +12,7 @@ type Props = {
 
 const Tooltip = ({ children, position = 'top', content }: Props) => {
   const tooltipPosition: Record<Position, React.CSSProperties> = {
-    top: { top: '-28px', left: '-150%' },
+    top: { bottom: '120%', left: '50%', transform: 'translateX(-50%)' },
     right: { top: '0px', right: '0px' },
     bottom: { bottom: '0px', left: '0px' },
     left: { top: '0px', left: '0px' },
@@ -31,7 +31,7 @@ const Tooltip = ({ children, position = 'top', content }: Props) => {
           // TODO: 2. add position
           // {/* https://gist.github.com/ndpniraj/633474d23145499c5a3c39b017f43be4 */}
           `absolute`,
-          'px-[6px] py-1 bg-yellow rounded-md text-size-small z-30 whitespace-nowrap',
+          'px-[6px] py-1 text-neutral-700 bg-yellow rounded-md text-size-small z-30 whitespace-nowrap',
           'group-hover:block'
         )}
         style={tooltipPosition[position]}
