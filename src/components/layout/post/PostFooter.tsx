@@ -25,7 +25,7 @@ const PostFooter = ({ post }: Props) => {
             <LeftChevronIcon className="text-secondary" />
             <div>
               <p className="text-size-small text-secondary">이전글</p>
-              <p>{prevPost.title}</p>
+              <p className="w-[250px]">{prevPost.title}</p>
             </div>
           </Link>
         ) : (
@@ -35,13 +35,15 @@ const PostFooter = ({ post }: Props) => {
           <Link href={nextPost.url} className="flex items-center gap-x-2">
             <div>
               <p className="text-size-small text-secondary">다음글</p>
-              <p>{nextPost.title}</p>
+              <p className="w-[250px]">{nextPost.title}</p>
             </div>
             <RightChevronIcon className="text-secondary" />
           </Link>
         )}
       </section>
-      <section>giscus</section>
+
+      {/* TODO: giscus */}
+      {/* <section>giscus</section> */}
     </>
   )
 }
