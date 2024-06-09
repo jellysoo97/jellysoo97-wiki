@@ -32,7 +32,7 @@ export default function HomePage() {
 
       {allCategories.length > 1 && (
         <section>
-          <Link href={`/posts/${CategoryEnum.All}`}>
+          <Link href={`/${CategoryEnum.All}`}>
             <p className="text-primary text-size-base px-2 py-1 bg-secondary mb-4">
               📌 &nbsp;{allCategories[0].label}&nbsp;(
               {allCategories[0].postCount})
