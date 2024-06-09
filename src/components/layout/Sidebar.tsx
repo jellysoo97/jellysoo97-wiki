@@ -3,8 +3,8 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { allCategories, mainTags } from '@/constants/posts'
 import { cn } from '@/utils/cn'
+import { getAllCategories, getMainTags } from '@/utils/posts'
 
 const Sidebar = () => {
   const pathname = usePathname()
@@ -12,14 +12,14 @@ const Sidebar = () => {
   return (
     <aside className="hidden md:block min-w-52 h-fit mr-4 bg-secondary">
       <div className="flex flex-col px-2 pt-2 pb-8 gap-y-2">
-        {allCategories.map((category) => (
+        {getAllCategories().map((category) => (
           <ul key={category.value} className="flex flex-col gap-y-2">
             <Link href={category.url}>
               {category.label}{' '}
               <span className="text-size-small">({category.postCount})</span>
             </Link>
 
-            {mainTags
+            {getMainTags()
               .filter((tag) => tag.category === category.value)
               ?.map((tag) => {
                 const isCurrentPage = pathname.includes(tag.url)

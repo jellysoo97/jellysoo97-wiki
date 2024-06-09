@@ -3,14 +3,14 @@ import Link from 'next/link'
 
 import LeftChevronIcon from '@/components/icons/LeftChevronIcon'
 import RightChevronIcon from '@/components/icons/RightChevronIcon'
-import { allSortedPosts } from '@/constants/posts'
+import { getAllSortedPosts } from '@/utils/posts'
 
 type Props = {
   post: Post
 }
 
 const PostFooter = ({ post }: Props) => {
-  const posts: Post[] = allSortedPosts.filter(
+  const posts: Post[] = getAllSortedPosts().filter(
     (elem) => elem.category === post.category && elem.tags[0] === post.tags[0]
   )
   const currentPostIndex = posts.indexOf(post)

@@ -5,14 +5,14 @@ import PostFooter from '@/components/layout/post/PostFooter'
 import PostHeader from '@/components/layout/post/PostHeader'
 import MDXContent from '@/components/posts/MDXContent'
 import PostListPage from '@/components/posts/PostListPage'
-import { allSortedPosts } from '@/constants/posts'
+import { getAllSortedPosts } from '@/utils/posts'
 
 type Props = {
   params: { slug: string[] }
 }
 
 export async function generateStaticParams(): Promise<Props['params'][]> {
-  return allSortedPosts.map((post) => ({
+  return getAllSortedPosts().map((post) => ({
     slug: post._raw.flattenedPath.split('/'),
   }))
 }
@@ -20,7 +20,7 @@ export async function generateStaticParams(): Promise<Props['params'][]> {
 function getPostByParams(slug: string[]) {
   const [category, mainTag, title] = slug
 
-  return allSortedPosts.find(
+  return getAllSortedPosts().find(
     (post) => post.url === `/${category}/${mainTag}/${title}`
   )
 }

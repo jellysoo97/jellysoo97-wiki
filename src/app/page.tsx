@@ -2,16 +2,18 @@ import Link from 'next/link'
 
 import BarGraph, { BarGraphData } from '@/components/common/BarGraph'
 import UnderlineLink from '@/components/common/UnderlineLink'
-import { allCategories, allSortedPosts, mainTags } from '@/constants/posts'
 import { CategoryEnum, DEFAULT_TAG_COLOR } from '@/constants/tags'
 import { calculatePercentage } from '@/utils/calculate-percentage'
+import { getAllCategories, getAllSortedPosts, getMainTags } from '@/utils/posts'
 
 export default function HomePage() {
+  const mainTags = getMainTags()
+  const allCategories = getAllCategories()
   const graphData: BarGraphData[] = mainTags.map((tag) => ({
     item: tag.label,
     percentage: calculatePercentage({
       value: tag.postCount || 0,
-      total: allSortedPosts.length,
+      total: getAllSortedPosts().length,
     }),
     color: tag.color || DEFAULT_TAG_COLOR,
   }))

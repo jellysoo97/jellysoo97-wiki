@@ -4,10 +4,10 @@ import Link from 'next/link'
 import Badge from '@/components/common/Badge'
 import Title from '@/components/common/Title'
 import PostTimeline from '@/components/posts/PostTimeline'
-import { allCategories, allSortedPosts, allTags } from '@/constants/posts'
 import { CategoryEnum } from '@/constants/tags'
 import { cn } from '@/utils/cn'
 import { DateFormatTypeEnum, formatDate } from '@/utils/format-date'
+import { getAllCategories, getAllSortedPosts, getAllTags } from '@/utils/posts'
 
 type Props = {
   slug: string[]
@@ -15,11 +15,11 @@ type Props = {
 
 const PostListPage = ({ slug }: Props) => {
   const [category, mainTag] = slug
-  const linkTags = [...allCategories, ...allTags]
+  const linkTags = [...getAllCategories(), ...getAllTags()]
   const posts: Post[] =
     category === CategoryEnum.All
-      ? allSortedPosts
-      : allSortedPosts.filter((post) =>
+      ? getAllSortedPosts()
+      : getAllSortedPosts().filter((post) =>
           mainTag
             ? (post.category === category && post.tags[0] === mainTag) ||
               post.tags.includes(mainTag)
