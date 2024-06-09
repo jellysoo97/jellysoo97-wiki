@@ -19,7 +19,10 @@ export type Tag = {
   category?: string
 }
 
-export const allSortedPosts: Post[] = sortPostsByDate(allPosts, true)
+export const allSortedPosts: Post[] = sortPostsByDate(
+  allPosts.filter((post) => !post.draft),
+  true
+)
 
 export const recentPosts: Post[] = allSortedPosts.slice(0, 5)
 
@@ -30,8 +33,8 @@ export const allCategories: Tag[] = Object.keys(CategoryEnum)
     label: categoryLabel[category as CategoryEnum],
     postCount:
       category === CategoryEnum.All
-        ? allPosts.length
-        : allPosts.filter((post) => post.category === category).length,
+        ? allSortedPosts.length
+        : allSortedPosts.filter((post) => post.category === category).length,
     url: `/${category}`,
   }))
   .filter((category) => category.postCount > 0)
@@ -39,7 +42,7 @@ export const allCategories: Tag[] = Object.keys(CategoryEnum)
 export const allTags: Tag[] = Object.keys(TagEnum)
   .map((key) => TagEnum[key as keyof typeof TagEnum])
   .map((tag) => {
-    const posts = allPosts.filter((post) => post.tags[0] === tag)
+    const posts = allSortedPosts.filter((post) => post.tags[0] === tag)
     const category = posts[0]?.category
 
     return {
