@@ -9,6 +9,6 @@ export const siteConfig = {
   url: {
     author: 'https://github.com/jellysoo97',
     github: 'https://github.com/jellysoo97/jellysoo97-wiki',
-    blog: 'https://jellysoo97-wiki.vercel.app/',
+    blog: 'https://jellysoo97-wiki.vercel.app',
   },
 }
