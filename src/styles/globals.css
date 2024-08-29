@@ -61,11 +61,7 @@
 
 @layer base {
   body {
-    @apply m-0 p-0 min-h-dvh relative layout-container;
-    @apply font-serif text-primary bg-primary text-size-base;
-  }
-
-  li {
-    @apply pl-2 my-1;
+    @apply relative m-0 p-0 layout-container;
+    @apply font-serif bg-primary text-primary text-size-base;
   }
 }
