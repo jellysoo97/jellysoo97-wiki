@@ -1,39 +1,27 @@
-import dayjs from 'dayjs'
+import { format } from 'date-fns'
 
 export enum DateFormatTypeEnum {
-  DateAndTime = 'YYYY-MM-DD HH:mm:ss',
-  DateOnly = 'YYYY-MM-DD',
-  DateOnlyWithDot = 'YYYY.MM.DD',
+  DateAndTime = 'yyyy-MM-dd HH:mm:ss',
+  DateOnly = 'yyyy-MM-dd',
+  DateOnlyWithDot = 'yyyy.MM.dd',
   TimeOnly = 'HH:mm:ss',
-  YearOnly = 'YYYY',
-  MonthAndDay = 'MM-DD',
-  MonthAndDayWithDot = 'MM.DD',
+  YearOnly = 'yyyy',
+  MonthAndDay = 'MM-dd',
+  MonthAndDayWithDot = 'MM.dd',
 }
 
-export const today = dayjs().format()
+export const today = new Date()
 
 export const formatDate = (
   inputDate: string | Date,
-  type?: DateFormatTypeEnum
+  type: DateFormatTypeEnum
 ) => {
-  const date = dayjs(inputDate)
+  const date = new Date(inputDate)
 
   switch (type) {
-    case DateFormatTypeEnum.DateAndTime:
-      return date.format(DateFormatTypeEnum.DateAndTime)
-    case DateFormatTypeEnum.DateOnly:
-      return date.format(DateFormatTypeEnum.DateOnly)
-    case DateFormatTypeEnum.DateOnlyWithDot:
-      return date.format(DateFormatTypeEnum.DateOnlyWithDot)
-    case DateFormatTypeEnum.TimeOnly:
-      return date.format(DateFormatTypeEnum.TimeOnly)
     case DateFormatTypeEnum.YearOnly:
-      return date.get('y')
-    case DateFormatTypeEnum.MonthAndDay:
-      return date.format(DateFormatTypeEnum.MonthAndDay)
-    case DateFormatTypeEnum.MonthAndDayWithDot:
-      return date.format(DateFormatTypeEnum.MonthAndDayWithDot)
+      return date.getFullYear()
     default:
-      return date.format(DateFormatTypeEnum.DateOnly)
+      return format(date, type)
   }
 }

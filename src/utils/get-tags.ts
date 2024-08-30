@@ -1,0 +1,16 @@
+import { IPost, ITag, TagEnum } from 'src/types'
+import { tagColor, tagLabel } from '../constants'
+
+export const getTags = (posts: IPost[]): ITag[] => {
+  let tags: Set<string> = new Set()
+
+  tags.add(TagEnum.All)
+  posts.forEach((post) => tags.add(post.metadata.tag))
+
+  return [...tags].map((tag) => ({
+    value: tag,
+    label: tagLabel[tag],
+    color: tagColor[tag],
+    postCount: posts.filter((post) => post.metadata.tag === tag).length,
+  }))
+}
