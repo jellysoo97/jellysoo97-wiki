@@ -1,13 +1,13 @@
 .prose {
-  @apply text-primary text-base;
+  @apply text-base text-primary;
 }
 
 .prose p {
-  @apply mt-0 mb-1 leading-8;
+  @apply mb-1 mt-0 leading-8;
 }
 
 .prose p:has(img) {
-  @apply relative inline-block overflow-hidden w-full aspect-video;
+  @apply relative inline-block aspect-video w-full overflow-hidden;
 }
 
 .prose img {
@@ -15,11 +15,11 @@
 }
 
 .prose h2 {
-  @apply px-2 py-1 mb-4 font-serif-bold text-primary text-2xl rounded-md bg-yellow-block-light dark:bg-yellow-block-dark;
+  @apply mb-4 rounded-md bg-yellow-block-light px-2 py-1 font-serif-bold text-2xl text-primary dark:bg-yellow-block-dark;
 }
 
 .prose h3 {
-  @apply font-serif-bold text-xl text-primary mb-4;
+  @apply mb-4 font-serif-bold text-xl text-primary;
 }
 
 .prose hr {
@@ -31,7 +31,7 @@
 }
 
 .prose strong {
-  @apply text-primary font-serif-bold;
+  @apply font-serif-bold text-primary;
 }
 
 .prose ul {
@@ -59,9 +59,8 @@
 }
 
 /* inline code */
-.prose code:not([data-language]) {
-  @apply font-serif text-red-500 dark:text-red-400;
-  @apply p-1 rounded-md bg-neutral-250 dark:bg-neutral-750;
+.prose p:has(code) code {
+  @apply rounded-md bg-neutral-250 px-1.5 py-1 dark:bg-neutral-750;
 
   &::before,
   &::after {
@@ -69,33 +68,37 @@
   }
 }
 
+.prose p:has(code) code span .sh__token--class,
+.prose p:has(code) code span .sh__token--sign,
+.prose p:has(code) code span .sh__token--property,
+.prose p:has(code) code span .sh__token--identifier,
+.prose p:has(code) code span .sh__token--string,
+.prose p:has(code) code span .sh__token--comment {
+  @apply text-base text-red-500 dark:text-red-400 !important;
+}
+
 /* code block */
-.prose div[data-rehype-pretty-code-fragment] pre {
-  counter-reset: line;
-  @apply bg-neutral-900;
+.prose pre:has(code) {
+  @apply m-0 my-2 overflow-x-auto bg-neutral-900;
 }
 
-.prose pre code span[data-line]::before {
-  counter-increment: line;
-  content: counter(line);
-  @apply inline-block text-right mr-3 w-4 text-neutral-400;
+.prose pre code {
+  counter-reset: sh-line-number;
 }
 
-.prose pre code span[data-highlighted-line] {
-  @apply bg-yellow-block-light border-l-2 border-yellow-400 dark:border-yellow-500;
+.prose pre code span {
+  @apply font-mono text-base leading-7;
 }
 
-.prose div[data-rehype-pretty-code-fragment] {
-  @apply w-full overflow-hidden rounded-lg my-6;
-
-  pre {
-    @apply overflow-x-auto m-0 p-2;
-  }
+.prose pre code .sh__line::before {
+  counter-increment: sh-line-number 1;
+  content: counter(sh-line-number);
+  @apply mr-4 text-right text-neutral-200;
 }
 
 .prose blockquote {
-  @apply border-l-4 border-yellow-400 dark:border-yellow-500 not-italic;
-  @apply bg-neutral-150 dark:bg-neutral-700 text-primary rounded-md p-4;
+  @apply border-l-4 border-yellow-400 not-italic dark:border-yellow-500;
+  @apply rounded-md bg-neutral-150 p-4 text-primary dark:bg-neutral-700;
 }
 
 .prose blockquote p {

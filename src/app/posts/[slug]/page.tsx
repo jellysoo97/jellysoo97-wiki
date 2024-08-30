@@ -5,6 +5,7 @@ import PostFooter from '@/components/posts/PostFooter'
 import PostHeader from '@/components/posts/PostHeader'
 import { getMdxData } from '@/utils/get-mdx-data'
 import { getMdxPostByUrl } from '@/utils/get-mdx-post-by-url'
+import CustomMDX from '@/components/common/CustomMDX'
 
 type Props = {
   params: { slug: string }
@@ -30,10 +31,12 @@ const PostPage = async ({ params }: Props) => {
   }
 
   return (
-    <div className="flex flex-col gap-y-4">
+    <div className="flex w-full flex-col gap-y-4">
       <PostHeader metadata={currentPost.metadata} />
       <Divider />
-      <section>{currentPost.content}</section>
+      <article className="prose prose-neutral dark:prose-dark w-full max-w-full py-4">
+        <CustomMDX content={currentPost.content} />
+      </article>
       <Divider />
       <PostFooter
         metadata={currentPost.metadata}
