@@ -21,7 +21,7 @@ const BarGraph = ({ data, width = 'w-full', height = 'h-2' }: Props) => {
 
   return (
     <div className="flex flex-col gap-y-3">
-      <div className={cn(width, height, 'flex', 'rounded-lg overflow-hidden')}>
+      <div className={cn(width, height, 'flex', 'overflow-hidden rounded-lg')}>
         {sortedData.map((data, index) => (
           <div
             key={data.item}
@@ -40,22 +40,17 @@ const BarGraph = ({ data, width = 'w-full', height = 'h-2' }: Props) => {
         ))}
       </div>
 
-      <ul className="flex flex-wrap items-center gap-2">
+      <ul className="flex flex-wrap items-center gap-3">
         {sortedData.map((data) => (
           <li key={data.item} className="flex items-center">
             <div
-              className={cn(
-                'w-3 h-3 rounded-full border border-neutral-300 dark:border-neutral-400',
-                'mr-1'
-              )}
+              className={cn('h-3 w-3 rounded-full', 'mr-1')}
               style={{ backgroundColor: data.color }}
             />
-            <div className="flex items-end">
-              <span className="text-size-small mr-1">{data.item}</span>
-              <span className="text-secondary text-xs">
-                {data.percentage.toFixed(1)}%
-              </span>
-            </div>
+            <span className="mr-1 text-size-small">{data.item}</span>
+            <span className="text-xs text-secondary">
+              {data.percentage.toFixed(1)}%
+            </span>
           </li>
         ))}
       </ul>
