@@ -2,8 +2,8 @@
 title: 02. 프로젝트 세팅하기
 description: dependencies 설치하고 configuration 설정하기
 date: 2024-01-20 16:08:26
-category: project
-tag: blog
+tag: project
+draft: true
 ---
 
 ## dependencies 설치
@@ -105,7 +105,7 @@ export const Post = defineDocumentType(() => ({
     description: { type: 'string', required: true },
     date: { type: 'date', required: true },
     category: { type: 'string', required: true },
-    tags: { type: 'list', of: { type: 'string' }, required: true },
+    tag: { type: 'list', of: { type: 'string' }, required: true },
   },
   // 각 파일의 메타 속성을 이용해서 가공한 필드들
   computedFields: {
@@ -150,7 +150,7 @@ export type Post = {
   description: string
   date: IsoDateTimeString
   category: string
-  tags: string[]
+  tag: string[]
   /** MDX file body */
   body: MDX
   url: string
@@ -175,7 +175,7 @@ title: '테스트'
 description: '테스트 글입니다'
 date: 2024-01-20 17:34:44
 category: 'category1'
-tags: ['tag1', 'tag2']
+tag: ['tag1', 'tag2']
 
 ---
 
