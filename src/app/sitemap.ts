@@ -1,17 +1,18 @@
 import { MetadataRoute } from 'next'
 
 import { siteConfig } from '@/constants/config'
-import { getAllSortedPosts } from '@/utils/posts'
+import { getMdxData } from '@/utils/get-mdx-data'
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const posts: MetadataRoute.Sitemap = getAllSortedPosts().map((post) => ({
-    url: `${siteConfig.url.blog}${post.url}`,
-    lastModified: post.date.split('T')[0],
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const { posts: originPosts } = await getMdxData()
+  const posts: MetadataRoute.Sitemap = originPosts.map((post) => ({
+    url: `${siteConfig.url.blog}${post.metadata.url}`,
+    lastModified: post.metadata.date.toISOString().split('T')[0],
     changeFrequency: 'daily',
     priority: 0.7,
   }))
 
-  const routes: MetadataRoute.Sitemap = ['', '/about'].map((route) => ({
+  const routes: MetadataRoute.Sitemap = ['', '/posts'].map((route) => ({
     url: `${siteConfig.url.blog}${route}`,
     lastModified: new Date().toISOString().split('T')[0],
     changeFrequency: 'daily',

@@ -1,65 +1,32 @@
-import Link from 'next/link'
-
 import BarGraph, { BarGraphData } from '@/components/common/BarGraph'
-import UnderlineLink from '@/components/common/UnderlineLink'
-import { CategoryEnum, DEFAULT_TAG_COLOR } from '@/constants/tags'
+import Title from '@/components/common/Title'
+import PostList from '@/components/posts/PostList'
 import { calculatePercentage } from '@/utils/calculate-percentage'
-import { getAllCategories, getAllSortedPosts, getMainTags } from '@/utils/posts'
+import { getMdxData } from '@/utils/get-mdx-data'
 
-export default function HomePage() {
-  const mainTags = getMainTags()
-  const allCategories = getAllCategories()
-  const graphData: BarGraphData[] = mainTags.map((tag) => ({
+import { DEFAULT_TAG_COLOR } from '../constants'
+
+export default async function HomePage() {
+  const { posts, tags } = await getMdxData()
+  const graphData: BarGraphData[] = tags.map((tag) => ({
     item: tag.label,
     percentage: calculatePercentage({
-      value: tag.postCount || 0,
-      total: getAllSortedPosts().length,
+      value: tag.postCount,
+      total: posts.length,
     }),
     color: tag.color || DEFAULT_TAG_COLOR,
   }))
 
   return (
-    <div className="w-full flex flex-col gap-y-8">
+    <div className="flex w-full flex-col gap-y-8">
       <section>
-        <div className="flex flex-col gap-y-2">
-          <UnderlineLink href={'/about'}>@jellysoo97</UnderlineLink>
-          <p className="text-size-small text-secondary mb-4">
-            배운걸 정리하거나 인사이트를 공유하는 저장소입니다.
-          </p>
-          <BarGraph data={graphData} />
-        </div>
+        <BarGraph data={graphData} />
       </section>
 
-      {allCategories.length > 1 && (
-        <section>
-          <Link href={`/${CategoryEnum.All}`}>
-            <p className="text-primary text-size-base px-2 py-1 bg-secondary mb-4">
-              📌 &nbsp;{allCategories[0].label}&nbsp;(
-              {allCategories[0].postCount})
-            </p>
-          </Link>
-          <div className="flex flex-col gap-4 md:grid grid-cols-2">
-            {allCategories.slice(1).map((category) => (
-              <div key={category.value} className="flex flex-col gap-y-2">
-                <h3 className="text-primary text-size-base px-2 py-1 bg-secondary cursor-default">
-                  📌 &nbsp;{category.label}&nbsp;({category.postCount})
-                </h3>
-                <ul>
-                  {mainTags
-                    .filter((tag) => tag.category === category.value)
-                    ?.map((tag) => (
-                      <li key={tag.value} className="mb-2">
-                        <UnderlineLink href={tag.url}>
-                          {tag.label}
-                        </UnderlineLink>
-                      </li>
-                    ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
+      <section className="flex flex-col gap-y-3">
+        <Title>Posts</Title>
+        <PostList posts={posts} tags={tags} />
+      </section>
     </div>
   )
 }

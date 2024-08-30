@@ -17,15 +17,11 @@ export default function RootLayout({ children }: Props) {
       <body>
         <NextThemeProvider>
           <Header />
-
           <Divider />
-
           <main className="min-h-[var(--height-main)] flex py-8">
             {children}
           </main>
-
           <Divider />
-
           <Footer />
         </NextThemeProvider>
       </body>

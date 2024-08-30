@@ -1,38 +1,18 @@
-export enum CategoryEnum {
-  All = 'all',
-  Fe = 'fe',
-  Development = 'development',
-  Project = 'project',
-}
+import { TagEnum } from 'src/types'
 
-export enum TagEnum {
-  // fe
-  JavaScript = 'javascript',
-  // development
-  TroubleShooting = 'troubleshooting',
-  // project
-  Blog = 'blog',
-}
-
-export const categoryLabel: Record<CategoryEnum, string> = {
-  [CategoryEnum.All]: '전체글',
-  [CategoryEnum.Fe]: 'FE',
-  [CategoryEnum.Development]: 'Development',
-  [CategoryEnum.Project]: '프로젝트',
-}
-
-export const tagLabel: Record<TagEnum, string> = {
+export const tagLabel: Record<string, string> = {
+  [TagEnum.All]: '전체글',
   [TagEnum.JavaScript]: 'JavaScript',
-  [TagEnum.Blog]: '블로그 개발',
   [TagEnum.TroubleShooting]: '트러블슈팅',
+  [TagEnum.Project]: '프로젝트',
 }
 
 export const DEFAULT_TAG_COLOR = '#e34c26'
 
-export const tagColor: Record<TagEnum, string> = {
+export const tagColor: Record<string, string> = {
   [TagEnum.JavaScript]: '#F0DB4F',
-  [TagEnum.Blog]: '#f472b6',
   [TagEnum.TroubleShooting]: DEFAULT_TAG_COLOR,
+  [TagEnum.Project]: '#f472b6',
   // [TagEnum.Nextjs]: '#000000',
   // [TagEnum.ModernJavascriptDeepDive]: '',
   // [TagEnum.Css]: '#563d7c',

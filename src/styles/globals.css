@@ -45,6 +45,16 @@
     --block-yellow: #f7be6833;
     --block-yellow-dark: #f0bb6c24;
 
+    --sh-class: #6366f1;
+    --sh-identifier: #eab308;
+    --sh-sign: #8996a3;
+    --sh-property: #3b82f6;
+    --sh-entity: #249a97;
+    --sh-jsxliterals: #d9f99d;
+    --sh-string: #00a99a;
+    --sh-keyword: #f47067;
+    --sh-comment: #a19595;
+
     /* fonts */
     --font-serif: 'Gowun Batang';
     --font-serif-bold: 'Gowun Batang Bold';
@@ -61,11 +71,7 @@
 
 @layer base {
   body {
-    @apply m-0 p-0 min-h-dvh relative layout-container;
-    @apply font-serif text-primary bg-primary text-size-base;
-  }
-
-  li {
-    @apply pl-2 my-1;
+    @apply relative m-0 p-0 layout-container;
+    @apply font-serif bg-primary text-primary text-size-base;
   }
 }

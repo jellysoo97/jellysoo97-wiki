@@ -1,7 +1,9 @@
+import { cn } from '@/utils/cn'
+
 const CheckIcon = ({ className, ...props }: React.ComponentProps<'svg'>) => {
   return (
     <svg
-      className={className}
+      className={cn(['w-6 h-6', className])}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

@@ -1,5 +1,7 @@
 import type { Config } from 'tailwindcss'
+import plugin from 'tailwindcss/plugin'
 import { fontFamily } from 'tailwindcss/defaultTheme'
+import typography from '@tailwindcss/typography'
 
 const config: Config = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
@@ -41,8 +43,8 @@ const config: Config = {
     typography: ['dark'],
   },
   plugins: [
-    require('@tailwindcss/typography'),
-    ({ addUtilities }: Partial<Config>) => {
+    typography,
+    plugin(({ addUtilities }) =>
       addUtilities({
         // colors
         '.bg-primary': { '@apply bg-neutral-100 dark:bg-neutral-800': '' },
@@ -97,7 +99,7 @@ const config: Config = {
           '@apply my-1': '',
         },
       })
-    },
+    ),
   ],
 }
 export default config

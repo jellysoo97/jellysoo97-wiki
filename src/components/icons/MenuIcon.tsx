@@ -1,9 +1,11 @@
 import React from 'react'
 
+import { cn } from '@/utils/cn'
+
 const MenuIcon = ({ className, ...props }: React.ComponentProps<'svg'>) => {
   return (
     <svg
-      className={className}
+      className={cn(['w-6 h-6', className])}
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
