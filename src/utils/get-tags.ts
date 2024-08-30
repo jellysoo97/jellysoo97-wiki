@@ -1,8 +1,8 @@
-import { IPost, ITag, TagEnum } from 'src/types'
+import { IPost, TagEnum } from 'src/types'
 import { tagColor, tagLabel } from '../constants'
 
-export const getTags = (posts: IPost[]): ITag[] => {
-  let tags: Set<string> = new Set()
+export const getTags = (posts: IPost[]) => {
+  const tags: Set<string> = new Set()
 
   tags.add(TagEnum.All)
   posts.forEach((post) => tags.add(post.metadata.tag))

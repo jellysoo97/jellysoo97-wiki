@@ -1,14 +1,13 @@
 'use client'
 
 import { siteConfig } from '@/constants/config'
-import { DateFormatTypeEnum, formatDate, today } from '@/utils/format-date'
-import IconButton from '../common/IconButton'
-import EmailIcon from '../icons/EmailIcon'
 import { useCopy } from '@/hooks/use-copy'
-import Tooltip from '../common/Tooltip'
+import { DateFormatTypeEnum, formatDate, today } from '@/utils/format-date'
 import Link from 'next/link'
-import GithubIcon from '../icons/GithubIcon'
+import IconButton from '../common/IconButton'
 import CheckIcon from '../icons/CheckIcon'
+import EmailIcon from '../icons/EmailIcon'
+import GithubIcon from '../icons/GithubIcon'
 
 const Footer = () => {
   const { isCopied, handleCopy } = useCopy()

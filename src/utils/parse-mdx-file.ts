@@ -10,7 +10,7 @@ export const parseMdxFile = (fileName: string): IPost => {
   const frontmatterRegex = /---\s*([\s\S]*?)\s*---/
   const frontmatterLines = frontmatterRegex.exec(raw)![1].trim().split('\n')
   const content = raw.replace(frontmatterRegex, '').trim()
-  let metadata: IMetadata = {} as IMetadata
+  const metadata: IMetadata = {} as IMetadata
 
   frontmatterLines.forEach((line) => {
     const [key, value] = line.split(': ')
