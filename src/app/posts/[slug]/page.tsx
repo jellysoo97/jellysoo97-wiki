@@ -1,9 +1,10 @@
+import { notFound } from 'next/navigation'
+
 import Divider from '@/components/common/Divider'
 import PostFooter from '@/components/posts/PostFooter'
 import PostHeader from '@/components/posts/PostHeader'
 import { getMdxData } from '@/utils/get-mdx-data'
 import { getMdxPostByUrl } from '@/utils/get-mdx-post-by-url'
-import { notFound } from 'next/navigation'
 
 type Props = {
   params: { slug: string }

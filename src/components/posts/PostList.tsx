@@ -2,9 +2,11 @@
 
 import { useMemo, useState } from 'react'
 import { IPost, ITag, TagEnum } from 'src/types'
-import Badge from '../common/Badge'
+
 import { cn } from '@/utils/cn'
 import { DateFormatTypeEnum, formatDate } from '@/utils/format-date'
+
+import Badge from '../common/Badge'
 import PostTimeline from './PostTimeline'
 
 type Props = {

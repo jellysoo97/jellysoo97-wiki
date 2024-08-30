@@ -1,6 +1,7 @@
+import { IMetadata } from 'src/types'
+
 import Title from '@/components/common/Title'
 import { DateFormatTypeEnum, formatDate } from '@/utils/format-date'
-import { IMetadata } from 'src/types'
 
 type Props = {
   metadata: IMetadata

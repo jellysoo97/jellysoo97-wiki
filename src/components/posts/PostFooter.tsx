@@ -1,8 +1,8 @@
 import Link from 'next/link'
+import { IMetadata, IPost } from 'src/types'
 
 import LeftChevronIcon from '@/components/icons/LeftChevronIcon'
 import RightChevronIcon from '@/components/icons/RightChevronIcon'
-import { IMetadata, IPost } from 'src/types'
 
 type Props = {
   metadata: IMetadata

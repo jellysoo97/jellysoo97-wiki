@@ -1,4 +1,5 @@
 import { useState } from 'react'
+
 import { useTimeOut } from './use-time-out'
 
 export const useCopy = () => {

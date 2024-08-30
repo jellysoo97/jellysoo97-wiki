@@ -1,9 +1,11 @@
 'use client'
 
+import Link from 'next/link'
+
 import { siteConfig } from '@/constants/config'
 import { useCopy } from '@/hooks/use-copy'
 import { DateFormatTypeEnum, formatDate, today } from '@/utils/format-date'
-import Link from 'next/link'
+
 import IconButton from '../common/IconButton'
 import CheckIcon from '../icons/CheckIcon'
 import EmailIcon from '../icons/EmailIcon'

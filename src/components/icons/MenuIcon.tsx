@@ -1,5 +1,6 @@
-import { cn } from '@/utils/cn'
 import React from 'react'
+
+import { cn } from '@/utils/cn'
 
 const MenuIcon = ({ className, ...props }: React.ComponentProps<'svg'>) => {
   return (

@@ -1,8 +1,8 @@
 import Link from 'next/link'
+import { IMetadata } from 'src/types'
 
 import { cn } from '@/utils/cn'
 import { DateFormatTypeEnum, formatDate } from '@/utils/format-date'
-import { IMetadata } from 'src/types'
 
 type Props = {
   metadata: IMetadata

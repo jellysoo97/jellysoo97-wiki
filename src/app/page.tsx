@@ -3,6 +3,7 @@ import Title from '@/components/common/Title'
 import PostList from '@/components/posts/PostList'
 import { calculatePercentage } from '@/utils/calculate-percentage'
 import { getMdxData } from '@/utils/get-mdx-data'
+
 import { DEFAULT_TAG_COLOR } from '../constants'
 
 export default async function HomePage() {

@@ -1,4 +1,5 @@
 import { IPost, TagEnum } from 'src/types'
+
 import { tagColor, tagLabel } from '../constants'
 
 export const getTags = (posts: IPost[]) => {
