@@ -7,6 +7,7 @@ import { getMdxData } from '@/utils/get-mdx-data'
 import { DEFAULT_TAG_COLOR } from '../constants'
 
 export default async function HomePage() {
+  // https://stackoverflow.com/questions/64926174/module-not-found-cant-resolve-fs-in-next-js-application
   const { posts, tags } = await getMdxData()
   const graphData: BarGraphData[] = tags.map((tag) => ({
     item: tag.label,
