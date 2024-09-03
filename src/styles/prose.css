@@ -101,7 +101,30 @@
   @apply rounded-md bg-neutral-150 p-4 text-primary dark:bg-neutral-700;
 }
 
-.prose blockquote p {
+.prose li:has(code) code {
+  @apply rounded-md bg-neutral-250 px-1.5 py-1 dark:bg-neutral-750;
+
+  &::before,
+  &::after {
+    @apply content-none;
+  }
+}
+
+.prose li:has(code) code span .sh__token--class,
+.prose li:has(code) code span .sh__token--sign,
+.prose li:has(code) code span .sh__token--property,
+.prose li:has(code) code span .sh__token--identifier,
+.prose li:has(code) code span .sh__token--string,
+.prose li:has(code) code span .sh__token--comment {
+  @apply text-base text-red-500 dark:text-red-400 !important;
+}
+
+.prose
+  :where(blockquote code):not(
+    :where([class~='not-prose'], [class~='not-prose'] *)
+  ) {
+  @apply text-base text-red-500 dark:text-red-400;
+
   &::before,
   &::after {
     @apply content-none;
