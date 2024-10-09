@@ -2,6 +2,7 @@ import { IMetadata } from 'src/types'
 
 import Title from '@/components/common/Title'
 import { DateFormatTypeEnum, formatDate } from '@/utils/format-date'
+import { tagLabel } from '@/constants/index'
 
 type Props = {
   metadata: IMetadata
@@ -16,7 +17,9 @@ const PostHeader = ({ metadata }: Props) => {
         </p>
       </div>
 
-      <Title>{metadata.title}</Title>
+      <Title>
+        [{tagLabel[metadata.tag]}] {metadata.title}
+      </Title>
       <p className="text-secondary text-size-small">{metadata.description}</p>
     </div>
   )

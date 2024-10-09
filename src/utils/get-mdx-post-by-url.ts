@@ -6,8 +6,8 @@ export const getMdxPostByUrl = async (url: string) => {
   const sameTagPosts = posts.filter(
     (post) => post.metadata.tag === currentPost?.metadata.tag
   )
-  const prevPost = posts[sameTagPosts.indexOf(currentPost!) - 1] || null
-  const nextPost = posts[sameTagPosts.indexOf(currentPost!) + 1] || null
+  const prevPost = posts[sameTagPosts.indexOf(currentPost!) + 1] || null
+  const nextPost = posts[sameTagPosts.indexOf(currentPost!) - 1] || null
 
   return { currentPost, prevPost, nextPost }
 }

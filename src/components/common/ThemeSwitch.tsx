@@ -21,7 +21,7 @@ const ThemeSwitch = () => {
 
   return (
     <IconButton onClick={switchTheme}>
-      <ThemeIcon isDarkTheme={isDarkTheme} className="w-5 h-5 text-yellow" />
+      <ThemeIcon isDarkTheme={isDarkTheme} className="h-5 w-5 text-yellow" />
     </IconButton>
   )
 }

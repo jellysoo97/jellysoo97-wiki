@@ -3,6 +3,7 @@ import { IMetadata } from 'src/types'
 
 import { cn } from '@/utils/cn'
 import { DateFormatTypeEnum, formatDate } from '@/utils/format-date'
+import { tagLabel } from '@/constants/index'
 
 type Props = {
   metadata: IMetadata
@@ -48,7 +49,9 @@ const PostTimeline = ({ metadata, year, isLastPostOfYear }: Props) => {
           <p className="text-secondary text-size-small">
             {formatDate(metadata.date, DateFormatTypeEnum.MonthAndDayWithDot)}
           </p>
-          <p className="text-size-base">{metadata.title}</p>
+          <p className="text-size-base">
+            [{tagLabel[metadata.tag]}] {metadata.title}
+          </p>
         </Link>
       </div>
     </li>

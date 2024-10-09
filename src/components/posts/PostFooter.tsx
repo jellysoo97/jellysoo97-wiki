@@ -3,6 +3,7 @@ import { IMetadata, IPost } from 'src/types'
 
 import LeftChevronIcon from '@/components/icons/LeftChevronIcon'
 import RightChevronIcon from '@/components/icons/RightChevronIcon'
+import { tagLabel } from '@/constants/index'
 
 type Props = {
   metadata: IMetadata
@@ -22,7 +23,9 @@ const PostFooter = ({ metadata, prevPost, nextPost }: Props) => {
             <LeftChevronIcon className="text-secondary" />
             <div>
               <p className="text-secondary text-size-small">이전글</p>
-              <p className="w-[250px]">{prevPost.metadata.title}</p>
+              <p className="w-[250px]">
+                [{tagLabel[prevPost.metadata.tag]}] {prevPost.metadata.title}
+              </p>
             </div>
           </Link>
         ) : (
@@ -33,9 +36,11 @@ const PostFooter = ({ metadata, prevPost, nextPost }: Props) => {
             href={nextPost.metadata.url}
             className="flex items-center gap-x-2"
           >
-            <div>
+            <div className="text-right">
               <p className="text-secondary text-size-small">다음글</p>
-              <p className="w-[250px]">{nextPost.metadata.title}</p>
+              <p className="w-[250px]">
+                [{tagLabel[nextPost.metadata.tag]}] {nextPost.metadata.title}
+              </p>
             </div>
             <RightChevronIcon className="text-secondary" />
           </Link>
