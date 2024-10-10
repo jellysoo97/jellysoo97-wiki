@@ -14,7 +14,7 @@ export interface ITag {
   color: string
 }
 
-export interface IMetadata {
+export interface IFrontmatter {
   title: string
   description: string
   date: Date
@@ -25,6 +25,6 @@ export interface IMetadata {
 }
 
 export interface IPost {
-  metadata: IMetadata
+  frontmatter: IFrontmatter
   content: string
 }
