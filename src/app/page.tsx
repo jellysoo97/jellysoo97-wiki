@@ -27,6 +27,10 @@ export async function generateMetadata(): Promise<Metadata> {
       url: url.blog,
       images: [DEFAULT_IMAGE],
     },
+    // https://nextjs.org/docs/app/api-reference/functions/generate-metadata#verification
+    verification: {
+      google: 'T0o_UVusJmu1IYqZ8sLjUxVXUYhSgiAycDrv4laE_wQ',
+    },
   }
 }
 
@@ -48,7 +52,6 @@ export default async function HomePage() {
       <section>
         <BarGraph data={graphData} />
       </section>
-
       <section className="flex flex-col gap-y-3">
         <Title>Posts</Title>
         <PostList posts={posts} tags={tags} />
