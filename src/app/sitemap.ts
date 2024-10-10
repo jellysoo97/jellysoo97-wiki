@@ -12,7 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: route === '' ? 1 : 0.8,
   }))
   const postSitemap: MetadataRoute.Sitemap = posts.map((post) => ({
-    url: `${siteConfig.url.blog}${post.frontmatter.url}`,
+    url: `${siteConfig.url.blog}/posts/${post.frontmatter.url}`,
     lastModified: post.frontmatter.date.toISOString().split('T')[0],
     changeFrequency: 'daily',
     priority: 0.7,
