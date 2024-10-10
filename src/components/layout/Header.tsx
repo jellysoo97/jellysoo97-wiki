@@ -2,11 +2,11 @@ import Link from 'next/link'
 
 import { siteConfig } from '@/constants/config'
 
+import Image from 'next/image'
+import logo from '../../../public/images/logo.png'
 import ThemeSwitch from '../common/ThemeSwitch'
 import Title from '../common/Title'
 import GithubIcon from '../icons/GithubIcon'
-import Image from 'next/image'
-import logo from '../../../public/images/logo.png'
 
 const Header = () => {
   return (

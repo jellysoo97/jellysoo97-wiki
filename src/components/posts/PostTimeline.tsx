@@ -1,19 +1,19 @@
 import Link from 'next/link'
-import { IMetadata } from 'src/types'
+import { IFrontmatter } from 'src/types'
 
+import { tagLabel } from '@/constants/index'
 import { cn } from '@/utils/cn'
 import { DateFormatTypeEnum, formatDate } from '@/utils/format-date'
-import { tagLabel } from '@/constants/index'
 
 type Props = {
-  metadata: IMetadata
+  frontmatter: IFrontmatter
   year: number | string
   isLastPostOfYear: boolean
 }
 
-const PostTimeline = ({ metadata, year, isLastPostOfYear }: Props) => {
+const PostTimeline = ({ frontmatter, year, isLastPostOfYear }: Props) => {
   return (
-    <li key={metadata.url} className="relative my-0 pl-16">
+    <li key={frontmatter.url} className="relative my-0 pl-16">
       {/* TODO:  */}
       {/* https://tailwindcss.com/docs/content#referencing-an-attribute-value */}
       {/* issue: before:content-[${year}] not working */}
@@ -45,12 +45,18 @@ const PostTimeline = ({ metadata, year, isLastPostOfYear }: Props) => {
           'before:absolute before:-left-[6px] before:top-[6px]'
         )}
       >
-        <Link href={metadata.url} className="flex items-baseline gap-x-2">
+        <Link
+          href={`/posts/${frontmatter.url}`}
+          className="flex items-baseline gap-x-2"
+        >
           <p className="text-secondary text-size-small">
-            {formatDate(metadata.date, DateFormatTypeEnum.MonthAndDayWithDot)}
+            {formatDate(
+              frontmatter.date,
+              DateFormatTypeEnum.MonthAndDayWithDot
+            )}
           </p>
           <p className="text-size-base">
-            [{tagLabel[metadata.tag]}] {metadata.title}
+            [{tagLabel[frontmatter.tag]}] {frontmatter.title}
           </p>
         </Link>
       </div>

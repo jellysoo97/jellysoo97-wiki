@@ -21,7 +21,7 @@ const PostList = ({ posts, tags }: Props) => {
     () =>
       currentTag === TagEnum.All
         ? posts
-        : posts.filter((post) => post.metadata.tag === currentTag),
+        : posts.filter((post) => post.frontmatter.tag === currentTag),
     [currentTag]
   )
 
@@ -39,16 +39,16 @@ const PostList = ({ posts, tags }: Props) => {
       </div>
 
       <ul>
-        {tagPosts.map(({ metadata }, index) => {
+        {tagPosts.map(({ frontmatter }, index) => {
           const currentPostYear = formatDate(
-            metadata.date,
+            frontmatter.date,
             DateFormatTypeEnum.YearOnly
           )
           const prevPostYear =
             index === 0
               ? currentPostYear
               : formatDate(
-                  tagPosts[index - 1].metadata.date,
+                  tagPosts[index - 1].frontmatter.date,
                   DateFormatTypeEnum.YearOnly
                 )
           const isLastPostOfYear =
@@ -56,8 +56,8 @@ const PostList = ({ posts, tags }: Props) => {
 
           return (
             <PostTimeline
-              key={metadata.title}
-              metadata={metadata}
+              key={frontmatter.title}
+              frontmatter={frontmatter}
               year={currentPostYear}
               isLastPostOfYear={isLastPostOfYear}
             />

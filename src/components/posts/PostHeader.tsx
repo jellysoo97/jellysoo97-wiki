@@ -1,26 +1,28 @@
-import { IMetadata } from 'src/types'
+import { IFrontmatter } from 'src/types'
 
 import Title from '@/components/common/Title'
-import { DateFormatTypeEnum, formatDate } from '@/utils/format-date'
 import { tagLabel } from '@/constants/index'
+import { DateFormatTypeEnum, formatDate } from '@/utils/format-date'
 
 type Props = {
-  metadata: IMetadata
+  frontmatter: IFrontmatter
 }
 
-const PostHeader = ({ metadata }: Props) => {
+const PostHeader = ({ frontmatter }: Props) => {
   return (
     <div className="flex flex-col gap-y-2">
       <div className="flex items-center gap-x-1">
         <p className="mr-2 text-secondary text-size-small">
-          {formatDate(metadata.date, DateFormatTypeEnum.DateOnlyWithDot)}
+          {formatDate(frontmatter.date, DateFormatTypeEnum.DateOnlyWithDot)}
         </p>
       </div>
 
       <Title>
-        [{tagLabel[metadata.tag]}] {metadata.title}
+        [{tagLabel[frontmatter.tag]}] {frontmatter.title}
       </Title>
-      <p className="text-secondary text-size-small">{metadata.description}</p>
+      <p className="text-secondary text-size-small">
+        {frontmatter.description}
+      </p>
     </div>
   )
 }
