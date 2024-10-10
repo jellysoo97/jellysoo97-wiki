@@ -5,7 +5,7 @@ import remarkGfm from 'remark-gfm'
 import { highlight } from 'sugar-high'
 
 type Props = {
-  content: string
+  source: string
 }
 
 function CustomLink(props: React.ComponentProps<'a'>) {
@@ -27,17 +27,6 @@ function CustomImg(props: React.ComponentProps<'img'>) {
   return <img className="mx-auto" {...props} />
 }
 
-function CustomTable(props: React.ComponentProps<'table'>) {
-  return (
-    <table>
-      <thead>
-        <tr></tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  )
-}
-
 function createHeading(level: number) {
   return ({ children }: React.ComponentProps<'h2'>) =>
     React.createElement(`h${level}`, {}, children)
@@ -49,7 +38,6 @@ const components = {
   a: CustomLink,
   code: CustomCode,
   img: CustomImg,
-  // table: CustomTable,
 }
 
 const options: SerializeOptions = {
@@ -58,10 +46,8 @@ const options: SerializeOptions = {
   },
 }
 
-function CustomMDX({ content }: Props) {
-  return (
-    <MDXRemote source={content} components={components} options={options} />
-  )
+function CustomMDX({ source }: Props) {
+  return <MDXRemote source={source} components={components} options={options} />
 }
 
 export default CustomMDX
