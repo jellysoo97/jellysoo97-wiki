@@ -31,7 +31,7 @@
 }
 
 .prose strong {
-  @apply font-serif-bold text-primary;
+  @apply font-serif-bold underline underline-offset-2 text-primary;
 }
 
 .prose ul {
@@ -60,12 +60,16 @@
 
 /* inline code */
 .prose p:has(code) code {
-  @apply rounded-md bg-neutral-250 px-1.5 py-1 dark:bg-neutral-750;
+  @apply rounded-md bg-neutral-200 px-1.5 py-1 font-serif dark:bg-neutral-750;
 
   &::before,
   &::after {
     @apply content-none;
   }
+}
+
+.prose p:has(img) {
+  @apply aspect-auto;
 }
 
 .prose p:has(code) code span .sh__token--class,
@@ -101,7 +105,40 @@
   @apply rounded-md bg-neutral-150 p-4 text-primary dark:bg-neutral-700;
 }
 
-.prose blockquote p {
+.prose
+  :where(blockquote p:first-of-type):not(
+    :where([class~='not-prose'], [class~='not-prose'] *)
+  ) {
+  &::before,
+  &::after {
+    @apply content-none !important;
+  }
+}
+
+.prose li:has(code) code {
+  @apply rounded-md bg-neutral-200 px-1.5 py-1 dark:bg-neutral-750;
+
+  &::before,
+  &::after {
+    @apply content-none;
+  }
+}
+
+.prose li:has(code) code span .sh__token--class,
+.prose li:has(code) code span .sh__token--sign,
+.prose li:has(code) code span .sh__token--property,
+.prose li:has(code) code span .sh__token--identifier,
+.prose li:has(code) code span .sh__token--string,
+.prose li:has(code) code span .sh__token--comment {
+  @apply text-base text-red-500 dark:text-red-400 !important;
+}
+
+.prose
+  :where(blockquote code):not(
+    :where([class~='not-prose'], [class~='not-prose'] *)
+  ) {
+  @apply text-base text-red-500 dark:text-red-400;
+
   &::before,
   &::after {
     @apply content-none;
@@ -109,21 +146,21 @@
 }
 
 .prose thead {
-  @apply bg-secondary;
+  @apply bg-neutral-150 dark:bg-neutral-700;
+}
 
-  th {
-    @apply p-2;
+.prose thead tr th {
+  @apply border-b-[1px] border-r-[1px] border-t-[1px] border-b-neutral-300 border-r-neutral-300 border-t-neutral-300 p-2 text-secondary dark:border-b-neutral-500 dark:border-r-neutral-500 dark:border-t-neutral-500;
 
-    &:first-child {
-      @apply border-r-[1px] border-r-neutral-300;
-    }
+  &:last-child {
+    @apply border-r-0;
   }
 }
 
-.prose tbody tr {
-  @apply border-b-[1px] border-b-neutral-300;
+.prose tbody tr td {
+  @apply border-b-[1px] border-r-[1px] border-b-neutral-300 border-r-neutral-300 p-2 text-secondary dark:border-b-neutral-500 dark:border-r-neutral-500;
 
-  td:first-child {
-    @apply border-r-[1px] border-r-neutral-300;
+  &:last-child {
+    @apply border-r-0;
   }
 }

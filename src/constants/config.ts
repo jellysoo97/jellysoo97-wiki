@@ -1,6 +1,6 @@
 export const siteConfig = {
   title: 'jellysoo97.wiki',
-  description: '',
+  description: '배운 것을 정리하고, 인사이트를 공유하는 공간입니다.',
   author: {
     name: 'jellysoo97',
     profile: '/images/about/profile.png',

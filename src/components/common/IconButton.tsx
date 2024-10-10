@@ -13,7 +13,7 @@ const IconButton = ({
       {...props}
       type={type}
       className={cn(
-        'flex w-8 h-8 justify-center items-center p-1',
+        'flex h-8 w-8 items-center justify-center p-1',
         'scale-sm',
         className
       )}

@@ -5,14 +5,14 @@
 @import 'prose.css';
 
 @font-face {
-  font-family: 'Gowun Batang';
-  src: url('../../public/fonts/GowunBatang-Regular.woff') format('woff');
+  font-family: 'SCDream';
+  src: url('../../public/fonts/SCDream3.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Gowun Batang Bold';
-  src: url('../../public/fonts/GowunBatang-Bold.woff') format('woff');
+  font-family: 'SCDream Bold';
+  src: url('../../public/fonts/SCDream5.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -42,8 +42,8 @@
     --neutral-800: #262626;
     --neutral-900: #171717;
 
-    --block-yellow: #f7be6833;
-    --block-yellow-dark: #f0bb6c24;
+    --block-yellow: #f7be6850;
+    --block-yellow-dark: #f7be6824;
 
     --sh-class: #6366f1;
     --sh-identifier: #eab308;
@@ -56,8 +56,8 @@
     --sh-comment: #a19595;
 
     /* fonts */
-    --font-serif: 'Gowun Batang';
-    --font-serif-bold: 'Gowun Batang Bold';
+    --font-serif: 'SCDream';
+    --font-serif-bold: 'SCDream Bold';
     --font-mono: 'Cutive Mono';
 
     /* layout */
